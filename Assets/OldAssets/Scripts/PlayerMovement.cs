@@ -83,7 +83,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+     
         MovePlayer();
+
 
         //Check respawn
         if (transform.position.y < -100)
@@ -101,33 +103,51 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             verticalInput = Input.GetAxisRaw("Vertical");
-            if (IsJumpingCheck == true)
+            if (IsJumpingCheck)
             {
                 Debug.Log(verticalInput);
             }
-            
         }
 
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        if (IsMovingCheck == true)
+        // Disable horizontal movement when minigame is active
+        if (GameController.isMinigameActive)
+        {
+            horizontalInput = 0; // Prevent A/D movement
+        }
+        else
+        {
+            horizontalInput = Input.GetAxisRaw("Horizontal");
+        }
+
+        if (IsMovingCheck)
         {
             Debug.Log(horizontalInput);
         }
 
-        // when to jump
+        // Jump input (already controlled with isMinigameActive)
         if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
             readyToJump = false;
 
-            Jump();
+            if (!GameController.isMinigameActive)
+            {
+                Jump();
+            }
 
             Invoke(nameof(ResetJump), jumpCooldown);
         }
     }
 
+
     private void MovePlayer()
     {
-        // calculate movement Direction
+        // Skip all movement when the minigame is active
+        if (GameController.isMinigameActive)
+        {
+            return;
+        }
+
+        // Calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         if (grounded)
@@ -138,10 +158,8 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
         }
-
-
-
     }
+
 
     private void SpeedControl()
     {

@@ -11,6 +11,7 @@ TagManager:
   - NPC
   - Object
   - Objective
+  - CookingMinigameOrangeSection
   layers:
   - Default
   - TransparentFX
