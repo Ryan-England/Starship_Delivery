@@ -142,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
         {
             readyToJump = false;
 
-            Jump();
+            //Jump();
             if (!GameController.isMinigameActive)
             {
                 Jump();
