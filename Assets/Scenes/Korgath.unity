@@ -2104,11 +2104,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d626bc496d40e4d42bfed4606a3548cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sensX: 300
+  sensY: 300
   orientation: {fileID: 916627774}
-  arrowKeyRotationSpeed: 100
-  normalFOV: 60
-  zoomFOV: 30
-  zoomSpeed: 10
 --- !u!81 &300514889
 AudioListener:
   m_ObjectHideFlags: 0
