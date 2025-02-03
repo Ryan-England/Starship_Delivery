@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/StartMenu_Aka.unity
+    guid: 3721c83cc1c03354c8194a0f2fb5e1c1
+  - enabled: 1
+    path: Assets/Scenes/MoveTestScene.unity
+    guid: 6e217449ed2fd44bd86eba00f2a48e80
+  - enabled: 1
+    path: Assets/Scenes/Korgath.unity
+    guid: 1fe6fc59572bc4ed2bf1aa81446b6116
+  - enabled: 1
+    path: Assets/Scenes/TestScene_AkaDialog.unity
+    guid: 54d1c8ad32de598439ccf020d16b88f2
   m_configObjects: {}
