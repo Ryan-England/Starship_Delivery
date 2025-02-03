@@ -12,6 +12,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public Slider mouseSens;
     public static float mouseValue;
+    public GameObject player; 
+    private Vector3 pos;
     private void Start()
     {
         pauseMenuUI.SetActive(false);
@@ -51,11 +53,26 @@ public class PauseMenu : MonoBehaviour
     }
     public void Quit()
     {
+        Debug.Log("Application is quitting!");
         Application.Quit();
     }
     public void Restart()
     {
-        Time.timeScale = 1f;
-        //Add scene
+        Debug.Log("Restart button pressed!");
+        Resume();
+        SceneManager.LoadScene("MoveTestScene");
+    }
+
+    public void SaveGame(){
+        pos = player.transform.position;
+        Debug.Log(pos);
+        SaveSystem.SavePlayer(pos);
+    }
+    public void LoadGame(){
+        PlayerData data = SaveSystem.LoadPlayer();
+        Debug.Log(data.position[0]);
+        Debug.Log(data.position[1]);
+        Debug.Log(data.position[2]);
+        player.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
     }
 }

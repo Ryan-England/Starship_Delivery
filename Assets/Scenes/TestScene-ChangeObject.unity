@@ -808,9 +808,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d626bc496d40e4d42bfed4606a3548cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensX: 300
-  sensY: 300
   orientation: {fileID: 2097481385}
+  arrowKeyRotationSpeed: 100
+  normalFOV: 60
+  zoomFOV: 30
+  zoomSpeed: 10
 --- !u!81 &62733906
 AudioListener:
   m_ObjectHideFlags: 0
@@ -15146,15 +15148,25 @@ MonoBehaviour:
   moveSpeed: 4
   groundDrag: 6
   IsMovingCheck: 0
+  sprintSpeedMultiplier: 1.5
+  sprintKey: 304
   jumpForce: 6
   jumpCooldown: 0.5
   airMultiplier: 2
+  maxJumps: 2
   IsJumpingCheck: 0
+  doubleJumpMultiplier: 0.8
+  crouchSpeed: 5
+  crouchHeight: 0.5
+  standingHeight: 2
+  crouchTransitionSpeed: 10
+  crouchCooldown: 0.2
   playerHeight: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 0
   jumpKey: 32
+  crouchKey: 306
   SpawnPoint: {fileID: 0}
   orientation: {fileID: 2097481385}
 --- !u!75 &1264687071
@@ -17971,7 +17983,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1500665585}
-  - component: {fileID: 1500665584}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -17979,18 +17990,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1500665584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1500665583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 223f9f1986c5a8046a2495fafd9cf04e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1500665585
 Transform:
   m_ObjectHideFlags: 0
