@@ -122,7 +122,16 @@ public class PlayerMovement : MonoBehaviour
             if (IsJumpingCheck) Debug.Log(verticalInput);
         }
 
-        horizontalInput = Input.GetAxisRaw("Horizontal");
+        // Disable horizontal movement when minigame is active
+        if (GameController.isMinigameActive)
+        {
+            horizontalInput = 0; // Prevent A/D movement
+        }
+        else
+        {
+            horizontalInput = Input.GetAxisRaw("Horizontal");
+        }
+
         if (IsMovingCheck) Debug.Log(horizontalInput);
 
         // Sprint input
@@ -132,7 +141,13 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(jumpKey) && readyToJump && jumpsRemaining > 0)
         {
             readyToJump = false;
+
             Jump();
+            if (!GameController.isMinigameActive)
+            {
+                Jump();
+            }
+
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
@@ -153,6 +168,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
+        // Skip all movement when the minigame is active
+        if (GameController.isMinigameActive)
+        {
+            return;
+        }
+
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         float currentMoveSpeed = moveSpeed;
