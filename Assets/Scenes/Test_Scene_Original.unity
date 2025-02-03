@@ -1033,11 +1033,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d626bc496d40e4d42bfed4606a3548cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sensX: 0
+  sensY: 0
   orientation: {fileID: 2097481385}
-  arrowKeyRotationSpeed: 100
-  normalFOV: 60
-  zoomFOV: 30
-  zoomSpeed: 10
 --- !u!81 &62733906
 AudioListener:
   m_ObjectHideFlags: 0
@@ -10200,7 +10198,7 @@ MonoBehaviour:
   GameIsPaused: 0
   pauseMenuUI: {fileID: 904492699}
   mouseSens: {fileID: 24265365}
-  player: {fileID: 0}
+  player: {fileID: 1264687067}
 --- !u!1001 &733165889
 PrefabInstance:
   m_ObjectHideFlags: 0
