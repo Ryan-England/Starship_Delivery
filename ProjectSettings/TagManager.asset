@@ -12,7 +12,6 @@ TagManager:
   - Object
   - Objective
   - CookingMinigameOrangeSection
-  - Stations
   layers:
   - Default
   - TransparentFX
@@ -20,7 +19,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Stations
+  - 
   - 
   - 
   - 

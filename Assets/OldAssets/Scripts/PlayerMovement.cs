@@ -1,268 +1,245 @@
-// using System;
-// using Unity.VisualScripting;
-// using UnityEngine;
+using System;
+using Unity.VisualScripting;
+using UnityEngine;
 
-// public class PlayerMovement : MonoBehaviour
-// {
-//     [Header("Movement")]
-//     public float moveSpeed;
-//     public float groundDrag;
-//     private bool is2D;
-//     public bool IsMovingCheck = false;
 
-//     [Header("Jump")]
-//     public float jumpForce;
-//     public float jumpCooldown;
-//     public float airMultiplier;
-//     bool readyToJump;
-//     private float jumpBoost = 1.0f;
-//     public bool IsJumpingCheck = false;
+public class PlayerMovement : MonoBehaviour
+{
 
-//     [Header("Crouch")]
-//     public float crouchSpeed = 5f; // Speed while crouching
-//     public float crouchHeight = 0.5f; // Height when crouched
-//     public float standingHeight = 2f; // Normal height when standing
-//     public float crouchTransitionSpeed = 10f; // How fast to transition to crouch
-//     private bool isCrouching = false;
-//     private Vector3 originalScale;
-//     private bool readyToCrouch = true;
-//     public float crouchCooldown = 0.2f;
+    [Header("Movement")]
+    public float moveSpeed;
+    public float groundDrag;
+    private bool is2D;
+    public bool IsMovingCheck = false;
 
-//     [Header("Ground Check")]
-//     public float playerHeight;
-//     public LayerMask whatIsGround;
-//     bool grounded;
+    [Header("Jump")]
+    public float jumpForce;
+    public float jumpCooldown;
+    public float airMultiplier;
+    bool readyToJump;
+    private float jumpBoost = 1.0f;
+    public bool IsJumpingCheck = false;
 
-//     [Header("Keybinds")]
-//     public KeyCode jumpKey = KeyCode.Space;
-//     public KeyCode crouchKey = KeyCode.LeftControl;
+    [Header("Ground Check")]
+    public float playerHeight;
+    public LayerMask whatIsGround;
+    bool grounded;
 
-//     [Header("Respawn")]
-//     public GameObject SpawnPoint;
-//     private Vector3 respawnLocation;
+    [Header("Keybinds")]
+    public KeyCode jumpKey = KeyCode.Space;
+    //public KeyCode jumpKey = KeyCode.Space;
 
-//     public Transform orientation;
+    [Header("Respawn")]
+    public GameObject SpawnPoint;
+    private Vector3 respawnLocation;
 
-//     float horizontalInput;
-//     float verticalInput;
+    public Transform orientation;
 
-//     Vector3 moveDirection;
+    float horizontalInput;
+    float verticalInput;
 
-//     Rigidbody rb;
-//     Transform tf;
+    Vector3 moveDirection;
 
-//     private void Start()
-//     {
-//         rb = GetComponent<Rigidbody>();
-//         tf = GetComponent<Transform>();
-//         rb.freezeRotation = true;
-//         originalScale = transform.localScale;
+    Rigidbody rb;
+    Transform tf;
 
-//         if (SpawnPoint != null)
-//         {
-//             respawnLocation = SpawnPoint.transform.position;
-//         }
-//         else 
-//         { 
-//             respawnLocation = transform.position;
-//         }
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        tf = GetComponent<Transform>();
+        rb.freezeRotation = true;
 
-//         ResetJump();
-//         ResetCrouch();
-//         grounded = true;
-//     }
+        if (SpawnPoint != null)
+        {
+            respawnLocation = SpawnPoint.transform.position;
+        }
+        else { 
+            respawnLocation = transform.position;
+            
+        }
 
-//     private void Update()
-//     {
-//         MyInput();
-//         SpeedControl();
+        ResetJump();
+        grounded = true;
+    }
 
-//         // handle drag
-//         if (grounded)
-//         {
-//             rb.drag = groundDrag;
-//         }
-//         else
-//         {
-//             rb.drag = 0;
-//         }
+    private void Update()
+    {
+        // ground check [DEPRECATED: grounded is now updated on collision enter/exit]
+        //grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
-//         // Handle crouch transition
-//         HandleCrouchAnimation();
-//     }
+        MyInput();
+        SpeedControl();
 
-//     private void FixedUpdate()
-//     {
-//         MovePlayer();
+        // handle drag
+        if (grounded)
+        {
+            rb.drag = groundDrag;
+        }
+        else
+        {
+            rb.drag = 0;
+        }
+    }
 
-//         if (transform.position.y < -100)
-//         {
-//             respawn();
-//         }
-//     }
+    private void FixedUpdate()
+    {
+     
+        MovePlayer();
 
-//     private void MyInput()
-//     {
-//         if (is2D)
-//         {
-//             verticalInput = 0;
-//         }
-//         else
-//         {
-//             verticalInput = Input.GetAxisRaw("Vertical");
-//             if (IsJumpingCheck) Debug.Log(verticalInput);
-//         }
 
-//         horizontalInput = Input.GetAxisRaw("Horizontal");
-//         if (IsMovingCheck) Debug.Log(horizontalInput);
+        //Check respawn
+        if (transform.position.y < -100)
+        {
+            respawn();
+        }
+    }
 
-//         // Jump input
-//         if (Input.GetKey(jumpKey) && readyToJump && grounded)
-//         {
-//             readyToJump = false;
-//             Jump();
-//             Invoke(nameof(ResetJump), jumpCooldown);
-//         }
+    private void MyInput()
+    {
+        if (is2D)
+        {
+            verticalInput = 0;
+        }
+        else
+        {
+            verticalInput = Input.GetAxisRaw("Vertical");
+            if (IsJumpingCheck)
+            {
+                Debug.Log(verticalInput);
+            }
+        }
 
-//         // Crouch input
-//         if (Input.GetKeyDown(crouchKey) && readyToCrouch && grounded)
-//         {
-//             readyToCrouch = false;
-//             Crouch();
-//             Invoke(nameof(ResetCrouch), crouchCooldown);
-//         }
+        // Disable horizontal movement when minigame is active
+        if (GameController.isMinigameActive)
+        {
+            horizontalInput = 0; // Prevent A/D movement
+        }
+        else
+        {
+            horizontalInput = Input.GetAxisRaw("Horizontal");
+        }
 
-//         // Stand up when key is released
-//         if (Input.GetKeyUp(crouchKey) && grounded)
-//         {
-//             StopCrouch();
-//         }
-//     }
+        if (IsMovingCheck)
+        {
+            Debug.Log(horizontalInput);
+        }
 
-//     private void MovePlayer()
-//     {
-//         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        // Jump input (already controlled with isMinigameActive)
+        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        {
+            readyToJump = false;
 
-//         float currentMoveSpeed = isCrouching ? crouchSpeed : moveSpeed;
+            if (!GameController.isMinigameActive)
+            {
+                Jump();
+            }
 
-//         if (grounded)
-//         {
-//             rb.AddForce(moveDirection.normalized * currentMoveSpeed * 10f, ForceMode.Force);
-//         }
-//         else
-//         {
-//             rb.AddForce(moveDirection.normalized * currentMoveSpeed * 10f * airMultiplier, ForceMode.Force);
-//         }
-//     }
+            Invoke(nameof(ResetJump), jumpCooldown);
+        }
+    }
 
-//     private void Crouch()
-//     {
-//         isCrouching = true;
-//     }
 
-//     private void StopCrouch()
-//     {
-//         // Check if there's enough space to stand up
-//         if (!Physics.Raycast(transform.position, Vector3.up, standingHeight))
-//         {
-//             isCrouching = false;
-//         }
-//     }
+    private void MovePlayer()
+    {
+        // Skip all movement when the minigame is active
+        if (GameController.isMinigameActive)
+        {
+            return;
+        }
 
-//     private void HandleCrouchAnimation()
-//     {
-//         float targetHeight = isCrouching ? crouchHeight : standingHeight;
-//         Vector3 targetScale = new Vector3(originalScale.x, originalScale.y * (targetHeight / standingHeight), originalScale.z);
-//         transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.deltaTime * crouchTransitionSpeed);
-//     }
+        // Calculate movement direction
+        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-//     private void ResetCrouch()
-//     {
-//         readyToCrouch = true;
-//     }
+        if (grounded)
+        {
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        }
+        else if (!grounded)
+        {
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        }
+    }
 
-//     private void SpeedControl()
-//     {
-//         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-//         // limit velocity if needed
-//         if(flatVel.magnitude > moveSpeed)
-//         {
-//             Vector3 limitedVel = flatVel.normalized * moveSpeed;
-//             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
-//         }
-//     }
+    private void SpeedControl()
+    {
+        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-//     private void Jump()
-//     {
-//         // reset y velocity
-//         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        // limit velocity if needed
+        if(flatVel.magnitude > moveSpeed)
+        {
+            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+        }
+    }
 
-//         rb.AddForce(transform.up * jumpForce * jumpBoost, ForceMode.Impulse);
-//     }
+    private void Jump()
+    {
+        // reset y velocity
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-//     private void ResetJump()
-//     {
-//         readyToJump = true;
-//     }
+        rb.AddForce(transform.up * jumpForce * jumpBoost, ForceMode.Impulse);
+    }
 
-//     //On collision, ground the player and check for properties of the platform
-//     private void OnCollisionEnter(Collision collision)
-//     {
-//         grounded = true;
+    private void ResetJump()
+    {
+        readyToJump = true;
+    }
 
-//         //PlatformManager P = collision.gameObject.GetComponent<PlatformManager>();
-//         if (collision.transform.tag == "Platform")
-//         {
-//             transform.parent = collision.transform.parent; //sets player as child of the platform in order to support moving platforms
-//             PlatformManager P = collision.gameObject.GetComponentInParent<PlatformManager>();
+    //On collision, ground the player and check for properties of the platform
+    private void OnCollisionEnter(Collision collision)
+    {
+        grounded = true;
 
-//             if (P.bounciness > 0) //bounce handling
-//             {
-//                 jumpBoost = 1.0f + P.bounciness;
-//                 float bv = 0;
-//                 if (collision.relativeVelocity.y > 2)
-//                 {
-//                     bv += P.bounciness * collision.relativeVelocity.y;
-//                 }
-//                 rb.AddForce(transform.up * bv, ForceMode.Impulse);
-//             }
+        //PlatformManager P = collision.gameObject.GetComponent<PlatformManager>();
+        if (collision.transform.tag == "Platform")
+        {
+            transform.parent = collision.transform.parent; //sets player as child of the platform in order to support moving platforms
+            PlatformManager P = collision.gameObject.GetComponentInParent<PlatformManager>();
 
-//             if (P.lethal)
-//             {
-//                 respawn();
-//             }
-//         }
-//     }
+            if (P.bounciness > 0) //bounce handling
+            {
+                jumpBoost = 1.0f + P.bounciness;
+                float bv = 0;
+                if (collision.relativeVelocity.y > 2)
+                {
+                    bv += P.bounciness * collision.relativeVelocity.y;
+                }
+                rb.AddForce(transform.up * bv, ForceMode.Impulse);
+            }
 
-//     //Upon leaving a surface, set player to ungrounded and unparent
-//     private void OnCollisionExit(Collision collision)
-//     {
-//         grounded = false;
+            if (P.lethal)
+            {
+                respawn();
+            }
+        }
+    }
 
-//         transform.parent = null;
+    //Upon leaving a surface, set player to ungrounded and unparent
+    private void OnCollisionExit(Collision collision)
+    {
+        grounded = false;
 
-//         jumpBoost = 1.0f;
-//     }
+        transform.parent = null;
 
-//     public void changeControls(bool value)
-//     {
-//         is2D = value;
-//     }
+        jumpBoost = 1.0f;
+    }
 
-//     public void resetOrientation()
-//     {
-//         orientation.eulerAngles = new Vector3(0f, 0f, 0f);
-//         tf.eulerAngles = new Vector3(0f, 0f, 0f);
-//     }
+    public void changeControls(bool value)
+    {
+        is2D = value;
+    }
 
-//      public void respawn()
-//     {
-//         transform.position = respawnLocation;
-//         resetOrientation();
-//         rb.velocity = Vector3.zero;
-//         // Reset crouch state on respawn
-//         isCrouching = false;
-//         transform.localScale = originalScale;
-//     }
-// }
+    public void resetOrientation()
+    {
+        orientation.eulerAngles = new Vector3(0f, 0f, 0f);
+        tf.eulerAngles = new Vector3(0f, 0f, 0f);
+    }
+
+    public void respawn()
+    {
+        transform.position = respawnLocation;
+        resetOrientation();
+        rb.velocity = new Vector3(0.0f, 0.0f, 0.0f);
+    }
+}
