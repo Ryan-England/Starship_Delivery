@@ -7258,9 +7258,8 @@ GameObject:
   - component: {fileID: 526265026}
   - component: {fileID: 526265025}
   - component: {fileID: 526265024}
-  - component: {fileID: 526265023}
   - component: {fileID: 526265022}
-  - component: {fileID: 526265021}
+  - component: {fileID: 526265030}
   m_Layer: 0
   m_Name: Player (1)
   m_TagString: Player
@@ -7268,22 +7267,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &526265021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 526265020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0681a7755046cb488bf9d8f74877525, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detectionRange: 1
-  detectionLayer:
-    serializedVersion: 2
-    m_Bits: 1
 --- !u!114 &526265022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7303,42 +7286,6 @@ MonoBehaviour:
   - {fileID: 496347689}
   - {fileID: 1597915559}
   deliveryPoint: {fileID: 1719649385}
---- !u!114 &526265023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 526265020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55c272b710434724aa29d037420df8b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 4
-  groundDrag: 6
-  IsMovingCheck: 0
-  sprintSpeedMultiplier: 1.5
-  sprintKey: 304
-  jumpForce: 6
-  jumpCooldown: 0.5
-  airMultiplier: 2
-  maxJumps: 2
-  IsJumpingCheck: 0
-  doubleJumpMultiplier: 0.8
-  crouchSpeed: 5
-  crouchHeight: 0.5
-  standingHeight: 2
-  crouchTransitionSpeed: 10
-  crouchCooldown: 0.2
-  playerHeight: 0
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
-  jumpKey: 32
-  crouchKey: 306
-  SpawnPoint: {fileID: 0}
-  orientation: {fileID: 1194367210}
 --- !u!75 &526265024
 ConstantForce:
   m_ObjectHideFlags: 0
@@ -7468,6 +7415,42 @@ Transform:
   - {fileID: 1194367210}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &526265030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 526265020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a2a584d7ec74e941b518067023c211d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 4
+  groundDrag: 6
+  IsMovingCheck: 0
+  sprintSpeedMultiplier: 1.5
+  sprintKey: 304
+  jumpForce: 6
+  jumpCooldown: 0
+  airMultiplier: 2
+  maxJumps: 2
+  IsJumpingCheck: 0
+  doubleJumpMultiplier: 0.8
+  crouchSpeed: 5
+  crouchHeight: 0.5
+  standingHeight: 2
+  crouchTransitionSpeed: 10
+  crouchCooldown: 0.2
+  playerHeight: 0
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  jumpKey: 32
+  crouchKey: 306
+  SpawnPoint: {fileID: 0}
+  orientation: {fileID: 1194367210}
 --- !u!1001 &528957011
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24589,7 +24572,6 @@ GameObject:
   - component: {fileID: 1719649388}
   - component: {fileID: 1719649387}
   - component: {fileID: 1719649386}
-  - component: {fileID: 1719649391}
   m_Layer: 0
   m_Name: IngredientDropOff
   m_TagString: NPC
@@ -24698,27 +24680,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1966874631}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1719649391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1719649385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6f9c0723c1c63d45bda37a3070a57a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  searchType: 0
-  hasDialogue: 1
-  dialogueLines:
-  - Hello there!
-  - How have you been?
-  - Good?
-  - I'm glad to hear.
-  chatBoxPrefab: {fileID: 1961553623638865437, guid: 9a7d15e78bdd22840989e96e4f5d8328,
-    type: 3}
 --- !u!1001 &1721386832
 PrefabInstance:
   m_ObjectHideFlags: 0

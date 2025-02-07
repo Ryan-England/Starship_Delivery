@@ -170,7 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   dialogueSphere: {fileID: 385507600}
   dialogueDistance: 4
   isTriggered: 0
@@ -610,7 +610,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1686226018}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: Resume
         m_Mode: 1
@@ -15433,8 +15433,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   searchType: 0
   hasDialogue: 0
-  dialogueLines: []
   chatBoxPrefab: {fileID: 2020387750}
+  optionBoxPrefab: {fileID: 475889443}
+  dialogue:
+    name: Jerry
+    sentences:
+    - Hey bud! Got a question for ya!
+    - Ya think pinapples belong on pizza?
+    - Me too! I love me some pineapple!
+    - That is literally the worst opinion I have ever heard in my entire history
+      of being please do not open your mouth in my presence again.
+    choices:
+    - 
+    - yes,no
+    - 
+    - 
+  dialogueText: {fileID: 2134645054}
+  dialogueName: {fileID: 37501561}
+  opt1: {fileID: 835184099}
+  opt2: {fileID: 2116498751}
+  c: {fileID: 1489489472}
+  quest: {fileID: 390007613}
+  quest_anim: {fileID: 1412422249}
+  quest_name: {fileID: 1412422252}
 --- !u!65 &390007612
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20708,7 +20729,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1686226018}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: Quit
         m_Mode: 1
@@ -22120,8 +22141,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   searchType: 0
   hasDialogue: 0
-  dialogueLines: []
   chatBoxPrefab: {fileID: 2020387750}
+  optionBoxPrefab: {fileID: 475889443}
+  dialogue:
+    name: Monke
+    sentences:
+    - .....
+    - 'I long for the taste of the scrumptious fruit of the yellow variety... It
+      hath been many a moon since I have feasted on one... '
+    - Alas... I hath endured too much strife in these last few moons... I fear I
+      lack the strerngth to make the pilgrimage to procure one...
+    - Would you be so kind as to embark upon this journey in my stead? I will pay
+      you handsomely for thine troubles.
+    choices:
+    - 
+    - 
+    - 
+    - 
+  dialogueText: {fileID: 2134645054}
+  dialogueName: {fileID: 37501561}
+  opt1: {fileID: 835184099}
+  opt2: {fileID: 2116498751}
+  c: {fileID: 1489489472}
+  quest: {fileID: 712039094}
+  quest_anim: {fileID: 1412422249}
+  quest_name: {fileID: 1412422252}
 --- !u!65 &712039093
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23008,13 +23052,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1686226018}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -46410,8 +46454,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   searchType: 0
   hasDialogue: 0
-  dialogueLines: []
   chatBoxPrefab: {fileID: 2020387750}
+  optionBoxPrefab: {fileID: 475889443}
+  dialogue:
+    name: Gecko
+    sentences:
+    - Life is ultimately meaningless....
+    - The world will cease to be billions of years from now and the heat death of
+      the universe will collapse all that was and will be...
+    choices:
+    - 
+    - 
+  dialogueText: {fileID: 2134645054}
+  dialogueName: {fileID: 37501561}
+  opt1: {fileID: 835184099}
+  opt2: {fileID: 2116498751}
+  c: {fileID: 1489489472}
+  quest: {fileID: 1090146240}
+  quest_anim: {fileID: 1412422249}
+  quest_name: {fileID: 1412422252}
 --- !u!114 &1090146240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49735,11 +49796,11 @@ GameObject:
   - component: {fileID: 1264687073}
   - component: {fileID: 1264687072}
   - component: {fileID: 1264687071}
-  - component: {fileID: 1264687070}
   - component: {fileID: 1264687069}
   - component: {fileID: 1264687076}
   - component: {fileID: 1264687078}
   - component: {fileID: 1264687077}
+  - component: {fileID: 1264687079}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -49784,42 +49845,6 @@ MonoBehaviour:
   - {fileID: 496347689}
   - {fileID: 1597915559}
   deliveryPoint: {fileID: 1719649385}
---- !u!114 &1264687070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1264687067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55c272b710434724aa29d037420df8b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 4
-  groundDrag: 6
-  IsMovingCheck: 0
-  sprintSpeedMultiplier: 1.5
-  sprintKey: 304
-  jumpForce: 6
-  jumpCooldown: 0.5
-  airMultiplier: 2
-  maxJumps: 2
-  IsJumpingCheck: 0
-  doubleJumpMultiplier: 0.8
-  crouchSpeed: 5
-  crouchHeight: 0.5
-  standingHeight: 2
-  crouchTransitionSpeed: 10
-  crouchCooldown: 0.2
-  playerHeight: 0
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
-  jumpKey: 32
-  crouchKey: 306
-  SpawnPoint: {fileID: 1500665583}
-  orientation: {fileID: 2097481385}
 --- !u!75 &1264687071
 ConstantForce:
   m_ObjectHideFlags: 0
@@ -49948,6 +49973,8 @@ MonoBehaviour:
   detectionLayer:
     serializedVersion: 2
     m_Bits: 1
+  im: {fileID: 1264687077}
+  inv: {fileID: 1264687078}
 --- !u!114 &1264687077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49974,6 +50001,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ci: {fileID: 1489489473}
+--- !u!114 &1264687079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264687067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a2a584d7ec74e941b518067023c211d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 4
+  groundDrag: 6
+  IsMovingCheck: 0
+  sprintSpeedMultiplier: 1.5
+  sprintKey: 304
+  jumpForce: 6
+  jumpCooldown: 0
+  airMultiplier: 2
+  maxJumps: 2
+  IsJumpingCheck: 0
+  doubleJumpMultiplier: 0.8
+  crouchSpeed: 5
+  crouchHeight: 0.5
+  standingHeight: 2
+  crouchTransitionSpeed: 10
+  crouchCooldown: 0.2
+  playerHeight: 0
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  jumpKey: 32
+  crouchKey: 306
+  SpawnPoint: {fileID: 0}
+  orientation: {fileID: 2097481385}
 --- !u!1001 &1267396910
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53098,7 +53161,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1686226015}
   - {fileID: 1391585108}
   - {fileID: 1412422250}
   - {fileID: 2020387751}
@@ -53108,6 +53170,7 @@ RectTransform:
   - {fileID: 1153026161}
   - {fileID: 565844270}
   - {fileID: 1086070064}
+  - {fileID: 1686226015}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -65782,7 +65845,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   dialogueSphere: {fileID: 1167046516}
   dialogueDistance: 4
   isTriggered: 0
@@ -67137,6 +67200,7 @@ GameObject:
   - component: {fileID: 1686226015}
   - component: {fileID: 1686226017}
   - component: {fileID: 1686226016}
+  - component: {fileID: 1686226018}
   m_Layer: 5
   m_Name: PauseUI
   m_TagString: Untagged
@@ -67206,6 +67270,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1686226014}
   m_CullTransparentMesh: 1
+--- !u!114 &1686226018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686226014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ee0529a97c0da0498344e0c4743f355, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameIsPaused: 0
+  pauseMenuUI: {fileID: 1686226014}
+  mouseSens: {fileID: 60142331}
+  player: {fileID: 1264687067}
 --- !u!1001 &1689264646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82676,7 +82756,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   dialogueSphere: {fileID: 491392431}
   dialogueDistance: 4
   isTriggered: 0

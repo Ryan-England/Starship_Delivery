@@ -13,11 +13,12 @@ TagManager:
   - Objective
   - CookingMinigameOrangeSection
   - Stations
+  - Collectible
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Stations
