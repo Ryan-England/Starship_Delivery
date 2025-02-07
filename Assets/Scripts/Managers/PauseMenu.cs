@@ -14,6 +14,10 @@ public class PauseMenu : MonoBehaviour
     public static float mouseValue;
     public GameObject player; 
     private Vector3 pos;
+    public GameObject pause;
+    public GameObject options;
+    public PlayerMovement pm; 
+    public int test;
     private void Start()
     {
         pauseMenuUI.SetActive(false);
@@ -64,9 +68,28 @@ public class PauseMenu : MonoBehaviour
         Resume();
         SceneManager.LoadScene("MoveTestScene");
     }
+    public void BackButtonPause(){
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        pause.SetActive(false);
+        Time.timeScale = 1;
+        pm.enabled =true;
+        options.SetActive(false);
+    }
+    public void BackButtonOptions(){
+        options.SetActive(false);
+        pause.SetActive(true);
+    }
 
+    public void ExitButtonPause(){
+        Application.Quit();
+    }
+
+    public void OptionsButtonPause(){
+        pause.SetActive(false);
+        options.SetActive(true);
+    }
     public void SaveGame(){
-        pos = player.transform.position;
         Debug.Log(pos);
         SaveSystem.SavePlayer(pos);
     }

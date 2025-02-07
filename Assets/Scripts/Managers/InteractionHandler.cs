@@ -16,6 +16,8 @@ public class InteractionHandler : MonoBehaviour
     // List of string lines shown in the inspector
     [SerializeField] private Queue<string> dialogueLines = new Queue<string>();
     [SerializeField] private Queue<string> dialogueOptions = new Queue<string>();
+    [SerializeField] private Queue<string> questCompleteLines = new Queue<string>();
+
     // Prefab of chatbox that'll appear when dialogue is ready.
     [SerializeField] private GameObject chatBoxPrefab;
     [SerializeField] private GameObject optionBoxPrefab;
@@ -36,6 +38,9 @@ public class InteractionHandler : MonoBehaviour
     private bool skip = false;
     // Reference that tracks the current line of dialogue
     private int currentLineIndex = 0;
+
+    public AudioSource source;
+    public AudioClip clip;
 
     // Called by the detection manager to interact with the object on E press.
     public void Interact()
@@ -118,7 +123,7 @@ public class InteractionHandler : MonoBehaviour
         foreach(string choice in dialogue.choices){
             dialogueOptions.Enqueue(choice);
         }
-            
+        source.PlayOneShot(clip);
         DisplayNextSentence();
     }
 
@@ -147,6 +152,7 @@ public class InteractionHandler : MonoBehaviour
         else{
             optionBoxPrefab.SetActive(false);
         }
+        source.PlayOneShot(clip);
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
 

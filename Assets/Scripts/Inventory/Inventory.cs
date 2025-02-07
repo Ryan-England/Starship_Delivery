@@ -28,7 +28,7 @@ public class Inventory : MonoBehaviour
     }
 
     // Dictionary to store items based on their category
-    private Dictionary<ItemType, List<Item>> itemCollection = new Dictionary<ItemType, List<Item>>();
+    public Dictionary<ItemType, List<Item>> itemCollection = new Dictionary<ItemType, List<Item>>();
     public CanvasInventory ci;
     private void Awake()
     {

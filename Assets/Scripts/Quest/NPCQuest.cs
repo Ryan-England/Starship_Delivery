@@ -6,5 +6,5 @@ public class NPCQuest : MonoBehaviour
 {
     public bool have_quest; 
     public string quest_name;
-    
+    public int quest_type;
 }
