@@ -36,6 +36,13 @@ public class PlayerMovement : MonoBehaviour
     private bool readyToCrouch = true;
     public float crouchCooldown = 0.2f;
 
+    [Header("Slide")]
+    public float slideDuration = 0.6f;
+    public float slideSpeedMultiplier = 1.5f;
+    public float slideForce = 5f;
+    private bool isSliding = false;
+    private float slideTimer;
+
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask whatIsGround;
@@ -98,6 +105,16 @@ public class PlayerMovement : MonoBehaviour
 
         // Handle crouch transition
         HandleCrouchAnimation();
+
+        // Handle slide
+        if (isSliding)
+        {
+            slideTimer -= Time.deltaTime;
+            if (slideTimer <= 0)
+            {
+                StopSlide();
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -155,7 +172,14 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(crouchKey) && readyToCrouch && grounded)
         {
             readyToCrouch = false;
-            Crouch();
+            if (isSprinting)
+            {
+                StartSlide();
+            }
+            else
+            {
+                Crouch();
+            }
             Invoke(nameof(ResetCrouch), crouchCooldown);
         }
 
@@ -185,6 +209,10 @@ public class PlayerMovement : MonoBehaviour
         {
             currentMoveSpeed = moveSpeed * sprintSpeedMultiplier;
         }
+        else if (isSliding)
+        {
+            currentMoveSpeed = moveSpeed * slideSpeedMultiplier;
+        }
 
         if (grounded)
         {
@@ -193,6 +221,12 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             rb.AddForce(moveDirection.normalized * currentMoveSpeed * 10f * airMultiplier, ForceMode.Force);
+        }
+
+        // Apply additional forward force during slide
+        if (isSliding)
+        {
+            rb.AddForce(orientation.forward * slideForce, ForceMode.Impulse);
         }
     }
 
@@ -213,7 +247,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleCrouchAnimation()
     {
-        float targetHeight = isCrouching ? crouchHeight : standingHeight;
+        float targetHeight = isCrouching || isSliding ? crouchHeight : standingHeight;
         Vector3 targetScale = new Vector3(originalScale.x, originalScale.y * (targetHeight / standingHeight), originalScale.z);
         transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.deltaTime * crouchTransitionSpeed);
     }
@@ -228,7 +262,12 @@ public class PlayerMovement : MonoBehaviour
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         float maxSpeed = isSprinting ? moveSpeed * sprintSpeedMultiplier : moveSpeed;
-        if(flatVel.magnitude > maxSpeed)
+        if (isSliding)
+        {
+            rb.velocity = new Vector3(rb.velocity.x * 0.95f, rb.velocity.y, rb.velocity.z * 0.95f); // Apply friction-like reduction
+        }
+
+        if (flatVel.magnitude > maxSpeed)
         {
             Vector3 limitedVel = flatVel.normalized * maxSpeed;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
@@ -255,6 +294,22 @@ public class PlayerMovement : MonoBehaviour
     {
         readyToJump = true;
     }
+
+    private void StartSlide()
+    {
+        isSliding = true;
+        isCrouching = true;
+        isSprinting = false;
+        slideTimer = slideDuration;
+    }
+
+    private void StopSlide()
+    {
+        isSliding = false;
+        isCrouching = false;
+        rb.velocity = new Vector3(rb.velocity.x * 0.5f, rb.velocity.y, rb.velocity.z * 0.5f); // Reduce speed when stopping
+    }
+
 
     private void OnCollisionEnter(Collision collision)
     {
