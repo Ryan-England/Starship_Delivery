@@ -129,4 +129,21 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+
+    public bool FindItem(string itemName)
+    {
+        foreach (var category in itemCollection)
+        {
+            foreach (var item in category.Value)
+            {
+                // Debug.Log(item.itemName);
+                // Debug.Log(itemName);
+                if (item.itemName == itemName)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

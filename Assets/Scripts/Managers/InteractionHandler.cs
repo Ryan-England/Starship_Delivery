@@ -16,7 +16,6 @@ public class InteractionHandler : MonoBehaviour
     // List of string lines shown in the inspector
     [SerializeField] private Queue<string> dialogueLines = new Queue<string>();
     [SerializeField] private Queue<string> dialogueOptions = new Queue<string>();
-    [SerializeField] private Queue<string> questCompleteLines = new Queue<string>();
 
     // Prefab of chatbox that'll appear when dialogue is ready.
     [SerializeField] private GameObject chatBoxPrefab;
@@ -35,6 +34,14 @@ public class InteractionHandler : MonoBehaviour
     public NPCQuest quest;
     public GameObject quest_anim;
     public Text quest_name;
+    public QuestManager qm;
+    public Inventory inv; 
+
+    public bool quest_complete_first = false;
+    public bool quest_complete = false;
+
+
+    public string[] sentences;
     private bool skip = false;
     // Reference that tracks the current line of dialogue
     private int currentLineIndex = 0;
@@ -73,6 +80,8 @@ public class InteractionHandler : MonoBehaviour
         }
         else{
             chatBoxPrefab.SetActive(true);
+            sentences = dialogue.sentences;
+            CheckQuest();
             StartDialogue(dialogue);
         }
     }
@@ -96,6 +105,30 @@ public class InteractionHandler : MonoBehaviour
         }
   
     }
+
+    public void CheckQuest(){
+        if(quest.have_quest){
+            if(qm.Quests.ContainsKey(quest.quest_name)){
+                if(qm.Quests[quest.quest_name]){
+                    sentences = dialogue.quest_complete;
+                    return;
+                }
+                switch(quest.quest_type){
+                    case 0: 
+                    case 1:
+                        if(inv.FindItem(quest.item_name)){
+                            inv.RemoveItem(quest.item_name, Inventory.ItemType.Ingredient, 1);
+                            sentences = dialogue.quest_check;
+                            qm.CompleteQuest(quest);
+                            return;
+                        }
+                        break;
+                    default: 
+                        break;
+                }
+            }
+        }
+    }
     // public void NextLine() {
     //     // If the total dialogue lines are more than zero
     //     if (dialogueLines.Count > 0) {
@@ -116,7 +149,7 @@ public class InteractionHandler : MonoBehaviour
         optionBoxPrefab.SetActive(false);
         dialogueName.text = dialogue.name;
         int i = 0;
-        foreach (string sentence in dialogue.sentences){
+        foreach (string sentence in sentences){
             Debug.Log(sentence);
             dialogueLines.Enqueue(sentence);
         }
@@ -183,8 +216,15 @@ public class InteractionHandler : MonoBehaviour
         c.ans = 0; 
 
         if(quest.have_quest){
-            quest_name.text = quest.quest_name;
-            quest_anim.SetActive(true);
+            if(!qm.Quests.ContainsKey(quest.quest_name)){
+                quest_name.text = quest.quest_name;
+                quest_anim.SetActive(true);
+                qm.AddQuest(quest);
+            }
+            else if(qm.Quests[quest.quest_name]){
+                quest_name.text = "Quest Complete: " + quest.quest_name;
+                quest_anim.SetActive(true);
+            }
         }
         Debug.Log("End of Conversation");
     }

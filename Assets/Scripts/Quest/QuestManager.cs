@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public Inventory inv;
+    public Dictionary<string, bool> Quests = new Dictionary<string, bool>();
+    public void AddQuest(NPCQuest n){
+        Quests.Add(n.quest_name, false);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void CompleteQuest(NPCQuest n){
+        Quests[n.quest_name] = true;
     }
 }
