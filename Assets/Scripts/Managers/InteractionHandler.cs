@@ -120,6 +120,7 @@ public class InteractionHandler : MonoBehaviour
                             inv.RemoveItem(quest.item_name, Inventory.ItemType.Ingredient, 1);
                             sentences = dialogue.quest_check;
                             qm.CompleteQuest(quest);
+                            quest_complete_first = true;
                             return;
                         }
                         break;
@@ -221,9 +222,10 @@ public class InteractionHandler : MonoBehaviour
                 quest_anim.SetActive(true);
                 qm.AddQuest(quest);
             }
-            else if(qm.Quests[quest.quest_name]){
+            else if(qm.Quests[quest.quest_name] && quest_complete_first){
                 quest_name.text = "Quest Complete: " + quest.quest_name;
                 quest_anim.SetActive(true);
+                quest_complete_first = false;
             }
         }
         Debug.Log("End of Conversation");

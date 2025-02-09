@@ -170,7 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   dialogueSphere: {fileID: 385507600}
   dialogueDistance: 4
   isTriggered: 0
@@ -1320,7 +1320,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -7769,11 +7769,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39485cb00ba3a4447bc0bf16acf6463d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  convexHighlight: 0.69
-  outlineShadow: 0.5
+  convexHighlight: 1
+  outlineShadow: 1
   concaveShadow: 1
   debugEffect: 0
-  depthSensitivity: 0.002
+  depthSensitivity: 0.0182
   clampCameraFarClipPlane: 1
   autoDetectCameras: 1
   cameraInfos:
@@ -7782,6 +7782,9 @@ MonoBehaviour:
     mirrorOnRenderImageOpaque: {fileID: 0}
   - cam: {fileID: 62733907}
     lastCam: {fileID: 62733907}
+    mirrorOnRenderImageOpaque: {fileID: 0}
+  - cam: {fileID: 0}
+    lastCam: {fileID: 0}
     mirrorOnRenderImageOpaque: {fileID: 0}
   - cam: {fileID: 0}
     lastCam: {fileID: 0}
@@ -15499,6 +15502,8 @@ MonoBehaviour:
     - Me too! I love me some pineapple!
     - That is literally the worst opinion I have ever heard in my entire history
       of being please do not open your mouth in my presence again.
+    quest_check: []
+    quest_complete: []
     choices:
     - 
     - yes,no
@@ -15512,6 +15517,13 @@ MonoBehaviour:
   quest: {fileID: 390007613}
   quest_anim: {fileID: 1412422249}
   quest_name: {fileID: 1412422252}
+  qm: {fileID: 0}
+  inv: {fileID: 0}
+  quest_complete_first: 0
+  quest_complete: 0
+  sentences: []
+  source: {fileID: 0}
+  clip: {fileID: 0}
 --- !u!65 &390007612
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15547,6 +15559,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   have_quest: 0
   quest_name: 
+  quest_type: 0
+  item_name: 
 --- !u!1 &393897111
 GameObject:
   m_ObjectHideFlags: 0
@@ -16944,7 +16958,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4237270380712220, guid: 3ce32ffa6ccf60e4ab65d9e396f43433, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.067
+      value: 0.167
       objectReference: {fileID: 0}
     - target: {fileID: 4237270380712220, guid: 3ce32ffa6ccf60e4ab65d9e396f43433, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17355,8 +17369,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4248393764766375997, guid: 0184ec63f2ce59942bcacbc1b8f6b950,
         type: 3}
+      propertyPath: outlineShadow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4248393764766375997, guid: 0184ec63f2ce59942bcacbc1b8f6b950,
+        type: 3}
       propertyPath: convexHighlight
-      value: 0.69
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4248393764766375997, guid: 0184ec63f2ce59942bcacbc1b8f6b950,
+        type: 3}
+      propertyPath: depthSensitivity
+      value: 0.0182
       objectReference: {fileID: 0}
     - target: {fileID: 4248393764766375997, guid: 0184ec63f2ce59942bcacbc1b8f6b950,
         type: 3}
@@ -22395,6 +22419,16 @@ MonoBehaviour:
       lack the strerngth to make the pilgrimage to procure one...
     - Would you be so kind as to embark upon this journey in my stead? I will pay
       you handsomely for thine troubles.
+    quest_check:
+    - ...
+    - You hath procured me a banana?
+    - I shan't ever forget this act of kindness. I thank you graciously.
+    - This shall provide sustenance for mine self.
+    quest_complete:
+    - We meet again....
+    - I once again would like to extend my gratitude for procuring me the banana...
+    - It hath made this pilgrimage much more bearable...
+    - Alas, if only I could find another....
     choices:
     - 
     - 
@@ -22408,6 +22442,13 @@ MonoBehaviour:
   quest: {fileID: 712039094}
   quest_anim: {fileID: 1412422249}
   quest_name: {fileID: 1412422252}
+  qm: {fileID: 1500665589}
+  inv: {fileID: 1264687078}
+  quest_complete_first: 0
+  quest_complete: 0
+  sentences: []
+  source: {fileID: 0}
+  clip: {fileID: 0}
 --- !u!65 &712039093
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22443,6 +22484,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   have_quest: 1
   quest_name: Find Banana.
+  quest_type: 0
+  item_name: banana
 --- !u!1001 &721899624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46698,6 +46741,8 @@ MonoBehaviour:
     - Life is ultimately meaningless....
     - The world will cease to be billions of years from now and the heat death of
       the universe will collapse all that was and will be...
+    quest_check: []
+    quest_complete: []
     choices:
     - 
     - 
@@ -46709,6 +46754,13 @@ MonoBehaviour:
   quest: {fileID: 1090146240}
   quest_anim: {fileID: 1412422249}
   quest_name: {fileID: 1412422252}
+  qm: {fileID: 0}
+  inv: {fileID: 0}
+  quest_complete_first: 0
+  quest_complete: 0
+  sentences: []
+  source: {fileID: 0}
+  clip: {fileID: 0}
 --- !u!114 &1090146240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46723,6 +46775,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   have_quest: 0
   quest_name: 
+  quest_type: 0
+  item_name: 
 --- !u!1 &1094036566
 GameObject:
   m_ObjectHideFlags: 0
@@ -51821,6 +51875,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391585107}
   m_CullTransparentMesh: 1
+--- !u!1001 &1394101739
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1049439044899708962, guid: 2fc4801dfd9af31468dd497c90c8085d,
+        type: 3}
+      propertyPath: sharedProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: cbb630469817bce46a8cd7fe5408dadf,
+        type: 2}
+    - target: {fileID: 1049439044899708963, guid: 2fc4801dfd9af31468dd497c90c8085d,
+        type: 3}
+      propertyPath: m_Name
+      value: Post
+      objectReference: {fileID: 0}
+    - target: {fileID: 1049439044899708963, guid: 2fc4801dfd9af31468dd497c90c8085d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1049439044899709149, guid: 2fc4801dfd9af31468dd497c90c8085d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -40.85821
+      objectReference: {fileID: 0}
+    - target: {fileID: 1049439044899709149, guid: 2fc4801dfd9af31468dd497c90c8085d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -42.969154
+      objectReference: {fileID: 0}
+    - target: {fileID: 1049439044899709149, guid: 2fc4801dfd9af31468dd497c90c8085d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 12.070897
+      objectReference: {fileID: 0}
+    - target: {fileID: 1049439044899709149, guid: 2fc4801dfd9af31468dd497c90c8085d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1049439044899709149, guid: 2fc4801dfd9af31468dd497c90c8085d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1049439044899709149, guid: 2fc4801dfd9af31468dd497c90c8085d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1049439044899709149, guid: 2fc4801dfd9af31468dd497c90c8085d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1049439044899709149, guid: 2fc4801dfd9af31468dd497c90c8085d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1049439044899709149, guid: 2fc4801dfd9af31468dd497c90c8085d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1049439044899709149, guid: 2fc4801dfd9af31468dd497c90c8085d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2fc4801dfd9af31468dd497c90c8085d, type: 3}
 --- !u!1001 &1398042350
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53701,6 +53834,7 @@ GameObject:
   - component: {fileID: 1500665586}
   - component: {fileID: 1500665587}
   - component: {fileID: 1500665588}
+  - component: {fileID: 1500665589}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -53779,6 +53913,19 @@ MonoBehaviour:
   options: {fileID: 1086070063}
   pm: {fileID: 1264687079}
   test: 0
+--- !u!114 &1500665589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500665583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ca907af7cc3bd468cca386866f0dcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inv: {fileID: 1264687078}
 --- !u!1 &1502370748
 GameObject:
   m_ObjectHideFlags: 0
@@ -65993,7 +66140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   dialogueSphere: {fileID: 1167046516}
   dialogueDistance: 4
   isTriggered: 0
@@ -82828,7 +82975,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   dialogueSphere: {fileID: 491392431}
   dialogueDistance: 4
   isTriggered: 0
@@ -82847,6 +82994,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   have_quest: 1
   quest_name: Find Banana
+  quest_type: 0
+  item_name: banana
 --- !u!1 &2033688554 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1610221149939563496, guid: 6082d326791af8f4a8a46da593bdb975,
@@ -84788,3 +84937,4 @@ SceneRoots:
   - {fileID: 1156332680}
   - {fileID: 1307117616}
   - {fileID: 506354163}
+  - {fileID: 1394101739}

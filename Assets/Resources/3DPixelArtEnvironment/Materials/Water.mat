@@ -213,7 +213,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Cloud_Movement: {r: 1, g: 1, b: 0, a: 0}
     - _Cloud_Step: {r: 13, g: 17, b: 0, a: 0}
-    - _Color: {r: 0.2980392, g: 0.8000001, b: 1, a: 0.57254905}
+    - _Color: {r: 1, g: 0.75890654, b: 0.2980392, a: 0.57254905}
     - _DiffuseColor: {r: 1, g: 1, b: 1, a: 0}
     - _DistortionDirection: {r: 0.25, g: 0, b: 0, a: 0}
     - _DistortionStrength: {r: 0.05, g: 0.05, b: 0, a: 0}
