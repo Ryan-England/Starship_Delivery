@@ -12,6 +12,8 @@ public class DetectionManager : MonoBehaviour
     public InventoryManager im; 
     public Inventory inv;
 
+    public Fridge fridge;
+
     private void Update()
     {
         // Pressing E to interact with objects/npcs from a range
@@ -33,12 +35,24 @@ public class DetectionManager : MonoBehaviour
             // Sets collider as an object reference
             GameObject obj = collider.gameObject;
             //Debug.Log("Hit: " + obj);
-
+            Debug.Log(obj.tag);
+            Debug.Log(obj.name);
             // Returns true/false as it calls a function to compare the object's tag, will follow through if true.
             if (MatchesTag(obj))
             {
+                Debug.Log(obj.tag);
                 if(obj.tag == "Collectible"){
                     im.CollectItem(obj, Inventory.ItemType.Ingredient);
+                }
+                else if(obj.tag == "Stations"){
+                    Debug.Log("found a station. ");
+                    switch(obj.name){
+                        case "Fridge":
+                            fridge.FridgeMenu();
+                            break; 
+                        default: 
+                            break;
+                    }
                 }
                 // Debug.Log("Interaction found");
                 // // Makes a interactionhandler reference and connects with the script on the object found
@@ -65,6 +79,7 @@ public class DetectionManager : MonoBehaviour
             case "Object":
             case "Objective":
             case "Collectible":
+            case "Stations":
                 return true; // Accept any matching tags
             default:
                 return false; //appropriate tag not found
