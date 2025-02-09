@@ -36,6 +36,7 @@ public class InteractionHandler : MonoBehaviour
     public Text quest_name;
     public QuestManager qm;
     public Inventory inv; 
+    public CanvasInventory ci;
 
     public bool quest_complete_first = false;
     public bool quest_complete = false;
@@ -118,6 +119,7 @@ public class InteractionHandler : MonoBehaviour
                     case 1:
                         if(inv.FindItem(quest.item_name)){
                             inv.RemoveItem(quest.item_name, Inventory.ItemType.Ingredient, 1);
+                            ci.DeleteItems(quest.item_name, 1);
                             sentences = dialogue.quest_check;
                             qm.CompleteQuest(quest);
                             quest_complete_first = true;
