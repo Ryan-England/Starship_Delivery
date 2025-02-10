@@ -13,7 +13,7 @@ public class DetectionManager : MonoBehaviour
     public Inventory inv;
 
     public Fridge fridge;
-
+    public CookingTemplate kitchen;
     private void Update()
     {
         // Pressing E to interact with objects/npcs from a range
@@ -49,6 +49,9 @@ public class DetectionManager : MonoBehaviour
                     switch(obj.name){
                         case "Fridge":
                             fridge.FridgeMenu();
+                            break; 
+                        case "Kitchen":
+                            kitchen.KitchenMenu();
                             break; 
                         default: 
                             break;
