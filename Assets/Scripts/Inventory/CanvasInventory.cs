@@ -8,13 +8,18 @@ public class CanvasInventory : MonoBehaviour
     public Transform items;
     List<GameObject> it = new List<GameObject>();
     public Inventory inv;
-    Dictionary<string, int> sub = new Dictionary<string, int>();
+    public Dictionary<string, int> sub = new Dictionary<string, int>();
+    public Transform fridge_items; 
+    List<GameObject> fr_it = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
         foreach(Transform i in items){
             it.Add(i.gameObject);
+        }
+        foreach(Transform k in fridge_items){
+            fr_it.Add(k.gameObject);
         }
     }
 
@@ -26,16 +31,36 @@ public class CanvasInventory : MonoBehaviour
                 //check the quantity
                 //set active the icon in that slot 
                 //update the qty according to the item
+                GameObject fridge_slot = fr_it.Find(obj => obj.name == j.name);
                 switch (name){
                     case "apple":
                     case "banana":
+                    case "Apple": 
+                    case "Banana":
                         GameObject temp = j.transform.Find(name).gameObject;
+                        GameObject temp_f = fridge_slot.transform.Find("Items").Find(name).gameObject;
+
+                        GameObject prep = fridge_slot.transform.Find("Prep").gameObject;
+
                         GameObject qty = j.transform.Find("qty").gameObject; 
+                        GameObject qty_f = fridge_slot.transform.Find("qty").gameObject; 
+
                         Text t = qty.GetComponent<Text>();
+                        Text t_f = qty_f.GetComponent<Text>();
+
                         temp.SetActive(true);
+                        temp_f.SetActive(true);
+                        prep.SetActive(true);
+
                         t.text= "x" + quantity;
+                        t_f.text = "x" + quantity;
+
                         s.filled = true;
+                        fridge_slot.GetComponent<Slot>().filled = true;
+
                         s.name = name;
+                        fridge_slot.GetComponent<Slot>().name = name;
+
                         sub.Add(name, quantity);
                         break;
                     default:
@@ -50,15 +75,32 @@ public class CanvasInventory : MonoBehaviour
                 //check the quantity
                 //set active the icon in that slot 
                 //update the qty according to the item
+                GameObject fridge_slot = fr_it.Find(obj => obj.name == j.name);
                 switch (name){
                     case "apple":
                     case "banana":
+                    case "Apple": 
+                    case "Banana":
                         Debug.Log("test2");
                         GameObject temp = j.transform.Find(name).gameObject;
+                        GameObject temp_f = fridge_slot.transform.Find("Items").Find(name).gameObject;
+
+                        GameObject prep = fridge_slot.transform.Find("Prep").gameObject;
+
                         GameObject qty = j.transform.Find("qty").gameObject; 
+                        GameObject qty_f = fridge_slot.transform.Find("qty").gameObject; 
+                        
+
                         Text t = qty.GetComponent<Text>();
+                        Text t_f = qty_f.GetComponent<Text>();
+                        
                         temp.SetActive(true);
+                        temp_f.SetActive(true);
+                        prep.SetActive(true);
+
                         t.text= "x" + (sub[name]+1);
+                        t_f.text= "x" + (sub[name]+1);
+
                         sub[name] +=1;
                         break;
                     default:
@@ -70,6 +112,7 @@ public class CanvasInventory : MonoBehaviour
 
         }
     }
+
     public void DeleteItems(string name, int quantity){
         foreach(GameObject j in it){
             Slot s = j.GetComponent<Slot>();
@@ -79,20 +122,38 @@ public class CanvasInventory : MonoBehaviour
                 //check the quantity
                 //set active the icon in that slot 
                 //update the qty according to the item
+                GameObject fridge_slot = fr_it.Find(obj => obj.name == j.name);
                 switch (name){
                     case "apple":
                     case "banana":
                         Debug.Log("test2");
                         GameObject temp = j.transform.Find(name).gameObject;
+                        GameObject temp_f = fridge_slot.transform.Find("Items").Find(name).gameObject;
+
+                        GameObject prep = fridge_slot.transform.Find("Prep").gameObject;
+
                         GameObject qty = j.transform.Find("qty").gameObject; 
+                        GameObject qty_f = fridge_slot.transform.Find("qty").gameObject; 
+
                         Text t = qty.GetComponent<Text>();
+                        Text t_f = qty_f.GetComponent<Text>();
+
                         if(quantity-1 <= 0){
                          temp.SetActive(false);
+                         temp_f.SetActive(false);
+
                          t.text = "x0";
+                         t_f.text = "x0";
+
+                        prep.SetActive(false);
                          break;   
                         }
                         temp.SetActive(true);
+                        temp_f.SetActive(true);
+
                         t.text= "x" + (sub[name]-1);
+                        t_f.text= "x" + (sub[name]-1);
+
                         sub[name] -=1;
                         break;
                     default:
