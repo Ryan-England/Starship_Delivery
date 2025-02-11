@@ -178,7 +178,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
       
-        if (Input.GetKeyDown(crouchKey) && readyToCrouch && grounded)
+        if (Input.GetKeyDown(KeyCode.C) && readyToCrouch && grounded)
         {
             readyToCrouch = false;
             if (isSprinting)
@@ -193,7 +193,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
        
-        if (Input.GetKeyUp(crouchKey) && grounded)
+        if (Input.GetKeyUp(KeyCode.C) && grounded)
         {
             StopCrouch();
         }
