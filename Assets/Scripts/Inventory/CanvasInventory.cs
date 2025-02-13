@@ -11,7 +11,6 @@ public class CanvasInventory : MonoBehaviour
     public Dictionary<string, int> sub = new Dictionary<string, int>();
     public Transform fridge_items; 
     List<GameObject> fr_it = new List<GameObject>();
-
     // Start is called before the first frame update
     void Start()
     {
@@ -163,8 +162,9 @@ public class CanvasInventory : MonoBehaviour
 
                         Text t = qty.GetComponent<Text>();
                         Text t_f = qty_f.GetComponent<Text>();
+                        sub[name] -=1;
 
-                        if(quantity-1 <= 0){
+                        if(sub[name] <= 0){
                          temp.SetActive(false);
                          temp_f.SetActive(false);
 
@@ -177,10 +177,9 @@ public class CanvasInventory : MonoBehaviour
                         temp.SetActive(true);
                         temp_f.SetActive(true);
 
-                        t.text= "x" + (sub[name]-1);
-                        t_f.text= "x" + (sub[name]-1);
+                        t.text= "x" + (sub[name]);
+                        t_f.text= "x" + (sub[name]);
 
-                        sub[name] -=1;
                         break;
                     default:
                         Debug.Log("sdf;lks;dlfk;sldkf");

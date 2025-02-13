@@ -10,12 +10,16 @@ public class Fridge : MonoBehaviour
     public PlayerMovement pm; 
     public Transform fridge_items;
     public Transform chop_items;
+    public Transform bake_items;
+
     public Transform items;
     List<GameObject> fridge_it = new List<GameObject>();
     List<GameObject> chop_it = new List<GameObject>();
+    List<GameObject> bake_it = new List<GameObject>();
     List<GameObject> inv_it = new List<GameObject>();
     public Dictionary<string, int> fsub = new Dictionary<string, int>();
     public CanvasInventory ci; 
+    public Inventory inv;
 
     void Start(){
         foreach(Transform k in fridge_items){
@@ -26,7 +30,10 @@ public class Fridge : MonoBehaviour
         }
         foreach(Transform i in chop_items){
             chop_it.Add(i.gameObject);
-        }        
+        }   
+        foreach(Transform f in bake_items){
+            bake_it.Add(f.gameObject);
+        }       
     }
     public void FridgeMenu(){
         Cursor.lockState = CursorLockMode.None;
@@ -65,14 +72,20 @@ public class Fridge : MonoBehaviour
     public void AddToFridge(string name, int quantity){
         foreach(GameObject j in fridge_it){
             GameObject chop_slot = chop_it.Find(obj => obj.name == j.name);
+            GameObject bake_slot = bake_it.Find(obj => obj.name == j.name);
+            
             GameObject temp = j.transform.Find("Items").Find(name).gameObject;
             GameObject temp_c = chop_slot.transform.Find("Items").Find(name).gameObject;
+            GameObject temp_b = bake_slot.transform.Find("Items").Find(name).gameObject;
 
             GameObject qty = j.transform.Find("qty").gameObject; 
             GameObject qty_c = chop_slot.transform.Find("qty").gameObject; 
+            GameObject qty_b = bake_slot.transform.Find("qty").gameObject; 
 
             Text t = qty.GetComponent<Text>();
             Text t_c = qty_c.GetComponent<Text>();
+            Text t_b = qty_b.GetComponent<Text>();
+
             Slot s = j.GetComponent<Slot>();
             if(!s.filled && !fsub.ContainsKey(name)){
                 //check the name of the item
@@ -86,31 +99,39 @@ public class Fridge : MonoBehaviour
                     case "Banana":
                         temp.SetActive(true);
                         temp_c.SetActive(true);
+                        temp_b.SetActive(true);
 
                         t.text= "x" + quantity;
                         t_c.text = "x" + quantity;
+                        t_b.text = "x" + quantity;
 
                         s.filled = true;
                         chop_slot.GetComponent<Slot>().filled = true;
+                        bake_slot.GetComponent<Slot>().filled = true;
 
                         s.name = name;
                         chop_slot.GetComponent<Slot>().name = name;
+                        bake_slot.GetComponent<Slot>().name = name;
 
                         fsub.Add(name, quantity);
                         if(name == "apple"){
                             s.action = "chopping";
                             chop_slot.GetComponent<Slot>().action = "chopping";
+                            bake_slot.GetComponent<Slot>().action = "chopping";
+
                         }
                         else if(name == "banana"){
                             s.action = "baking";
                             chop_slot.GetComponent<Slot>().action = "baking";
+                            bake_slot.GetComponent<Slot>().action = "baking";
                         }
                         break;
                     default:
                         Debug.Log("sdf;lks;dlfk;sldkf");
                         break;
                 }
-
+                inv.RemoveItem(name, Inventory.ItemType.Ingredient, 1);
+                ci.DeleteItems(name, 1);
             }
             else if(s.filled && s.name == name){
                 Debug.Log("test1");
@@ -125,39 +146,57 @@ public class Fridge : MonoBehaviour
                     case "Banana":
                         temp.SetActive(true);
                         temp_c.SetActive(true);
+                        temp_b.SetActive(true);
+                        fsub[name] +=1;
 
-                        if(fsub[name]+1 <= ci.sub[name]){
-                            t.text= "x" + (fsub[name]+1);
-                            fsub[name] +=1;
+                        t.text= "x" + (fsub[name]);
+                        t_c.text= "x" + (fsub[name]);
+                        t_b.text= "x" + (fsub[name]);
+                        if(name == "apple"){
+                            s.action = "chopping";
+                            chop_slot.GetComponent<Slot>().action = "chopping";
+                            bake_slot.GetComponent<Slot>().action = "chopping";
+
                         }
-                        else{
-                            t.text= "x" + (fsub[name]);
+                        else if(name == "banana"){
+                            s.action = "baking";
+                            chop_slot.GetComponent<Slot>().action = "baking";
+                            bake_slot.GetComponent<Slot>().action = "baking";
                         }
-                        if(name == "apple"){s.action = "chopping";}
-                        else if(name == "banana"){s.action = "baking";}
                         break;
                     default:
                         Debug.Log("sdf;lks;dlfk;sldkf");
                         break;
                 }
+                inv.RemoveItem(name, Inventory.ItemType.Ingredient, 1);
+                ci.DeleteItems(name, 1);
 
             }
-            ci.DeleteItems(name, 1);
+            // ci.DeleteItems(name, 1);
         }
     }
     public void DeleteItems(string name, int quantity){
+        Debug.Log("1");
         foreach(GameObject j in fridge_it){
+            Debug.Log("2");
             GameObject chop_slot = chop_it.Find(obj => obj.name == j.name);
+            GameObject bake_slot = bake_it.Find(obj => obj.name == j.name);
+
             GameObject temp = j.transform.Find("Items").Find(name).gameObject;
             GameObject temp_c = chop_slot.transform.Find("Items").Find(name).gameObject;
+            GameObject temp_b = bake_slot.transform.Find("Items").Find(name).gameObject;
 
             GameObject qty = j.transform.Find("qty").gameObject; 
             GameObject qty_c = chop_slot.transform.Find("qty").gameObject; 
+            GameObject qty_b = bake_slot.transform.Find("qty").gameObject; 
 
             Text t = qty.GetComponent<Text>();
             Text t_c = qty_c.GetComponent<Text>();
+            Text t_b = qty_b.GetComponent<Text>();
+
             Slot s = j.GetComponent<Slot>();
-            if(s.filled && s.name == name){
+            Debug.Log("3");
+            if(s.filled){
                 Debug.Log("test1");
                 //check the name of the item
                 //check the quantity
@@ -166,24 +205,30 @@ public class Fridge : MonoBehaviour
                 switch (name){
                     case "apple":
                     case "banana":
+                    Debug.Log("4");
                         Debug.Log("test2");
+                        fsub[name] -=1;
 
-                        if(quantity-1 <= 0){
+                        if(fsub[name] <= 0){
                          temp.SetActive(false);
                          temp_c.SetActive(false);
+                         temp_b.SetActive(false);
 
+                         fsub[name] = 0;
                          t.text = "x0";
                          t_c.text = "x0";
+                         t_b.text = "x0";
 
                          break;   
                         }
                         temp.SetActive(true);
                         temp_c.SetActive(true);
+                        temp_b.SetActive(true);
 
-                        t.text= "x" + (fsub[name]-1);
-                        t_c.text= "x" + (fsub[name]-1);
+                        t.text= "x" + (fsub[name]);
+                        t_c.text= "x" + (fsub[name]);
+                        t_b.text= "x" + (fsub[name]);
 
-                        fsub[name] -=1;
                         break;
                     default:
                         Debug.Log("sdf;lks;dlfk;sldkf");

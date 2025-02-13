@@ -50,7 +50,7 @@ public class BakingTemplate : MonoBehaviour
         GameObject temp = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
         // GameObject temp = gameObject.transform.parent.gameObject;
         Slot s  = temp.GetComponent<Slot>();
-        if(s.filled && s.action == "chopping"){
+        if(s.filled && s.action == "baking"){
             AddToCook(s.name, 1);
         }
     }
@@ -62,7 +62,7 @@ public class BakingTemplate : MonoBehaviour
              Text t = qty.GetComponent<Text>();
              Slot s = j.GetComponent<Slot>();
 
-             if(!s.filled && !csub.ContainsKey(name)){
+             if(!s.filled){
                 //check the name of the item
                 //check the quantity
                 //set active the icon in that slot 
@@ -79,44 +79,48 @@ public class BakingTemplate : MonoBehaviour
                         s.filled = true;
 
                         s.name = name;
-
-                        csub.Add(name, quantity);
+                        if(!csub.ContainsKey(name)){
+                            csub.Add(name, quantity);
+                        }
+                        else{
+                            csub[name] +=1; 
+                        }
                         
                         break;
                     default:
                         Debug.Log("sdf;lks;dlfk;sldkf");
                         break;
                 }
-
+                f.DeleteItems(name, 1);
+                return;
             }
-            else if(s.filled && s.name == name){
-                Debug.Log("test1");
-                //check the name of the item
-                //check the quantity
-                //set active the icon in that slot 
-                //update the qty according to the item
-                switch (name){
-                    case "apple":
-                    case "banana":
-                    case "Apple": 
-                    case "Banana":
-                        temp.SetActive(true);
+            // else if(s.filled && s.name == name){
+            //     Debug.Log("test1");
+            //     //check the name of the item
+            //     //check the quantity
+            //     //set active the icon in that slot 
+            //     //update the qty according to the item
+            //     switch (name){
+            //         case "apple":
+            //         case "banana":
+            //         case "Apple": 
+            //         case "Banana":
+            //             temp.SetActive(true);
 
-                        if(csub[name]+1 <= f.fsub[name]){
-                            t.text= "x" + (csub[name]+1);
-                            csub[name] +=1;
-                        }
-                        else{
-                            t.text= "x" + (csub[name]);
-                        }
-                        break;
-                    default:
-                        Debug.Log("sdf;lks;dlfk;sldkf");
-                        break;
-                }
+            //             if(csub[name]+1 <= f.fsub[name]){
+            //                 t.text= "x" + (csub[name]+1);
+            //                 csub[name] +=1;
+            //             }
+            //             else{
+            //                 t.text= "x" + (csub[name]);
+            //             }
+            //             break;
+            //         default:
+            //             Debug.Log("sdf;lks;dlfk;sldkf");
+            //             break;
+            //     }
 
-            }
-            f.DeleteItems(name, 1);
+            // }
         }
     }
 }
