@@ -6,4 +6,5 @@ public class Slot : MonoBehaviour
 {
     public bool filled;
     public string name;
+    public string action;
 }

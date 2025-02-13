@@ -37,6 +37,7 @@ public class CanvasInventory : MonoBehaviour
                     case "banana":
                     case "Apple": 
                     case "Banana":
+                    case "quaso":
                         GameObject temp = j.transform.Find(name).gameObject;
                         GameObject temp_f = fridge_slot.transform.Find("Items").Find(name).gameObject;
 
@@ -62,6 +63,18 @@ public class CanvasInventory : MonoBehaviour
                         fridge_slot.GetComponent<Slot>().name = name;
 
                         sub.Add(name, quantity);
+                        if(name == "apple"){
+                            s.action = "chopping";
+                            fridge_slot.GetComponent<Slot>().action = "chopping";
+                        }
+                        else if(name == "banana"){
+                            s.action = "baking";
+                            fridge_slot.GetComponent<Slot>().action = "baking";
+                        }
+                        else{
+                            s.action = "food";
+                            fridge_slot.GetComponent<Slot>().action = "food";
+                        }
                         break;
                     default:
                         Debug.Log("sdf;lks;dlfk;sldkf");
@@ -81,6 +94,7 @@ public class CanvasInventory : MonoBehaviour
                     case "banana":
                     case "Apple": 
                     case "Banana":
+                    case "quaso":
                         Debug.Log("test2");
                         GameObject temp = j.transform.Find(name).gameObject;
                         GameObject temp_f = fridge_slot.transform.Find("Items").Find(name).gameObject;
@@ -102,6 +116,18 @@ public class CanvasInventory : MonoBehaviour
                         t_f.text= "x" + (sub[name]+1);
 
                         sub[name] +=1;
+                        if(name == "apple"){
+                            s.action = "chopping";
+                            fridge_slot.GetComponent<Slot>().action = "chopping";
+                        }
+                        else if(name == "banana"){
+                            s.action = "baking";
+                            fridge_slot.GetComponent<Slot>().action = "baking";
+                        }
+                        else{
+                            s.action = "food";
+                            fridge_slot.GetComponent<Slot>().action = "food";
+                        }
                         break;
                     default:
                         Debug.Log("sdf;lks;dlfk;sldkf");

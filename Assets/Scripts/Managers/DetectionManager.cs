@@ -14,6 +14,8 @@ public class DetectionManager : MonoBehaviour
 
     public Fridge fridge;
     public CookingTemplate kitchen;
+    public BakingTemplate oven;
+
     private void Update()
     {
         // Pressing E to interact with objects/npcs from a range
@@ -52,6 +54,9 @@ public class DetectionManager : MonoBehaviour
                             break; 
                         case "Kitchen":
                             kitchen.KitchenMenu();
+                            break;
+                        case "Oven":
+                            oven.KitchenMenu();
                             break; 
                         default: 
                             break;
