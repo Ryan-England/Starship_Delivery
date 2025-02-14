@@ -9,6 +9,8 @@ public class DialogueTrigger : MonoBehaviour
     public float dialogueDistance = 10f;
     public bool isTriggered;
 
+    public bool enabled = true;
+
     public GameObject selector;
     // Update is called once per frame
     void Start(){
@@ -17,7 +19,7 @@ public class DialogueTrigger : MonoBehaviour
     void Update()
     {
         isTriggered = Physics.CheckSphere(dialogueSphere.position, dialogueDistance, mask);
-        if(isTriggered){
+        if(isTriggered && enabled){
             selector.SetActive(true);
             // else{
             //     box.SetActive(false);
