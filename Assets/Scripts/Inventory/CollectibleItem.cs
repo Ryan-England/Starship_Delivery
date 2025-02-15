@@ -84,6 +84,7 @@ public class CollectibleItem : MonoBehaviour
         }
     }
 
+
     private IEnumerator timedRefresh()
     {
         yield return new WaitForSeconds(regenTime);
