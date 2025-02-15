@@ -1,0 +1,16 @@
+{
+    "questList": [
+        {
+            "name": "Test Quest",
+            "QuestID": "test_quest",
+            "quest_text": "This is a test quest",
+            "required_item_id": "test_item",
+            "required_item_amount": 1,
+            "recipe_reward_id": null,
+            "item_reward_id": null,
+            "item_reward_amount": 0,
+            "planet_id": "test_zone",
+            "reputation_reward": 0
+        }
+    ]
+}

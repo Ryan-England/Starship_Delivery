@@ -1,0 +1,21 @@
+{
+    "recipeList": [
+        {
+            "name": "generic item",
+            "RecipeID": "generic",
+            "ingredient1_id": "generic",
+            "ingredient1_amount": 1,
+            "ingredient2_id": "generic",
+            "ingredient2_amount": 1,
+            "ingredient3_id": "generic",
+            "ingredient3_amount": 1,
+            "ingredient4_id": "generic",
+            "ingredient4_amount": 1,
+            "minigame1_id": "chopping",
+            "minigame2_id": "mixing",
+            "minigame3_id": "baking",
+            "output_id": "generic",
+            "output_amount": 2
+        }
+    ]
+}
