@@ -104,18 +104,43 @@ public class BakingTemplate : MonoBehaviour
     }
 
     private IEnumerator BakingProcess()
+{
+    isBaking = true;
+    float timer = bakingTime;
+
+    // Clear the UI slots at the start of baking
+    foreach (GameObject slotObj in cook_it)
     {
-        isBaking = true;
-        float timer = bakingTime;
-
-        while (timer > 0)
+        Slot slot = slotObj.GetComponent<Slot>();
+        if (slot.filled)
         {
-            timerText.text = "Baking... " + Mathf.Ceil(timer) + "s";
-            yield return new WaitForSeconds(1f);
-            timer--;
-        }
+            slot.filled = false;
+            slot.name = "";
 
-        timerText.text = "Done Baking!";
-        isBaking = false;
+            // Hide the item UI
+            Transform itemContainer = slotObj.transform.Find("Items");
+            foreach (Transform item in itemContainer) 
+            {
+                item.gameObject.SetActive(false);
+            }
+
+            // Reset the quantity text
+            Text qtyText = slotObj.transform.Find("qty").GetComponent<Text>();
+            qtyText.text = "";
+        }
     }
+
+    // Start the baking timer
+    while (timer > 0)
+    {
+        timerText.text = "Baking... " + Mathf.Ceil(timer) + "s";
+        yield return new WaitForSeconds(1f);
+        timer--;
+    }
+
+    // Baking complete
+    timerText.text = "Done Baking!";
+    isBaking = false;
+}
+
 }
