@@ -231,7 +231,7 @@ public class JsonManager : MonoBehaviour
         else
         {
             Debug.LogError("NPC with id " + id + " not found");
-            return null;
+            return npcList["generic"];
         }
     }
 }
