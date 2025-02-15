@@ -4,6 +4,7 @@ public class Item
 {
     public string name;
     public string ItemID;
+    public string image_filepath;
     public string description;
     public int value;
     

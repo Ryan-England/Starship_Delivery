@@ -179,6 +179,7 @@ public class JsonManager : MonoBehaviour
             Item newItem = new Item();
             newItem.name = element["name"].stringValue;
             newItem.ItemID = element["ItemID"].stringValue;
+            newItem.image_filepath = element["image_filepath"].stringValue;
             newItem.description = element["description"].stringValue;
             newItem.value = element["value"].intValue;
             if(element["tags"] != null){
