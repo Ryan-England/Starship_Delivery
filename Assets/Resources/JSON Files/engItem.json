@@ -1,0 +1,11 @@
+{
+    "ItemList": [
+        {
+            "name": "genericItem",
+            "ItemID": "generic",
+            "description": "A generic item",
+            "value": 1,
+            "tags": ["generic"]
+        }
+    ]
+}

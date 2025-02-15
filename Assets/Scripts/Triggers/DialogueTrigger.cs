@@ -10,10 +10,6 @@ public class DialogueTrigger : MonoBehaviour
     public bool isTriggered;
 
     public GameObject selector;
-    // Update is called once per frame
-    void Start(){
-
-    }
     void Update()
     {
         isTriggered = Physics.CheckSphere(dialogueSphere.position, dialogueDistance, mask);
