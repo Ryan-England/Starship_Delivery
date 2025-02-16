@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UI;  // Required for UI elements
 using UnityEngine.EventSystems;
 
 public class CookingTemplate : MonoBehaviour
@@ -9,32 +9,31 @@ public class CookingTemplate : MonoBehaviour
     public PlayerMovement pm; 
     public GameObject kitchenUI;
     public GameObject startButton;
-    public Text timerText;
-    public float cookingTime = 5f;
-    private bool isCooking = false;
+    public Text timerText; // Assign in Unity
+    public float bakingTime = 5f; // Adjust as needed
+    private bool isBaking = false;
 
     List<GameObject> cook_it = new List<GameObject>();
     public Transform cook_items;
-    public Fridge f;
+    public Fridge f; 
 
     Dictionary<string, int> csub = new Dictionary<string, int>();
-
+    public GameObject quaso;
+    public GameObject spawner;
     void Start()
     {
-        foreach (Transform k in cook_items)
-        {
+        foreach(Transform k in cook_items){
             cook_it.Add(k.gameObject);
-        }
-        startButton.GetComponent<Button>().interactable = false;
+        }   
+        startButton.GetComponent<Button>().interactable = false; // Disable button initially
     }
 
     void Update()
     {
-        CheckSlots();
+        CheckSlots(); // Continuously check if the button should be enabled
     }
 
-    public void KitchenMenu()
-    {
+    public void KitchenMenu(){
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         pm.enabled = false;
@@ -42,8 +41,7 @@ public class CookingTemplate : MonoBehaviour
         kitchenUI.SetActive(true);
     }
 
-    public void BackButtonKitchen()
-    {
+    public void BackButtonKitchen(){
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Time.timeScale = 1;
@@ -51,40 +49,33 @@ public class CookingTemplate : MonoBehaviour
         kitchenUI.SetActive(false);
     }
 
-    public void MoveToCook()
-    {
+    public void MoveToCook(){
         GameObject temp = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
         Slot s = temp.GetComponent<Slot>();
 
-        if (s.filled && s.action == "chopping")
-        {
+        if(s.filled && s.action == "chopping"){
             AddToCook(s.name, 1);
         }
     }
 
-    public void AddToCook(string name, int quantity)
-    {
-        foreach (GameObject j in cook_it)
-        {
-            GameObject temp = j.transform.Find("Items").Find(name).gameObject;
-            GameObject qty = j.transform.Find("qty").gameObject;
-            Text t = qty.GetComponent<Text>();
-            Slot s = j.GetComponent<Slot>();
+    public void AddToCook(string name, int quantity){
+        foreach(GameObject j in cook_it){
+             GameObject temp = j.transform.Find("Items").Find(name).gameObject;
+             GameObject qty = j.transform.Find("qty").gameObject; 
+             Text t = qty.GetComponent<Text>();
+             Slot s = j.GetComponent<Slot>();
 
-            if (!s.filled)
-            {
+             if(!s.filled){
                 temp.SetActive(true);
-                t.text = "x" + quantity;
+                t.text= "x" + quantity;
                 s.filled = true;
                 s.name = name;
 
-                if (!csub.ContainsKey(name))
-                {
+                if(!csub.ContainsKey(name)){
                     csub.Add(name, quantity);
                 }
-                else
-                {
-                    csub[name] += 1;
+                else{
+                    csub[name] +=1; 
                 }
 
                 f.DeleteItems(name, 1);
@@ -101,47 +92,58 @@ public class CookingTemplate : MonoBehaviour
             Slot slot = slotObj.GetComponent<Slot>();
             if (slot.filled) filledCount++;
         }
-        startButton.GetComponent<Button>().interactable = (filledCount >= 2 && !isCooking);
+
+        startButton.GetComponent<Button>().interactable = (filledCount >= 2 && !isBaking);
     }
 
     public void StartCooking()
     {
-        if (!isCooking)
+        if (!isBaking)
         {
             StartCoroutine(CookingProcess());
         }
     }
 
     private IEnumerator CookingProcess()
+{
+    isBaking = true;
+    float timer = bakingTime;
+
+    // Clear the UI slots at the start of baking
+    foreach (GameObject slotObj in cook_it)
     {
-        isCooking = true;
-        float timer = cookingTime;
-
-        foreach (GameObject slotObj in cook_it)
+        Slot slot = slotObj.GetComponent<Slot>();
+        if (slot.filled)
         {
-            Slot slot = slotObj.GetComponent<Slot>();
-            if (slot.filled)
+            slot.filled = false;
+            slot.name = "";
+
+            // Hide the item UI
+            Transform itemContainer = slotObj.transform.Find("Items");
+            foreach (Transform item in itemContainer) 
             {
-                slot.filled = false;
-                slot.name = "";
-                Transform itemContainer = slotObj.transform.Find("Items");
-                foreach (Transform item in itemContainer)
-                {
-                    item.gameObject.SetActive(false);
-                }
-                Text qtyText = slotObj.transform.Find("qty").GetComponent<Text>();
-                qtyText.text = "";
+                item.gameObject.SetActive(false);
             }
-        }
 
-        while (timer > 0)
-        {
-            timerText.text = "Cooking... " + Mathf.Ceil(timer) + "s";
-            yield return new WaitForSeconds(1f);
-            timer--;
+            // Reset the quantity text
+            Text qtyText = slotObj.transform.Find("qty").GetComponent<Text>();
+            qtyText.text = "";
         }
-
-        timerText.text = "Done Cooking!";
-        isCooking = false;
     }
+
+    // Start the baking timer
+    while (timer > 0)
+    {
+        timerText.text = "Baking... " + Mathf.Ceil(timer) + "s";
+        yield return new WaitForSeconds(1f);
+        timer--;
+    }
+
+    // Baking complete
+    timerText.text = "";
+    isBaking = false;
+    Vector3 spawn_coords = spawner.transform.position;
+    Instantiate(quaso, spawn_coords, Quaternion.identity);
+}
+
 }

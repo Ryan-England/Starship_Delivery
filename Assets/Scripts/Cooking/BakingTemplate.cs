@@ -18,7 +18,8 @@ public class BakingTemplate : MonoBehaviour
     public Fridge f; 
 
     Dictionary<string, int> csub = new Dictionary<string, int>();
-
+    public GameObject quaso;
+    public GameObject spawner;
     void Start()
     {
         foreach(Transform k in cook_items){
@@ -139,8 +140,10 @@ public class BakingTemplate : MonoBehaviour
     }
 
     // Baking complete
-    timerText.text = "Done Baking!";
+    timerText.text = "";
     isBaking = false;
+    Vector3 spawn_coords = spawner.transform.position;
+    Instantiate(quaso, spawn_coords, Quaternion.identity);
 }
 
 }

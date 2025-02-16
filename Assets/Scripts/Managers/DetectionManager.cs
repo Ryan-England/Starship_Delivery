@@ -15,6 +15,7 @@ public class DetectionManager : MonoBehaviour
     public Fridge fridge;
     public CookingTemplate kitchen;
     public BakingTemplate oven;
+    public MixingTemplate mix;
 
     private void Update()
     {
@@ -57,6 +58,9 @@ public class DetectionManager : MonoBehaviour
                             break;
                         case "Oven":
                             oven.KitchenMenu();
+                            break;
+                        case "Mixing":
+                            mix.KitchenMenu();
                             break; 
                         default: 
                             break;

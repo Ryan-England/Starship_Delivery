@@ -8,26 +8,31 @@ public class MixingTemplate : MonoBehaviour
 {
     public PlayerMovement pm; 
     public GameObject kitchenUI;
-    public GameObject start;
+    public GameObject startButton;
+    public Text timerText; // Assign in Unity
+    public float bakingTime = 5f; // Adjust as needed
+    private bool isBaking = false;
+
     List<GameObject> cook_it = new List<GameObject>();
     public Transform cook_items;
     public Fridge f; 
 
     Dictionary<string, int> csub = new Dictionary<string, int>();
-
-    // Start is called before the first frame update
+    public GameObject quaso;
+    public GameObject spawner;
     void Start()
     {
         foreach(Transform k in cook_items){
             cook_it.Add(k.gameObject);
         }   
+        startButton.GetComponent<Button>().interactable = false; // Disable button initially
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        CheckSlots(); // Continuously check if the button should be enabled
     }
+
     public void KitchenMenu(){
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -36,20 +41,18 @@ public class MixingTemplate : MonoBehaviour
         kitchenUI.SetActive(true);
     }
 
-    //basically we want to check if the items have a 
     public void BackButtonKitchen(){
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Time.timeScale = 1;
-        pm.enabled =true;
+        pm.enabled = true;
         kitchenUI.SetActive(false);
     }
 
     public void MoveToCook(){
-        //go inside the canvas inventory next to the fridge
         GameObject temp = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
-        // GameObject temp = gameObject.transform.parent.gameObject;
-        Slot s  = temp.GetComponent<Slot>();
+        Slot s = temp.GetComponent<Slot>();
+
         if(s.filled && s.action == "mixing"){
             AddToCook(s.name, 1);
         }
@@ -63,64 +66,84 @@ public class MixingTemplate : MonoBehaviour
              Slot s = j.GetComponent<Slot>();
 
              if(!s.filled){
-                //check the name of the item
-                //check the quantity
-                //set active the icon in that slot 
-                //update the qty according to the item
-                switch (name){
-                    case "apple":
-                    case "banana":
-                    case "Apple": 
-                    case "Banana":
-                        temp.SetActive(true);
+                temp.SetActive(true);
+                t.text= "x" + quantity;
+                s.filled = true;
+                s.name = name;
 
-                        t.text= "x" + quantity;
-
-                        s.filled = true;
-
-                        s.name = name;
-                        if(!csub.ContainsKey(name)){
-                            csub.Add(name, quantity);
-                        }
-                        else{
-                            csub[name] +=1; 
-                        }
-                        
-                        break;
-                    default:
-                        Debug.Log("sdf;lks;dlfk;sldkf");
-                        break;
+                if(!csub.ContainsKey(name)){
+                    csub.Add(name, quantity);
                 }
+                else{
+                    csub[name] +=1; 
+                }
+
                 f.DeleteItems(name, 1);
                 return;
             }
-            // else if(s.filled && s.name == name){
-            //     Debug.Log("test1");
-            //     //check the name of the item
-            //     //check the quantity
-            //     //set active the icon in that slot 
-            //     //update the qty according to the item
-            //     switch (name){
-            //         case "apple":
-            //         case "banana":
-            //         case "Apple": 
-            //         case "Banana":
-            //             temp.SetActive(true);
-
-            //             if(csub[name]+1 <= f.fsub[name]){
-            //                 t.text= "x" + (csub[name]+1);
-            //                 csub[name] +=1;
-            //             }
-            //             else{
-            //                 t.text= "x" + (csub[name]);
-            //             }
-            //             break;
-            //         default:
-            //             Debug.Log("sdf;lks;dlfk;sldkf");
-            //             break;
-            //     }
-
-            // }
         }
     }
+
+    private void CheckSlots()
+    {
+        int filledCount = 0;
+        foreach (GameObject slotObj in cook_it)
+        {
+            Slot slot = slotObj.GetComponent<Slot>();
+            if (slot.filled) filledCount++;
+        }
+
+        startButton.GetComponent<Button>().interactable = (filledCount >= 2 && !isBaking);
+    }
+
+    public void StartMixing()
+    {
+        if (!isBaking)
+        {
+            StartCoroutine(MixingProcess());
+        }
+    }
+
+    private IEnumerator MixingProcess()
+{
+    isBaking = true;
+    float timer = bakingTime;
+
+    // Clear the UI slots at the start of baking
+    foreach (GameObject slotObj in cook_it)
+    {
+        Slot slot = slotObj.GetComponent<Slot>();
+        if (slot.filled)
+        {
+            slot.filled = false;
+            slot.name = "";
+
+            // Hide the item UI
+            Transform itemContainer = slotObj.transform.Find("Items");
+            foreach (Transform item in itemContainer) 
+            {
+                item.gameObject.SetActive(false);
+            }
+
+            // Reset the quantity text
+            Text qtyText = slotObj.transform.Find("qty").GetComponent<Text>();
+            qtyText.text = "";
+        }
+    }
+
+    // Start the baking timer
+    while (timer > 0)
+    {
+        timerText.text = "Mixing... " + Mathf.Ceil(timer) + "s";
+        yield return new WaitForSeconds(1f);
+        timer--;
+    }
+
+    // Baking complete
+    timerText.text = "";
+    isBaking = false;
+    Vector3 spawn_coords = spawner.transform.position;
+    Instantiate(quaso, spawn_coords, Quaternion.identity);
+}
+
 }
