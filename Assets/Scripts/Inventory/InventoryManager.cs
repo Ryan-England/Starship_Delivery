@@ -29,10 +29,25 @@ public class InventoryManager : MonoBehaviour
     public void CollectItem(GameObject collectible, Inventory.ItemType type)
     {
         CollectibleItem collectibleItem = collectible.GetComponent<CollectibleItem>();
-
-        if (collectibleItem != null)
+        CarolynCollectibleItem c_collectibleItem = collectible.GetComponent<CarolynCollectibleItem>();
+       
+       
+        if (c_collectibleItem != null)
         {
-            // Debug.Log(collectibleItem.itemName);
+            Debug.Log(collectibleItem.itemName);
+            // Debug.Log(collectibleItem.quantity);
+            inventory.AddItem(c_collectibleItem.itemName, type, c_collectibleItem.quantity);
+            c_collectibleItem.harvest();
+
+            // Print new acquired item message
+            inventory.PrintItem(c_collectibleItem.itemName);
+
+            // Print updated inventory contents after collection
+            //inventory.PrintInventory();
+        }
+        else if (collectibleItem != null)
+        {
+            Debug.Log(collectibleItem.itemName + "not");
             // Debug.Log(collectibleItem.quantity);
             inventory.AddItem(collectibleItem.itemName, type, collectibleItem.quantity);
             Destroy(collectible);
@@ -43,5 +58,6 @@ public class InventoryManager : MonoBehaviour
             // Print updated inventory contents after collection
             //inventory.PrintInventory();
         }
+
     }
 }

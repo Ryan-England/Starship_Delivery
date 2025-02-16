@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 8610113229848714457}
   - component: {fileID: 6696623334699656714}
   - component: {fileID: 5665422300358554190}
-  - component: {fileID: 7404931495746788882}
+  - component: {fileID: 7071096677001345652}
   - component: {fileID: 7802391105918568027}
   - component: {fileID: 4613837600145872006}
   m_Layer: 0
@@ -146,7 +146,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.01
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7404931495746788882
+--- !u!114 &7071096677001345652
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,16 +155,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 3269488921482430220}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35743afeebd308745a0f2b03abc784be, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b3899013ae799d4bbbc39f46795a7f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: apple
+  itemName: cinderwheat
   quantity: 1
   type: 1
-  regenerating: 1
+  regenerating: 0
   regenTime: 30
-  FreshModel: {fileID: 0}
-  DepleteModel: {fileID: 8742979505890582438}
+  FreshModel: {fileID: 919132149155446097, guid: ccabd8b1d32a25245b89791bd20022a1,
+    type: 3}
+  DepleteModel: {fileID: 919132149155446097, guid: aa8ea7f3dc3b96248bcec53c9e87beb8,
+    type: 3}
 --- !u!114 &7802391105918568027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,7 +185,6 @@ MonoBehaviour:
   dialogueSphere: {fileID: 7395863841842122532}
   dialogueDistance: 2
   isTriggered: 0
-  enabled: 1
   selector: {fileID: 7694128418478136522}
 --- !u!82 &4613837600145872006
 AudioSource:
