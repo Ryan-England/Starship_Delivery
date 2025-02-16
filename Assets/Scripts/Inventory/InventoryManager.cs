@@ -34,14 +34,14 @@ public class InventoryManager : MonoBehaviour
        
         if (c_collectibleItem != null)
         {
-            Debug.Log(collectibleItem.itemName);
+            Debug.Log(c_collectibleItem.itemName);
             // Debug.Log(collectibleItem.quantity);
             inventory.AddItem(c_collectibleItem.itemName, type, c_collectibleItem.quantity);
             c_collectibleItem.harvest();
 
             // Print new acquired item message
             inventory.PrintItem(c_collectibleItem.itemName);
-
+            return;
             // Print updated inventory contents after collection
             //inventory.PrintInventory();
         }

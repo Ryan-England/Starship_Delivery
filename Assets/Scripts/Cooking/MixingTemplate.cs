@@ -59,8 +59,12 @@ public class MixingTemplate : MonoBehaviour
     }
 
     public void AddToCook(string name, int quantity){
+        string path = "Icons";
         foreach(GameObject j in cook_it){
-             GameObject temp = j.transform.Find("Items").Find(name).gameObject;
+             GameObject temp = j.transform.Find("Items").Find("apple").gameObject;
+             Image test = temp.GetComponent<Image>();
+             test.sprite = Resources.Load<Sprite>(path + "/" + name);
+
              GameObject qty = j.transform.Find("qty").gameObject; 
              Text t = qty.GetComponent<Text>();
              Slot s = j.GetComponent<Slot>();

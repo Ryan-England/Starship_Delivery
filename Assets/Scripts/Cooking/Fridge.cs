@@ -11,11 +11,14 @@ public class Fridge : MonoBehaviour
     public Transform fridge_items;
     public Transform chop_items;
     public Transform bake_items;
+    public Transform mix_items;
+
 
     public Transform items;
     List<GameObject> fridge_it = new List<GameObject>();
     List<GameObject> chop_it = new List<GameObject>();
     List<GameObject> bake_it = new List<GameObject>();
+    List<GameObject> mix_it = new List<GameObject>();
     List<GameObject> inv_it = new List<GameObject>();
     public Dictionary<string, int> fsub = new Dictionary<string, int>();
     public CanvasInventory ci; 
@@ -33,6 +36,9 @@ public class Fridge : MonoBehaviour
         }   
         foreach(Transform f in bake_items){
             bake_it.Add(f.gameObject);
+        }   
+        foreach(Transform o in mix_items){
+            mix_it.Add(o.gameObject);
         }       
     }
     public void FridgeMenu(){
@@ -73,18 +79,25 @@ public class Fridge : MonoBehaviour
         foreach(GameObject j in fridge_it){
             GameObject chop_slot = chop_it.Find(obj => obj.name == j.name);
             GameObject bake_slot = bake_it.Find(obj => obj.name == j.name);
-            
-            GameObject temp = j.transform.Find("Items").Find(name).gameObject;
-            GameObject temp_c = chop_slot.transform.Find("Items").Find(name).gameObject;
-            GameObject temp_b = bake_slot.transform.Find("Items").Find(name).gameObject;
+            GameObject mix_slot = mix_it.Find(obj => obj.name == j.name);
+
+            string path = "Icons";
+
+
+            GameObject temp = j.transform.Find("Items").Find("apple").gameObject;
+            GameObject temp_c = chop_slot.transform.Find("Items").Find("apple").gameObject;
+            GameObject temp_b = bake_slot.transform.Find("Items").Find("apple").gameObject;
+            GameObject temp_m = mix_slot.transform.Find("Items").Find("apple").gameObject;
 
             GameObject qty = j.transform.Find("qty").gameObject; 
             GameObject qty_c = chop_slot.transform.Find("qty").gameObject; 
             GameObject qty_b = bake_slot.transform.Find("qty").gameObject; 
+            GameObject qty_m = mix_slot.transform.Find("qty").gameObject; 
 
             Text t = qty.GetComponent<Text>();
             Text t_c = qty_c.GetComponent<Text>();
             Text t_b = qty_b.GetComponent<Text>();
+            Text t_m = qty_m.GetComponent<Text>();
 
             Slot s = j.GetComponent<Slot>();
             if(!s.filled && !fsub.ContainsKey(name)){
@@ -97,33 +110,59 @@ public class Fridge : MonoBehaviour
                     case "banana":
                     case "Apple": 
                     case "Banana":
+                    case "cinderwheat":
+
+                        Image test = temp.GetComponent<Image>();
+                        test.sprite = Resources.Load<Sprite>(path + "/" + name);
+                        Image test2 = temp_c.GetComponent<Image>();
+                        test2.sprite = Resources.Load<Sprite>(path + "/" + name);
+                        Image test3 = temp_b.GetComponent<Image>();
+                        test3.sprite = Resources.Load<Sprite>(path + "/" + name);
+                        Image test4 = temp_m.GetComponent<Image>();
+                        test4.sprite = Resources.Load<Sprite>(path + "/" + name);
+
+
+                        
                         temp.SetActive(true);
                         temp_c.SetActive(true);
                         temp_b.SetActive(true);
+                        temp_m.SetActive(true);
 
                         t.text= "x" + quantity;
                         t_c.text = "x" + quantity;
                         t_b.text = "x" + quantity;
+                        t_m.text = "x" + quantity;
 
                         s.filled = true;
                         chop_slot.GetComponent<Slot>().filled = true;
                         bake_slot.GetComponent<Slot>().filled = true;
+                        mix_slot.GetComponent<Slot>().filled = true;
 
                         s.name = name;
                         chop_slot.GetComponent<Slot>().name = name;
                         bake_slot.GetComponent<Slot>().name = name;
+                        mix_slot.GetComponent<Slot>().name = name;
 
                         fsub.Add(name, quantity);
                         if(name == "apple"){
                             s.action = "chopping";
                             chop_slot.GetComponent<Slot>().action = "chopping";
                             bake_slot.GetComponent<Slot>().action = "chopping";
+                            mix_slot.GetComponent<Slot>().action = "chopping";
 
                         }
                         else if(name == "banana"){
                             s.action = "baking";
                             chop_slot.GetComponent<Slot>().action = "baking";
                             bake_slot.GetComponent<Slot>().action = "baking";
+                            mix_slot.GetComponent<Slot>().action = "baking";
+    
+                        }
+                        else if(name == "cinderwheat"){
+                            s.action = "mixing";
+                            chop_slot.GetComponent<Slot>().action = "mixing";
+                            bake_slot.GetComponent<Slot>().action = "mixing";
+                            mix_slot.GetComponent<Slot>().action = "mixing";
                         }
                         break;
                     default:
@@ -144,24 +183,37 @@ public class Fridge : MonoBehaviour
                     case "banana":
                     case "Apple": 
                     case "Banana":
+                    case "cinderwheat":
                         temp.SetActive(true);
                         temp_c.SetActive(true);
                         temp_b.SetActive(true);
+                        temp_m.SetActive(true);
+
                         fsub[name] +=1;
 
                         t.text= "x" + (fsub[name]);
                         t_c.text= "x" + (fsub[name]);
                         t_b.text= "x" + (fsub[name]);
+                        t_m.text= "x" + (fsub[name]);
+
                         if(name == "apple"){
                             s.action = "chopping";
                             chop_slot.GetComponent<Slot>().action = "chopping";
                             bake_slot.GetComponent<Slot>().action = "chopping";
+                            mix_slot.GetComponent<Slot>().action = "chopping";
 
                         }
                         else if(name == "banana"){
                             s.action = "baking";
                             chop_slot.GetComponent<Slot>().action = "baking";
                             bake_slot.GetComponent<Slot>().action = "baking";
+                            mix_slot.GetComponent<Slot>().action = "baking";
+                        }
+                        else if(name == "cinderwheat"){
+                            s.action = "mixing";
+                            chop_slot.GetComponent<Slot>().action = "mixing";
+                            bake_slot.GetComponent<Slot>().action = "mixing";
+                            mix_slot.GetComponent<Slot>().action = "mixing";
                         }
                         break;
                     default:
@@ -181,18 +233,22 @@ public class Fridge : MonoBehaviour
             Debug.Log("2");
             GameObject chop_slot = chop_it.Find(obj => obj.name == j.name);
             GameObject bake_slot = bake_it.Find(obj => obj.name == j.name);
+            GameObject mix_slot = mix_it.Find(obj => obj.name == j.name);
 
-            GameObject temp = j.transform.Find("Items").Find(name).gameObject;
-            GameObject temp_c = chop_slot.transform.Find("Items").Find(name).gameObject;
-            GameObject temp_b = bake_slot.transform.Find("Items").Find(name).gameObject;
+            GameObject temp = j.transform.Find("Items").Find("apple").gameObject;
+            GameObject temp_c = chop_slot.transform.Find("Items").Find("apple").gameObject;
+            GameObject temp_b = bake_slot.transform.Find("Items").Find("apple").gameObject;
+            GameObject temp_m = mix_slot.transform.Find("Items").Find("apple").gameObject;
 
             GameObject qty = j.transform.Find("qty").gameObject; 
             GameObject qty_c = chop_slot.transform.Find("qty").gameObject; 
             GameObject qty_b = bake_slot.transform.Find("qty").gameObject; 
+            GameObject qty_m = mix_slot.transform.Find("qty").gameObject; 
 
             Text t = qty.GetComponent<Text>();
             Text t_c = qty_c.GetComponent<Text>();
             Text t_b = qty_b.GetComponent<Text>();
+            Text t_m = qty_m.GetComponent<Text>();
 
             Slot s = j.GetComponent<Slot>();
             Debug.Log("3");
@@ -205,6 +261,7 @@ public class Fridge : MonoBehaviour
                 switch (name){
                     case "apple":
                     case "banana":
+                    case "cinderwheat":
                     Debug.Log("4");
                         Debug.Log("test2");
                         fsub[name] -=1;
@@ -213,21 +270,25 @@ public class Fridge : MonoBehaviour
                          temp.SetActive(false);
                          temp_c.SetActive(false);
                          temp_b.SetActive(false);
+                         temp_m.SetActive(false);
 
                          fsub[name] = 0;
                          t.text = "x0";
                          t_c.text = "x0";
                          t_b.text = "x0";
+                         t_m.text = "x0";
 
                          break;   
                         }
                         temp.SetActive(true);
                         temp_c.SetActive(true);
                         temp_b.SetActive(true);
+                        temp_m.SetActive(true);
 
                         t.text= "x" + (fsub[name]);
                         t_c.text= "x" + (fsub[name]);
                         t_b.text= "x" + (fsub[name]);
+                        t_m.text= "x" + (fsub[name]);
 
                         break;
                     default:

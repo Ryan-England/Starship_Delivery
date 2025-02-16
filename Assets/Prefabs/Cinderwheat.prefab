@@ -161,12 +161,10 @@ MonoBehaviour:
   itemName: cinderwheat
   quantity: 1
   type: 1
-  regenerating: 0
+  regenerating: 1
   regenTime: 30
-  FreshModel: {fileID: 919132149155446097, guid: ccabd8b1d32a25245b89791bd20022a1,
-    type: 3}
-  DepleteModel: {fileID: 919132149155446097, guid: aa8ea7f3dc3b96248bcec53c9e87beb8,
-    type: 3}
+  FreshModel: {fileID: 0}
+  DepleteModel: {fileID: 8742979505890582438}
 --- !u!114 &7802391105918568027
 MonoBehaviour:
   m_ObjectHideFlags: 0

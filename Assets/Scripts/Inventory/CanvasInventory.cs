@@ -25,6 +25,8 @@ public class CanvasInventory : MonoBehaviour
     public void AddItems(string name, int quantity){
         foreach(GameObject j in it){
             Slot s = j.GetComponent<Slot>();
+            string path = "Icons";
+            
             if(!s.filled && !sub.ContainsKey(name)){
                 //check the name of the item
                 //check the quantity
@@ -37,8 +39,15 @@ public class CanvasInventory : MonoBehaviour
                     case "Apple": 
                     case "Banana":
                     case "quaso":
-                        GameObject temp = j.transform.Find(name).gameObject;
-                        GameObject temp_f = fridge_slot.transform.Find("Items").Find(name).gameObject;
+                    case "cinderwheat":
+                        GameObject temp = j.transform.Find("apple").gameObject;
+                        GameObject temp_f = fridge_slot.transform.Find("Items").Find("apple").gameObject;
+
+                        Image test = temp.GetComponent<Image>();
+                        Debug.Log(test + "skjdflksdjflksjdklfj " + temp);
+                        test.sprite = Resources.Load<Sprite>(path + "/" + name);
+                        Image test2 = temp_f.GetComponent<Image>();
+                        test2.sprite = Resources.Load<Sprite>(path + "/" + name);
 
                         GameObject prep = fridge_slot.transform.Find("Prep").gameObject;
 
@@ -70,6 +79,10 @@ public class CanvasInventory : MonoBehaviour
                             s.action = "baking";
                             fridge_slot.GetComponent<Slot>().action = "baking";
                         }
+                        else if(name == "cinderwheat"){
+                            s.action = "mixing";
+                            fridge_slot.GetComponent<Slot>().action = "mixing";
+                        }
                         else{
                             s.action = "food";
                             fridge_slot.GetComponent<Slot>().action = "food";
@@ -94,9 +107,15 @@ public class CanvasInventory : MonoBehaviour
                     case "Apple": 
                     case "Banana":
                     case "quaso":
+                    case "cinderwheat":
                         Debug.Log("test2");
-                        GameObject temp = j.transform.Find(name).gameObject;
-                        GameObject temp_f = fridge_slot.transform.Find("Items").Find(name).gameObject;
+                        GameObject temp = j.transform.Find("apple").gameObject;
+                        GameObject temp_f = fridge_slot.transform.Find("Items").Find("apple").gameObject;
+
+                        Image test = temp.GetComponent<Image>();
+                        test.sprite = Resources.Load<Sprite>(path + "/" + name);
+                        Image test2 = temp_f.GetComponent<Image>();
+                        test2.sprite = Resources.Load<Sprite>(path + "/" + name);
 
                         GameObject prep = fridge_slot.transform.Find("Prep").gameObject;
 
@@ -122,6 +141,10 @@ public class CanvasInventory : MonoBehaviour
                         else if(name == "banana"){
                             s.action = "baking";
                             fridge_slot.GetComponent<Slot>().action = "baking";
+                        }
+                        else if(name == "cinderwheat"){
+                            s.action = "mixing";
+                            fridge_slot.GetComponent<Slot>().action = "mixing";
                         }
                         else{
                             s.action = "food";
@@ -151,9 +174,10 @@ public class CanvasInventory : MonoBehaviour
                 switch (name){
                     case "apple":
                     case "banana":
+                    case "cinderwheat":
                         Debug.Log("test2");
-                        GameObject temp = j.transform.Find(name).gameObject;
-                        GameObject temp_f = fridge_slot.transform.Find("Items").Find(name).gameObject;
+                        GameObject temp = j.transform.Find("apple").gameObject;
+                        GameObject temp_f = fridge_slot.transform.Find("Items").Find("apple").gameObject;
 
                         GameObject prep = fridge_slot.transform.Find("Prep").gameObject;
 
