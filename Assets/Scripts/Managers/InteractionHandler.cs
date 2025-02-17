@@ -48,7 +48,7 @@ public class InteractionHandler : MonoBehaviour
     public bool quest_complete = false;
 
 
-    public string[] sentences;
+    private string[] sentences;
     private bool skip = false;
     // Reference that tracks the current line of dialogue
     private int currentLineIndex = 0;
