@@ -3,6 +3,8 @@ public class Discourse
     public string speaker;
     public string line_ID;
     public string next_line_ID;
+    public string prev_line_ID;
+    public string flag_ID;
     public string text;
     public string quest_ID;
     public string choice_A;
@@ -10,11 +12,13 @@ public class Discourse
     public string choice_B;
     public string choice_B_ID;
 
-    public Discourse(string speaker, string line_ID, string text, string next_line_ID = null, string quest_ID = null, string choice_A = null, string choice_A_ID = null, string choice_B = null, string choice_B_ID = null)
+    public Discourse(string speaker, string line_ID, string text, string flag_ID = null, string prev_line_ID = null, string next_line_ID = null, string quest_ID = null, string choice_A = null, string choice_A_ID = null, string choice_B = null, string choice_B_ID = null)
     {
         this.speaker = speaker;
         this.line_ID = line_ID;
+        this.flag_ID = flag_ID;
         this.next_line_ID = next_line_ID;
+        this.prev_line_ID = prev_line_ID;
         this.text = text;
         this.quest_ID = quest_ID;
         this.choice_A = choice_A;
