@@ -179,6 +179,9 @@ public class CanvasInventory : MonoBehaviour
                     case "apple":
                     case "banana":
                     case "cinderwheat":
+                    case "quaso": 
+                    case "ice":
+                    case "salad":
                         Debug.Log("test2");
                         GameObject temp = j.transform.Find("apple").gameObject;
                         GameObject temp_f = fridge_slot.transform.Find("Items").Find("apple").gameObject;
