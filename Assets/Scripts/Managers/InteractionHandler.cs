@@ -165,7 +165,7 @@ public class InteractionHandler : MonoBehaviour
         foreach(string choice in dialogue.choices){
             dialogueOptions.Enqueue(choice);
         }
-        source.PlayOneShot(clip);
+        //source.PlayOneShot(clip);
         DisplayNextSentence();
     }
 
@@ -194,7 +194,7 @@ public class InteractionHandler : MonoBehaviour
         else{
             optionBoxPrefab.SetActive(false);
         }
-        source.PlayOneShot(clip);
+        //source.PlayOneShot(clip);
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
 
