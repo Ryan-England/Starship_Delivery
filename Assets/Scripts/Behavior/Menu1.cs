@@ -6,15 +6,7 @@ using UnityEngine.SceneManagement;
 public class Menu1: MonoBehaviour
 {
     public GameObject start;
-    public GameObject options;
-    void Start(){
-
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }    
+    public GameObject options; 
     public void Switch(string sceneName)
     {
         SceneManager.LoadScene(sceneName);

@@ -50,7 +50,7 @@ public class InventoryManager : MonoBehaviour
             Debug.Log(collectibleItem.itemName + "not");
             // Debug.Log(collectibleItem.quantity);
             inventory.AddItem(collectibleItem.itemName, type, collectibleItem.quantity);
-            Destroy(collectible);
+            collectibleItem.harvest();
 
             // Print new acquired item message
             inventory.PrintItem(collectibleItem.itemName);

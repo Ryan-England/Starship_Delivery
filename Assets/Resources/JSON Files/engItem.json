@@ -1,0 +1,12 @@
+{
+    "ItemList": [
+        {
+            "name": "genericItem",
+            "ItemID": "generic",
+            "image_filepath": "Sprites/Items/genericItem",
+            "description": "A generic item",
+            "value": 1,
+            "tags": ["generic"]
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "NPCList": [{
+        "name": "genericNPC",
+        "UnitID": "generic",
+        "dialogues": [{
+            "greetText": "Hello, I am a generic NPC"
+        }]
+    }]
+}

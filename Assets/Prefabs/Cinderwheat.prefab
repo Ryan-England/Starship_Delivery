@@ -183,6 +183,7 @@ MonoBehaviour:
   dialogueSphere: {fileID: 7395863841842122532}
   dialogueDistance: 2
   isTriggered: 0
+  enabled: 1
   selector: {fileID: 7694128418478136522}
 --- !u!82 &4613837600145872006
 AudioSource:

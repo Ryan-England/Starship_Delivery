@@ -11,6 +11,10 @@ public class InteractionHandler : MonoBehaviour
     public enum SearchType { NPC, Object, Objectives }
     // Eventually, we'll use searchType for unique setups for dialogue or dialogue boxes/choices.
     [SerializeField] private SearchType searchType;
+
+    // UnitID - used for linking object in game and in JSON
+    [SerializeField] private string unitID;
+    
     // Decide whether the interaction will be dialogue or not
     [SerializeField] private bool hasDialogue = false;
     // List of string lines shown in the inspector
@@ -23,9 +27,11 @@ public class InteractionHandler : MonoBehaviour
 
     [SerializeField] private Dialogue dialogue;
     
+    // Text components for dialogue box
     [SerializeField] private Text dialogueText;
     [SerializeField] private Text dialogueName;
 
+    // Button components for dialogue box
     [SerializeField] private Text opt1;
     [SerializeField] private Text opt2;
 

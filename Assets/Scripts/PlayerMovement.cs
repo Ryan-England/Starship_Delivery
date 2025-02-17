@@ -12,19 +12,23 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Sprint")]
     public float sprintSpeedMultiplier = 1.5f;
-    public KeyCode sprintKey = KeyCode.LeftShift;
     private bool isSprinting = false;
 
     [Header("Jump")]
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
-    public int maxJumps = 2;  // Maximum number of jumps allowed (2 for double jump)
-    private int jumpsRemaining;  // Current jumps remaining
+    public int maxJumps = 2;  
+    private int jumpsRemaining;  
     bool readyToJump;
     private float jumpBoost = 1.0f;
     public bool IsJumpingCheck = false;
-    public float doubleJumpMultiplier = 0.8f;  // How strong the second jump is compared to the first
+    public float doubleJumpMultiplier = 0.8f;  
+
+    [Header("Climbing")]
+    public float climbSpeed = 5f;
+    public float climbCheckDistance = 0.5f;
+    private bool isClimbing = false;
 
     [Header("Crouch")]
     public float crouchSpeed = 5f;
@@ -36,14 +40,22 @@ public class PlayerMovement : MonoBehaviour
     private bool readyToCrouch = true;
     public float crouchCooldown = 0.2f;
 
+    [Header("Slide")]
+    public float slideDuration = 0.6f;
+    public float slideSpeedMultiplier = 1.5f;
+    public float slideForce = 5f;
+    private bool isSliding = false;
+    private float slideTimer;
+
     [Header("Ground Check")]
     public float playerHeight;
-    public LayerMask whatIsGround;
     bool grounded;
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
-    public KeyCode crouchKey = KeyCode.LeftControl;
+    public KeyCode crouchKey = KeyCode.C;
+    public KeyCode climbKey = KeyCode.F;
+    public KeyCode sprintKey = KeyCode.LeftShift;
 
     [Header("Respawn")]
     public GameObject SpawnPoint;
@@ -86,7 +98,6 @@ public class PlayerMovement : MonoBehaviour
         MyInput();
         SpeedControl();
 
-        // handle drag
         if (grounded)
         {
             rb.drag = groundDrag;
@@ -96,8 +107,21 @@ public class PlayerMovement : MonoBehaviour
             rb.drag = 0;
         }
 
-        // Handle crouch transition
+
         HandleCrouchAnimation();
+
+     
+        if (isSliding)
+        {
+            slideTimer -= Time.deltaTime;
+            if (slideTimer <= 0)
+            {
+                StopSlide();
+            }
+        }
+
+     
+        CheckForClimbableSurface();
     }
 
     private void FixedUpdate()
@@ -108,6 +132,8 @@ public class PlayerMovement : MonoBehaviour
         {
             respawn();
         }
+
+        Climb();
     }
 
     private void MyInput()
@@ -122,10 +148,10 @@ public class PlayerMovement : MonoBehaviour
             if (IsJumpingCheck) Debug.Log(verticalInput);
         }
 
-        // Disable horizontal movement when minigame is active
+     
         if (GameController.isMinigameActive)
         {
-            horizontalInput = 0; // Prevent A/D movement
+            horizontalInput = 0; 
         }
         else
         {
@@ -134,15 +160,15 @@ public class PlayerMovement : MonoBehaviour
 
         if (IsMovingCheck) Debug.Log(horizontalInput);
 
-        // Sprint input
+       
         isSprinting = Input.GetKey(sprintKey) && grounded && !isCrouching;
 
-        // Jump input
+     
         if (Input.GetKeyDown(jumpKey) && readyToJump && jumpsRemaining > 0)
         {
             readyToJump = false;
 
-            //Jump();
+         
             if (!GameController.isMinigameActive)
             {
                 Jump();
@@ -151,16 +177,23 @@ public class PlayerMovement : MonoBehaviour
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
-        // Crouch input
-        if (Input.GetKeyDown(crouchKey) && readyToCrouch && grounded)
+      
+        if (Input.GetKeyDown(KeyCode.C) && readyToCrouch && grounded)
         {
             readyToCrouch = false;
-            Crouch();
+            if (isSprinting)
+            {
+                StartSlide();
+            }
+            else
+            {
+                Crouch();
+            }
             Invoke(nameof(ResetCrouch), crouchCooldown);
         }
 
-        // Stand up when key is released
-        if (Input.GetKeyUp(crouchKey) && grounded)
+       
+        if (Input.GetKeyUp(KeyCode.C) && grounded)
         {
             StopCrouch();
         }
@@ -168,8 +201,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        // Skip all movement when the minigame is active
-        if (GameController.isMinigameActive)
+    
+        if (GameController.isMinigameActive || isClimbing)
         {
             return;
         }
@@ -185,6 +218,10 @@ public class PlayerMovement : MonoBehaviour
         {
             currentMoveSpeed = moveSpeed * sprintSpeedMultiplier;
         }
+        else if (isSliding)
+        {
+            currentMoveSpeed = moveSpeed * slideSpeedMultiplier;
+        }
 
         if (grounded)
         {
@@ -193,6 +230,12 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             rb.AddForce(moveDirection.normalized * currentMoveSpeed * 10f * airMultiplier, ForceMode.Force);
+        }
+
+
+        if (isSliding)
+        {
+            rb.AddForce(orientation.forward * slideForce, ForceMode.Impulse);
         }
     }
 
@@ -204,7 +247,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void StopCrouch()
     {
-        // Check if there's enough space to stand up
+       
         if (!Physics.Raycast(transform.position, Vector3.up, standingHeight))
         {
             isCrouching = false;
@@ -213,7 +256,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleCrouchAnimation()
     {
-        float targetHeight = isCrouching ? crouchHeight : standingHeight;
+        float targetHeight = isCrouching || isSliding ? crouchHeight : standingHeight;
         Vector3 targetScale = new Vector3(originalScale.x, originalScale.y * (targetHeight / standingHeight), originalScale.z);
         transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.deltaTime * crouchTransitionSpeed);
     }
@@ -223,12 +266,59 @@ public class PlayerMovement : MonoBehaviour
         readyToCrouch = true;
     }
 
+    private void CheckForClimbableSurface()
+    {
+        RaycastHit hit;
+    
+        if (Physics.Raycast(transform.position, orientation.forward, out hit, climbCheckDistance))
+        {
+            if (Input.GetKeyDown(climbKey))
+            {
+                StartClimbing();
+            }
+        }
+        else if (isClimbing)
+        {
+            StopClimbing();
+        }
+    }
+
+    private void StartClimbing()
+    {
+        isClimbing = true;
+        rb.useGravity = false;
+        rb.velocity = Vector3.zero; 
+    }
+
+    private void StopClimbing()
+    {
+        isClimbing = false;
+        rb.useGravity = true;
+    }
+
+    private void Climb()
+    {
+        if (isClimbing)
+        {
+            float verticalInput = Input.GetAxisRaw("Vertical");
+            float horizontalInput = Input.GetAxisRaw("Horizontal");
+
+            Vector3 climbDirection = orientation.up * verticalInput + orientation.right * horizontalInput;
+            rb.velocity = climbDirection.normalized * climbSpeed;
+        }
+    }
+
     private void SpeedControl()
     {
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         float maxSpeed = isSprinting ? moveSpeed * sprintSpeedMultiplier : moveSpeed;
-        if(flatVel.magnitude > maxSpeed)
+        if (isSliding)
+        {
+            rb.velocity = new Vector3(rb.velocity.x * 0.95f, rb.velocity.y, rb.velocity.z * 0.95f); 
+        }
+
+        if (flatVel.magnitude > maxSpeed)
         {
             Vector3 limitedVel = flatVel.normalized * maxSpeed;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
@@ -239,13 +329,13 @@ public class PlayerMovement : MonoBehaviour
     {
         jumpsRemaining--;
 
-        // reset y velocity (only on first jump)
+ 
         if (grounded)
         {
             rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         }
 
-        // Apply different force for double jump
+      
         float currentJumpForce = grounded ? jumpForce : jumpForce * doubleJumpMultiplier;
         
         rb.AddForce(transform.up * currentJumpForce * jumpBoost, ForceMode.Impulse);
@@ -256,34 +346,34 @@ public class PlayerMovement : MonoBehaviour
         readyToJump = true;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void StartSlide()
     {
-        if (!grounded && collision.contacts[0].normal.y > 0.7f)  // Check if we're landing on top of something
+        isSliding = true;
+        isCrouching = true;
+        isSprinting = false;
+        slideTimer = slideDuration;
+    }
+
+    private void StopSlide()
+    {
+        isSliding = false;
+        isCrouching = false;
+        rb.velocity = new Vector3(rb.velocity.x * 0.5f, rb.velocity.y, rb.velocity.z * 0.5f); 
+    }
+
+
+   private void OnCollisionEnter(Collision collision)
+    {
+        if (!grounded && collision.contacts[0].normal.y > 0.7f) 
         {
             grounded = true;
-            jumpsRemaining = maxJumps;  // Reset available jumps when landing
+            jumpsRemaining = maxJumps;  
+            StopClimbing();
         }
 
-        if (collision.transform.tag == "Platform")
+        if (isClimbing)
         {
-            transform.parent = collision.transform.parent;
-            PlatformManager P = collision.gameObject.GetComponentInParent<PlatformManager>();
-
-            if (P.bounciness > 0)
-            {
-                jumpBoost = 1.0f + P.bounciness;
-                float bv = 0;
-                if (collision.relativeVelocity.y > 2)
-                {
-                    bv += P.bounciness * collision.relativeVelocity.y;
-                }
-                rb.AddForce(transform.up * bv, ForceMode.Impulse);
-            }
-
-            if (P.lethal)
-            {
-                respawn();
-            }
+            rb.useGravity = false;
         }
     }
 
@@ -292,18 +382,22 @@ public class PlayerMovement : MonoBehaviour
         grounded = false;
         transform.parent = null;
         jumpBoost = 1.0f;
+        if (isClimbing)
+        {
+            StopClimbing();
+        }
     }
 
-    public void changeControls(bool value)
-    {
-        is2D = value;
-    }
+        public void changeControls(bool value)
+        {
+            is2D = value;
+        }
 
-    public void resetOrientation()
-    {
-        orientation.eulerAngles = new Vector3(0f, 0f, 0f);
-        tf.eulerAngles = new Vector3(0f, 0f, 0f);
-    }
+        public void resetOrientation()
+        {
+            orientation.eulerAngles = new Vector3(0f, 0f, 0f);
+            tf.eulerAngles = new Vector3(0f, 0f, 0f);
+        }
 
     public void respawn()
     {
