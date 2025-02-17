@@ -28,7 +28,7 @@ public class Inventory : MonoBehaviour
     }
 
     // Dictionary to store items based on their category
-    private Dictionary<ItemType, List<Item>> itemCollection = new Dictionary<ItemType, List<Item>>();
+    public Dictionary<ItemType, List<Item>> itemCollection = new Dictionary<ItemType, List<Item>>();
     public CanvasInventory ci;
     private void Awake()
     {
@@ -128,5 +128,22 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
+    }
+
+    public bool FindItem(string itemName)
+    {
+        foreach (var category in itemCollection)
+        {
+            foreach (var item in category.Value)
+            {
+                // Debug.Log(item.itemName);
+                // Debug.Log(itemName);
+                if (item.itemName == itemName)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

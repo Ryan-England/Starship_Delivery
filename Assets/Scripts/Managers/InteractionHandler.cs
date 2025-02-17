@@ -20,6 +20,7 @@ public class InteractionHandler : MonoBehaviour
     // List of string lines shown in the inspector
     [SerializeField] private Queue<string> dialogueLines = new Queue<string>();
     [SerializeField] private Queue<string> dialogueOptions = new Queue<string>();
+
     // Prefab of chatbox that'll appear when dialogue is ready.
     [SerializeField] private GameObject chatBoxPrefab;
     [SerializeField] private GameObject optionBoxPrefab;
@@ -39,9 +40,21 @@ public class InteractionHandler : MonoBehaviour
     public NPCQuest quest;
     public GameObject quest_anim;
     public Text quest_name;
+    public QuestManager qm;
+    public Inventory inv; 
+    public CanvasInventory ci;
+
+    public bool quest_complete_first = false;
+    public bool quest_complete = false;
+
+
+    public string[] sentences;
     private bool skip = false;
     // Reference that tracks the current line of dialogue
     private int currentLineIndex = 0;
+
+    public AudioSource source;
+    public AudioClip clip;
 
     // Called by the detection manager to interact with the object on E press.
     public void Interact()
@@ -74,6 +87,8 @@ public class InteractionHandler : MonoBehaviour
         }
         else{
             chatBoxPrefab.SetActive(true);
+            sentences = dialogue.sentences;
+            CheckQuest();
             StartDialogue(dialogue);
         }
     }
@@ -97,6 +112,32 @@ public class InteractionHandler : MonoBehaviour
         }
   
     }
+
+    public void CheckQuest(){
+        if(quest.have_quest){
+            if(qm.Quests.ContainsKey(quest.quest_name)){
+                if(qm.Quests[quest.quest_name]){
+                    sentences = dialogue.quest_complete;
+                    return;
+                }
+                switch(quest.quest_type){
+                    case 0: 
+                    case 1:
+                        if(inv.FindItem(quest.item_name)){
+                            inv.RemoveItem(quest.item_name, Inventory.ItemType.Ingredient, 1);
+                            ci.DeleteItems(quest.item_name, 1);
+                            sentences = dialogue.quest_check;
+                            qm.CompleteQuest(quest);
+                            quest_complete_first = true;
+                            return;
+                        }
+                        break;
+                    default: 
+                        break;
+                }
+            }
+        }
+    }
     // public void NextLine() {
     //     // If the total dialogue lines are more than zero
     //     if (dialogueLines.Count > 0) {
@@ -117,14 +158,14 @@ public class InteractionHandler : MonoBehaviour
         optionBoxPrefab.SetActive(false);
         dialogueName.text = dialogue.name;
         int i = 0;
-        foreach (string sentence in dialogue.sentences){
+        foreach (string sentence in sentences){
             Debug.Log(sentence);
             dialogueLines.Enqueue(sentence);
         }
         foreach(string choice in dialogue.choices){
             dialogueOptions.Enqueue(choice);
         }
-            
+        source.PlayOneShot(clip);
         DisplayNextSentence();
     }
 
@@ -153,6 +194,7 @@ public class InteractionHandler : MonoBehaviour
         else{
             optionBoxPrefab.SetActive(false);
         }
+        source.PlayOneShot(clip);
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
 
@@ -183,8 +225,16 @@ public class InteractionHandler : MonoBehaviour
         c.ans = 0; 
 
         if(quest.have_quest){
-            quest_name.text = quest.quest_name;
-            quest_anim.SetActive(true);
+            if(!qm.Quests.ContainsKey(quest.quest_name)){
+                quest_name.text = quest.quest_name;
+                quest_anim.SetActive(true);
+                qm.AddQuest(quest);
+            }
+            else if(qm.Quests[quest.quest_name] && quest_complete_first){
+                quest_name.text = "Quest Complete: " + quest.quest_name;
+                quest_anim.SetActive(true);
+                quest_complete_first = false;
+            }
         }
         Debug.Log("End of Conversation");
     }
