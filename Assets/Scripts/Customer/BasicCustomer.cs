@@ -14,7 +14,7 @@ public class BasicCustomer : MonoBehaviour
     float turnSmoothVelocity;
     public float speed = 5f;
     public Animator movement;
-
+    public int limit;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,12 +25,12 @@ public class BasicCustomer : MonoBehaviour
     void Update()
     {
         if(customer){
-            Debug.Log("customer mode started... Moving...");
+            // Debug.Log("customer mode started... Moving...");
             bool x = targetposition.transform.position.x != transform.position.x; 
             bool y = targetposition.transform.position.z != transform.position.z;
             distance = Vector3.Distance(transform.position, targetposition.transform.position);
             if (distance >= 2f) {
-                    Debug.Log("moving...");
+                    // Debug.Log("moving...");
                     movement.SetTrigger("moving");
                     Vector3 direction = targetposition.transform.position - transform.position;
                     // Debug.Log(direction);
@@ -47,7 +47,7 @@ public class BasicCustomer : MonoBehaviour
                 customer = false;
             }
         }
-        int randomNumber = UnityEngine.Random.Range(0, 11); // 0 is inclusive, 11 is exclusive
+        int randomNumber = UnityEngine.Random.Range(0, limit); // 0 is inclusive, 11 is exclusive
         if(randomNumber == 4){
             customer = true;
         }
