@@ -42,6 +42,7 @@ public class CanvasInventory : MonoBehaviour
                     case "salad":
                     case "ice":
                     case "cinderwheat":
+                    case "salt":
                         GameObject temp = j.transform.Find("apple").gameObject;
                         GameObject temp_f = fridge_slot.transform.Find("Items").Find("apple").gameObject;
 
@@ -81,7 +82,7 @@ public class CanvasInventory : MonoBehaviour
                             s.action = "baking";
                             fridge_slot.GetComponent<Slot>().action = "baking";
                         }
-                        else if(name == "cinderwheat"){
+                        else if(name == "cinderwheat" || name == "salt"){
                             s.action = "mixing";
                             fridge_slot.GetComponent<Slot>().action = "mixing";
                         }
@@ -112,6 +113,7 @@ public class CanvasInventory : MonoBehaviour
                     case "salad":
                     case "ice":
                     case "cinderwheat":
+                    case "salt":
                         Debug.Log("test2");
                         GameObject temp = j.transform.Find("apple").gameObject;
                         GameObject temp_f = fridge_slot.transform.Find("Items").Find("apple").gameObject;
@@ -134,10 +136,11 @@ public class CanvasInventory : MonoBehaviour
                         temp_f.SetActive(true);
                         prep.SetActive(true);
 
-                        t.text= "x" + (sub[name]+1);
-                        t_f.text= "x" + (sub[name]+1);
+                        sub[name] += quantity;
+                        t.text= "x" + (sub[name]);
+                        t_f.text= "x" + (sub[name]);
 
-                        sub[name] +=1;
+                        
                         if(name == "apple"){
                             s.action = "chopping";
                             fridge_slot.GetComponent<Slot>().action = "chopping";
@@ -146,7 +149,7 @@ public class CanvasInventory : MonoBehaviour
                             s.action = "baking";
                             fridge_slot.GetComponent<Slot>().action = "baking";
                         }
-                        else if(name == "cinderwheat"){
+                        else if(name == "cinderwheat" || name == "salt"){
                             s.action = "mixing";
                             fridge_slot.GetComponent<Slot>().action = "mixing";
                         }
@@ -175,47 +178,39 @@ public class CanvasInventory : MonoBehaviour
                 //set active the icon in that slot 
                 //update the qty according to the item
                 GameObject fridge_slot = fr_it.Find(obj => obj.name == j.name);
-                switch (name){
-                    case "apple":
-                    case "banana":
-                    case "cinderwheat":
-                    case "quaso": 
-                    case "ice":
-                    case "salad":
-                        Debug.Log("test2");
-                        GameObject temp = j.transform.Find("apple").gameObject;
-                        GameObject temp_f = fridge_slot.transform.Find("Items").Find("apple").gameObject;
+                
+                Debug.Log("test2");
+                GameObject temp = j.transform.Find("apple").gameObject;
+                GameObject temp_f = fridge_slot.transform.Find("Items").Find("apple").gameObject;
 
-                        GameObject prep = fridge_slot.transform.Find("Prep").gameObject;
+                GameObject prep = fridge_slot.transform.Find("Prep").gameObject;
 
-                        GameObject qty = j.transform.Find("qty").gameObject; 
-                        GameObject qty_f = fridge_slot.transform.Find("qty").gameObject; 
+                GameObject qty = j.transform.Find("qty").gameObject; 
+                GameObject qty_f = fridge_slot.transform.Find("qty").gameObject; 
 
-                        Text t = qty.GetComponent<Text>();
-                        Text t_f = qty_f.GetComponent<Text>();
-                        sub[name] -=1;
+                Text t = qty.GetComponent<Text>();
+                Text t_f = qty_f.GetComponent<Text>();
+                sub[name] -= quantity;
 
-                        if(sub[name] <= 0){
-                         temp.SetActive(false);
-                         temp_f.SetActive(false);
+                if(sub[name] <= 0)
+                {
+                    temp.SetActive(false);
+                    temp_f.SetActive(false);
 
-                         t.text = "x0";
-                         t_f.text = "x0";
+                    t.text = "x0";
+                    t_f.text = "x0";
 
-                        prep.SetActive(false);
-                         break;   
-                        }
-                        temp.SetActive(true);
-                        temp_f.SetActive(true);
+                    prep.SetActive(false); 
+                } 
+                else 
+                { 
+                    temp.SetActive(true);
+                    temp_f.SetActive(true);
 
-                        t.text= "x" + (sub[name]);
-                        t_f.text= "x" + (sub[name]);
-
-                        break;
-                    default:
-                        Debug.Log("sdf;lks;dlfk;sldkf");
-                        break;
+                    t.text= "x" + (sub[name]);
+                    t_f.text= "x" + (sub[name]);
                 }
+                
 
             }
 

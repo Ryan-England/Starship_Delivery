@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;  // Required for UI elements
 using UnityEngine.EventSystems;
+using System;
 public class Fridge : MonoBehaviour
 {
 
@@ -63,7 +64,12 @@ public class Fridge : MonoBehaviour
         GameObject temp = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
         // GameObject temp = gameObject.transform.parent.gameObject;
         Slot s  = temp.GetComponent<Slot>();
-        if(s.action != "food"){AddToFridge(s.name, 1);}
+        if(s.action != "food")
+        {
+            AddToFridge(s.name, 1);
+            inv.RemoveItem(s.name, Inventory.ItemType.Ingredient, 1);
+            ci.DeleteItems(s.name, 1);
+        }
     }
 
     //add items
@@ -76,6 +82,7 @@ public class Fridge : MonoBehaviour
             // can we use an inventory object for this?
             //honestly yeah probably, inventory script at the end of the day is just a generic that can be applied to the fridge
     public void AddToFridge(string name, int quantity){
+        Debug.Log("Adding " + quantity + " " + name + " to fridge");
         foreach(GameObject j in fridge_it){
             GameObject chop_slot = chop_it.Find(obj => obj.name == j.name);
             GameObject bake_slot = bake_it.Find(obj => obj.name == j.name);
@@ -111,6 +118,7 @@ public class Fridge : MonoBehaviour
                     case "Apple": 
                     case "Banana":
                     case "cinderwheat":
+                    case "salt":
 
                         Image test = temp.GetComponent<Image>();
                         test.sprite = Resources.Load<Sprite>(path + "/" + name);
@@ -169,8 +177,7 @@ public class Fridge : MonoBehaviour
                         Debug.Log("sdf;lks;dlfk;sldkf");
                         break;
                 }
-                inv.RemoveItem(name, Inventory.ItemType.Ingredient, 1);
-                ci.DeleteItems(name, 1);
+                
             }
             else if(s.filled && s.name == name){
                 Debug.Log("test1");
@@ -184,12 +191,13 @@ public class Fridge : MonoBehaviour
                     case "Apple": 
                     case "Banana":
                     case "cinderwheat":
+                    case "salt":
                         temp.SetActive(true);
                         temp_c.SetActive(true);
                         temp_b.SetActive(true);
                         temp_m.SetActive(true);
 
-                        fsub[name] +=1;
+                        fsub[name] += quantity;
 
                         t.text= "x" + (fsub[name]);
                         t_c.text= "x" + (fsub[name]);
@@ -220,8 +228,8 @@ public class Fridge : MonoBehaviour
                         Debug.Log("sdf;lks;dlfk;sldkf");
                         break;
                 }
-                inv.RemoveItem(name, Inventory.ItemType.Ingredient, 1);
-                ci.DeleteItems(name, 1);
+                //inv.RemoveItem(name, Inventory.ItemType.Ingredient, 1);
+                //ci.DeleteItems(name, 1);
 
             }
             // ci.DeleteItems(name, 1);
@@ -252,49 +260,45 @@ public class Fridge : MonoBehaviour
 
             Slot s = j.GetComponent<Slot>();
             Debug.Log("3");
-            if(s.filled){
+            if(s.filled && s.name == name){
                 Debug.Log("test1");
                 //check the name of the item
                 //check the quantity
                 //set active the icon in that slot 
                 //update the qty according to the item
-                switch (name){
-                    case "apple":
-                    case "banana":
-                    case "cinderwheat":
-                    Debug.Log("4");
-                        Debug.Log("test2");
-                        fsub[name] -=1;
+                
+                
+                Debug.Log("4");
+                Debug.Log("test2");
+                fsub[name] -= quantity;
 
-                        if(fsub[name] <= 0){
-                         temp.SetActive(false);
-                         temp_c.SetActive(false);
-                         temp_b.SetActive(false);
-                         temp_m.SetActive(false);
+                if (fsub[name] <= 0)
+                {
+                    temp.SetActive(false);
+                    temp_c.SetActive(false);
+                    temp_b.SetActive(false);
+                    temp_m.SetActive(false);
 
-                         fsub[name] = 0;
-                         t.text = "x0";
-                         t_c.text = "x0";
-                         t_b.text = "x0";
-                         t_m.text = "x0";
-
-                         break;   
-                        }
-                        temp.SetActive(true);
-                        temp_c.SetActive(true);
-                        temp_b.SetActive(true);
-                        temp_m.SetActive(true);
-
-                        t.text= "x" + (fsub[name]);
-                        t_c.text= "x" + (fsub[name]);
-                        t_b.text= "x" + (fsub[name]);
-                        t_m.text= "x" + (fsub[name]);
-
-                        break;
-                    default:
-                        Debug.Log("sdf;lks;dlfk;sldkf");
-                        break;
+                    fsub[name] = 0;
+                    t.text = "x0";
+                    t_c.text = "x0";
+                    t_b.text = "x0";
+                    t_m.text = "x0";
                 }
+                else
+                { 
+                    temp.SetActive(true);
+                    temp_c.SetActive(true);
+                    temp_b.SetActive(true);
+                    temp_m.SetActive(true);
+
+                    t.text = "x" + (fsub[name]);
+                    t_c.text = "x" + (fsub[name]);
+                    t_b.text = "x" + (fsub[name]);
+                    t_m.text = "x" + (fsub[name]);
+                }
+                
+                
 
             }
 
