@@ -9,11 +9,15 @@ public class ConversationHandler : MonoBehaviour
     [SerializeField] private string unitID;
     [SerializeField] private GameObject chatBoxPrefab;
     [SerializeField] private GameObject optionBoxPrefab;
+    [SerializeField] private Text dialogueText;
+    [SerializeField] private Text dialogueName;
     [SerializeField] private GameObject jsonManager;
     private Dictionary<string, Discourse> conversations;
     private NPC character;
     private string first_Line;
-    private Quest quest;
+    private string next_line_ID;
+    private Discourse curr_discourse;
+    private Quest quest;  //Unclear, may be able to just be the questID
     private Text opt1;
     private Text opt2;
     // Start is called before the first frame update
@@ -34,17 +38,52 @@ public class ConversationHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(optionBoxPrefab.activeSelf){
+            /*if(c.ans == 1){
+                optionBoxPrefab.SetActive(false);
+                DisplayNextSentence();
+                string sentence = dialogueLines.Dequeue();
+                string choice = dialogueOptions.Dequeue();            
+            }
+            else if(c.ans == 2){
+                optionBoxPrefab.SetActive(false);
+                string sentence = dialogueLines.Dequeue();
+                string choice = dialogueOptions.Dequeue();  
+                DisplayNextSentence(); 
+            }
+            else{
+                Debug.Log("answer is " + c.ans);
+            } */
+        }
     }
 
     public void Interact()
     {
-        if(chatBoxPrefab.activeSelf){
+        if(chatBoxPrefab.activeSelf){ //if already in conversation
             if(!optionBoxPrefab.activeSelf){
-                DisplayNextLine(first_Line);
+                if (curr_discourse.next_line_ID != null)
+                {
+                    next_line_ID = curr_discourse.next_line_ID;
+                    DisplayNextLine(next_line_ID);
+                }
+                else if (curr_discourse.choice_A != null)
+                {
+                    opt1.text = curr_discourse.choice_A;
+                    opt2.text = curr_discourse.choice_B;
+                    optionBoxPrefab.SetActive(true);
+                }
+                else
+                {
+                    /* if (curr_discourse.quest_ID != null)
+                    {
+                        quest = jsonManager.GetComponent<JsonManager>().getQuest(curr_discourse.quest_ID);
+                        //Supposed to set quest to active, once JSON quest system is functional
+                    }*/
+                    chatBoxPrefab.SetActive(false);
+                }
             }
         }
-        else{
+        else{ //starting conversation
             chatBoxPrefab.SetActive(true);
             first_Line = getDiscourseStart();
             DisplayNextLine(first_Line);
@@ -54,11 +93,22 @@ public class ConversationHandler : MonoBehaviour
     private string getDiscourseStart()
     {
         // Get the first line of dialogue
+        // ISSUES: There will be multiple starting lines, need to find a way to determine which one to start with
         return "";
     }
 
     private void DisplayNextLine(string line_ID)
     {
-        // Display the first line of dialogue
+        // Get the next line of dialogue
+        curr_discourse = conversations[line_ID];
+        StartCoroutine(TypeSentence(curr_discourse.text));
+    }
+
+    IEnumerator TypeSentence(string sentence){
+        dialogueText.text = "";
+        foreach(char i in sentence.ToCharArray()){
+            dialogueText.text += i; 
+            yield return null;
+        }
     }
 }
