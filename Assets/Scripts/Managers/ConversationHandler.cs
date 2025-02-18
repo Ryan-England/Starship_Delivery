@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Unity.PlasticSCM.Editor.WebApi;
 
 public class ConversationHandler : MonoBehaviour
 {
@@ -29,7 +28,7 @@ public class ConversationHandler : MonoBehaviour
         // Get the conversation data from the JSON Manager script
         if (jsonManager != null)
         {
-            character = jsonManager.GetComponent<JsonManager>().getNPC(unitID);
+            loadNPC(unitID);
             conversations = character.dialogues;
         }
         else
@@ -117,5 +116,9 @@ public class ConversationHandler : MonoBehaviour
             dialogueText.text += i; 
             yield return null;
         }
+    }
+
+    public void loadNPC(string unitID){
+        character = jsonManager.GetComponent<JsonManager>().getNPC(unitID);
     }
 }
