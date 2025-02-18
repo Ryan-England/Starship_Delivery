@@ -70,14 +70,14 @@ public class JsonManager : MonoBehaviour
             return;
         }
         foreach (JSONObject element in json_Object.list) {
-            var dialogues = new Dictionary<string, Dialogue>();
+            var dialogues = new Dictionary<string, Discourse>();
             NPC newNPC = new NPC(element["name"].stringValue, element["UnitID"].stringValue, dialogues, element["QuestID"].stringValue);
             if(element["dialogues"] != null){
                 foreach(JSONObject dialogue in element["dialogues"].list){
-                    Dialogue newDialogue = new Dialogue();
-                    newDialogue.name = newNPC.name;
-                    //newDialogue.text = dialogue["text"].stringValue;
-                    newNPC.dialogues.Add(dialogue["id"].stringValue, newDialogue);
+                    Discourse newDialogue = new Discourse(element["speaker"].stringValue, element["line_ID"].stringValue, element["text"].stringValue, 
+                        element["flag_ID"].intValue, element["prev_line_ID"].stringValue, element["next_line_ID"].stringValue, element["quest_ID"].stringValue, 
+                        element["choice_A"].stringValue, element["choice_A_ID"].stringValue, element["choice_B"].stringValue, element["choice_B_ID"].stringValue);
+                    newNPC.dialogues.Add(dialogue["line_ID"].stringValue, newDialogue);
                 }
             }
             npcList.Add(newNPC.UnitID, newNPC);
@@ -93,7 +93,8 @@ public class JsonManager : MonoBehaviour
             return;
         }
         foreach (JSONObject element in json_Object.list) {
-            Quest newQuest = new Quest(element["name"].stringValue, element["QuestID"].stringValue, element["quest_text"].stringValue, element["required_item_id"].stringValue, (int)element["required_item_amount"].intValue);
+            Quest newQuest = new Quest(element["name"].stringValue, element["QuestID"].stringValue, element["quest_text"].stringValue, 
+                element["required_item_id"].stringValue, element["required_item_amount"].intValue);
             if(element["recipe_reward_id"] != null){
                 newQuest.recipe_reward_id = element["recipe_reward_id"].stringValue;
             }
@@ -101,13 +102,13 @@ public class JsonManager : MonoBehaviour
                 newQuest.item_reward_id = element["item_reward_id"].stringValue;
             }
             if(element["item_reward_amount"] != null){
-                newQuest.item_reward_amount = (int)element["item_reward_amount"].intValue;
+                newQuest.item_reward_amount = element["item_reward_amount"].intValue;
             }
             if(element["planet_id"] != null){
                 newQuest.planet_id = element["planet_id"].stringValue;
             }
             if(element["reputation_reward"] != null){
-                newQuest.reputation_reward = (int)element["reputation_reward"].intValue;
+                newQuest.reputation_reward = element["reputation_reward"].intValue;
             }
             questList.Add(newQuest.QuestID, newQuest);
         }
@@ -122,21 +123,22 @@ public class JsonManager : MonoBehaviour
             return;
         }
         foreach (JSONObject element in json_Object.list) {
-            Recipe newRecipe = new Recipe(element["name"].stringValue, element["RecipeID"].stringValue, element["ingredient1_id"].stringValue, (int)element["ingredient1_amount"].intValue, element["minigame1_id"].stringValue, element["output_id"].stringValue, (int)element["output_amount"].intValue);
+            Recipe newRecipe = new Recipe(element["name"].stringValue, element["RecipeID"].stringValue, element["ingredient1_id"].stringValue, 
+                element["ingredient1_amount"].intValue, element["minigame1_id"].stringValue, element["output_id"].stringValue, element["output_amount"].intValue);
             if (element["ingredient2_id"] != null)
             {
                 newRecipe.ingredient2_id = element["ingredient2_id"].stringValue;
-                newRecipe.ingredient2_amount = (int)element["ingredient2_amount"].intValue;
+                newRecipe.ingredient2_amount = element["ingredient2_amount"].intValue;
             }
             if (element["ingredient3_id"] != null)
             {
                 newRecipe.ingredient3_id = element["ingredient3_id"].stringValue;
-                newRecipe.ingredient3_amount = (int)element["ingredient3_amount"].intValue;
+                newRecipe.ingredient3_amount = element["ingredient3_amount"].intValue;
             }
             if (element["ingredient4_id"] != null)
             {
                 newRecipe.ingredient4_id = element["ingredient4_id"].stringValue;
-                newRecipe.ingredient4_amount = (int)element["ingredient4_amount"].intValue;
+                newRecipe.ingredient4_amount = element["ingredient4_amount"].intValue;
             }
             if (element["minigame2_id"] != null)
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.PlasticSCM.Editor.WebApi;
 
 public class ConversationHandler : MonoBehaviour
 {
@@ -17,9 +18,11 @@ public class ConversationHandler : MonoBehaviour
     private string first_Line;
     private string next_line_ID;
     private Discourse curr_discourse;
+    private int curr_flag = 0;
     private Quest quest;  //Unclear, may be able to just be the questID
     private Text opt1;
     private Text opt2;
+    private Choice c;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +30,7 @@ public class ConversationHandler : MonoBehaviour
         if (jsonManager != null)
         {
             character = jsonManager.GetComponent<JsonManager>().getNPC(unitID);
-            //conversations = character.dialogues;
+            conversations = character.dialogues;
         }
         else
         {
@@ -39,21 +42,17 @@ public class ConversationHandler : MonoBehaviour
     void Update()
     {
         if(optionBoxPrefab.activeSelf){
-            /*if(c.ans == 1){
+            if(c.ans == 1){
                 optionBoxPrefab.SetActive(false);
-                DisplayNextSentence();
-                string sentence = dialogueLines.Dequeue();
-                string choice = dialogueOptions.Dequeue();            
+                DisplayNextLine(curr_discourse.choice_A_ID);
             }
             else if(c.ans == 2){
                 optionBoxPrefab.SetActive(false);
-                string sentence = dialogueLines.Dequeue();
-                string choice = dialogueOptions.Dequeue();  
-                DisplayNextSentence(); 
+                DisplayNextLine(curr_discourse.choice_B_ID);
             }
             else{
                 Debug.Log("answer is " + c.ans);
-            } */
+            } 
         }
     }
 
@@ -80,6 +79,7 @@ public class ConversationHandler : MonoBehaviour
                         //Supposed to set quest to active, once JSON quest system is functional
                     }*/
                     chatBoxPrefab.SetActive(false);
+                    curr_flag += 1;
                 }
             }
         }
@@ -94,7 +94,14 @@ public class ConversationHandler : MonoBehaviour
     {
         // Get the first line of dialogue
         // ISSUES: There will be multiple starting lines, need to find a way to determine which one to start with
-        return "";
+        foreach (KeyValuePair<string, Discourse> entry in conversations)
+        {
+            if (entry.Value.flag_ID == curr_flag && entry.Value.prev_line_ID == null)
+            {
+                return entry.Key;
+            }
+        }
+        return null;
     }
 
     private void DisplayNextLine(string line_ID)
