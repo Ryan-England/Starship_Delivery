@@ -136,6 +136,7 @@ public class PlayerMovement : MonoBehaviour
         Climb();
     }
 
+    #region Player Input
     private void MyInput()
     {
         if (is2D)
@@ -198,7 +199,9 @@ public class PlayerMovement : MonoBehaviour
             StopCrouch();
         }
     }
+    #endregion
 
+    #region Player Movement
     private void MovePlayer()
     {
     
@@ -238,7 +241,9 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(orientation.forward * slideForce, ForceMode.Impulse);
         }
     }
+    #endregion
 
+    #region Crouching Functionality
     private void Crouch()
     {
         isCrouching = true;
@@ -260,17 +265,22 @@ public class PlayerMovement : MonoBehaviour
         Vector3 targetScale = new Vector3(originalScale.x, originalScale.y * (targetHeight / standingHeight), originalScale.z);
         transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.deltaTime * crouchTransitionSpeed);
     }
+    
 
     private void ResetCrouch()
     {
         readyToCrouch = true;
     }
 
+    #endregion
+
+    #region Climbing Functionality
     private void CheckForClimbableSurface()
     {
         RaycastHit hit;
+        bool AttachedtoWall = Physics.Raycast(transform.position, orientation.forward, out hit, climbCheckDistance);
     
-        if (Physics.Raycast(transform.position, orientation.forward, out hit, climbCheckDistance))
+        if (AttachedtoWall)
         {
             if (Input.GetKeyDown(climbKey))
             {
@@ -307,7 +317,9 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = climbDirection.normalized * climbSpeed;
         }
     }
+    #endregion
 
+    #region Sprinting Functionality
     private void SpeedControl()
     {
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
@@ -324,7 +336,9 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
     }
+    #endregion
 
+    #region Jump Logic
     private void Jump()
     {
         jumpsRemaining--;
@@ -345,7 +359,9 @@ public class PlayerMovement : MonoBehaviour
     {
         readyToJump = true;
     }
+    #endregion
 
+    #region Sliding Functionality
     private void StartSlide()
     {
         isSliding = true;
@@ -360,8 +376,9 @@ public class PlayerMovement : MonoBehaviour
         isCrouching = false;
         rb.velocity = new Vector3(rb.velocity.x * 0.5f, rb.velocity.y, rb.velocity.z * 0.5f); 
     }
+    #endregion
 
-
+    #region Collision Logic
    private void OnCollisionEnter(Collision collision)
     {
         if (!grounded && collision.contacts[0].normal.y > 0.7f) 
@@ -387,7 +404,9 @@ public class PlayerMovement : MonoBehaviour
             StopClimbing();
         }
     }
+    #endregion
 
+    #region Debug Functionality
         public void changeControls(bool value)
         {
             is2D = value;
@@ -398,7 +417,9 @@ public class PlayerMovement : MonoBehaviour
             orientation.eulerAngles = new Vector3(0f, 0f, 0f);
             tf.eulerAngles = new Vector3(0f, 0f, 0f);
         }
+    #endregion
 
+    #region Respawn Functionality
     public void respawn()
     {
         transform.position = respawnLocation;
@@ -409,4 +430,5 @@ public class PlayerMovement : MonoBehaviour
         jumpsRemaining = maxJumps;
         transform.localScale = originalScale;
     }
+    #endregion
 }
