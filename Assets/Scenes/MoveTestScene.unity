@@ -1128,24 +1128,27 @@ MonoBehaviour:
   groundDrag: 6
   IsMovingCheck: 0
   sprintSpeedMultiplier: 1.5
-  sprintKey: 304
   jumpForce: 6
   jumpCooldown: 0
   airMultiplier: 2
   maxJumps: 2
   IsJumpingCheck: 0
   doubleJumpMultiplier: 0.8
+  climbSpeed: 5
+  climbCheckDistance: 0.5
   crouchSpeed: 5
   crouchHeight: 0.5
   standingHeight: 2
   crouchTransitionSpeed: 10
   crouchCooldown: 0.2
+  slideDuration: 0.6
+  slideSpeedMultiplier: 1.5
+  slideForce: 5
   playerHeight: 0
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
   jumpKey: 32
   crouchKey: 306
+  climbKey: 102
+  sprintKey: 304
   SpawnPoint: {fileID: 0}
   orientation: {fileID: 1350081555}
 --- !u!1 &98882520
@@ -5315,7 +5318,7 @@ MonoBehaviour:
   engNPCJson: {fileID: 4900000, guid: 213b851461a3f4a82ae57be3eb86d070, type: 3}
   engRecipeJson: {fileID: 4900000, guid: 5977e8a15681b4b5ab2d85b1466d3204, type: 3}
   engQuestJson: {fileID: 4900000, guid: 40305ec702e3c4d12aa58ff7123d70bb, type: 3}
-  engItemJson: {fileID: 4900000, guid: 2231fae2da8a641c681f9bb78ca68357, type: 3}
+  engItemJson: {fileID: 4900000, guid: 6f89e7e4a58404bc3ad3223a8fdf0236, type: 3}
   current_language: 0
 --- !u!1 &646901603
 GameObject:
