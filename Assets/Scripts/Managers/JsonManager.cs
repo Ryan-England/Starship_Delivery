@@ -64,12 +64,12 @@ public class JsonManager : MonoBehaviour
     private void PopulateNPCs(string json)
     {
         json_Object = new JSONObject(json);
-        if (json_Object.type != JSONObject.Type.Array)
+        if (json_Object.list[0].type != JSONObject.Type.Array)
         {
             Debug.LogError("Json file is not an array");
             return;
         }
-        foreach (JSONObject element in json_Object.list) {
+        foreach (JSONObject element in json_Object.list[0]) {
             var dialogues = new Dictionary<string, Dialogue>();
             NPC newNPC = new NPC(element["name"].stringValue, element["UnitID"].stringValue, dialogues, element["QuestID"].stringValue);
             if(element["dialogues"] != null){
@@ -87,12 +87,12 @@ public class JsonManager : MonoBehaviour
     private void PopulateQuests(string json)
     {
         var json_Object = new JSONObject(json);
-        if (json_Object.type != JSONObject.Type.Array)
+        if (json_Object.list[0].type != JSONObject.Type.Array)
         {
             Debug.LogError("Json file is not an array");
             return;
         }
-        foreach (JSONObject element in json_Object.list) {
+        foreach (JSONObject element in json_Object.list[0]) {
             Quest newQuest = new Quest(element["name"].stringValue, element["QuestID"].stringValue, element["quest_text"].stringValue, element["required_item_id"].stringValue, (int)element["required_item_amount"].intValue);
             if(element["recipe_reward_id"] != null){
                 newQuest.recipe_reward_id = element["recipe_reward_id"].stringValue;
@@ -116,12 +116,12 @@ public class JsonManager : MonoBehaviour
     private void PopulateRecipes(string json)
     {
         var json_Object = new JSONObject(json);
-        if (json_Object.type != JSONObject.Type.Array)
+        if (json_Object.list[0].type != JSONObject.Type.Array)
         {
             Debug.LogError("Json file is not an array");
             return;
         }
-        foreach (JSONObject element in json_Object.list) {
+        foreach (JSONObject element in json_Object.list[0]) {
             Recipe newRecipe = new Recipe(element["name"].stringValue, element["RecipeID"].stringValue, element["ingredient1_id"].stringValue, (int)element["ingredient1_amount"].intValue, element["minigame1_id"].stringValue, element["output_id"].stringValue, (int)element["output_amount"].intValue);
             if (element["ingredient2_id"] != null)
             {
@@ -153,12 +153,12 @@ public class JsonManager : MonoBehaviour
     private void PopulateItems(string json)
     {
         var json_Object = new JSONObject(json);
-        if (json_Object.type != JSONObject.Type.Array)
+        if (json_Object.list[0].type != JSONObject.Type.Array)
         {
             Debug.LogError("Json file is not an array");
             return;
         }
-        foreach (JSONObject element in json_Object.list) {
+        foreach (JSONObject element in json_Object.list[0]) {
             Item newItem = new Item();
             newItem.name = element["name"].stringValue;
             newItem.ItemID = element["ItemID"].stringValue;
