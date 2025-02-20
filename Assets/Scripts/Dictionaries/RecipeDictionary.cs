@@ -12,8 +12,9 @@ public class RecipeDictionary : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        BakeDict.Add("cinderwheat", new recipe("quaso", 1));
+        BakeDict.Add("smolderdough", new recipe("quaso", 1));
         MixDict.Add("applebanana", new recipe("ice", 1));
+        MixDict.Add("cinderwheatsalt", new recipe("smolderdough", 1));
     }
 
     // Update is called once per frame

@@ -119,6 +119,7 @@ public class Fridge : MonoBehaviour
                     case "Banana":
                     case "cinderwheat":
                     case "salt":
+                    case "smolderdough":
 
                         Image test = temp.GetComponent<Image>();
                         test.sprite = Resources.Load<Sprite>(path + "/" + name);
@@ -192,6 +193,7 @@ public class Fridge : MonoBehaviour
                     case "Banana":
                     case "cinderwheat":
                     case "salt":
+                    case "smolderdough":
                         temp.SetActive(true);
                         temp_c.SetActive(true);
                         temp_b.SetActive(true);
@@ -243,6 +245,11 @@ public class Fridge : MonoBehaviour
             GameObject bake_slot = bake_it.Find(obj => obj.name == j.name);
             GameObject mix_slot = mix_it.Find(obj => obj.name == j.name);
 
+            Slot s = j.GetComponent<Slot>();
+            Slot cs = chop_slot.GetComponent<Slot>();
+            Slot bs = bake_slot.GetComponent<Slot>();
+            Slot ms = mix_slot.GetComponent<Slot>();
+
             GameObject temp = j.transform.Find("Items").Find("apple").gameObject;
             GameObject temp_c = chop_slot.transform.Find("Items").Find("apple").gameObject;
             GameObject temp_b = bake_slot.transform.Find("Items").Find("apple").gameObject;
@@ -258,7 +265,7 @@ public class Fridge : MonoBehaviour
             Text t_b = qty_b.GetComponent<Text>();
             Text t_m = qty_m.GetComponent<Text>();
 
-            Slot s = j.GetComponent<Slot>();
+            
             Debug.Log("3");
             if(s.filled && s.name == name){
                 Debug.Log("test1");
@@ -280,10 +287,18 @@ public class Fridge : MonoBehaviour
                     temp_m.SetActive(false);
 
                     fsub[name] = 0;
+                    fsub.Remove(name);
+
                     t.text = "x0";
                     t_c.text = "x0";
                     t_b.text = "x0";
                     t_m.text = "x0";
+
+                    s.filled = false;
+                    cs.filled = false;
+                    bs.filled = false;
+                    ms.filled = false;
+
                 }
                 else
                 { 

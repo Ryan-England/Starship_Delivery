@@ -43,6 +43,7 @@ public class CanvasInventory : MonoBehaviour
                     case "ice":
                     case "cinderwheat":
                     case "salt":
+                    case "smolderdough":
                         GameObject temp = j.transform.Find("apple").gameObject;
                         GameObject temp_f = fridge_slot.transform.Find("Items").Find("apple").gameObject;
 
@@ -78,7 +79,7 @@ public class CanvasInventory : MonoBehaviour
                             s.action = "chopping";
                             fridge_slot.GetComponent<Slot>().action = "chopping";
                         }
-                        else if(name == "banana"){
+                        else if(name == "banana" || name == "smolderdough"){
                             s.action = "baking";
                             fridge_slot.GetComponent<Slot>().action = "baking";
                         }
@@ -114,6 +115,7 @@ public class CanvasInventory : MonoBehaviour
                     case "ice":
                     case "cinderwheat":
                     case "salt":
+                    case "smolderdough":
                         Debug.Log("test2");
                         GameObject temp = j.transform.Find("apple").gameObject;
                         GameObject temp_f = fridge_slot.transform.Find("Items").Find("apple").gameObject;
@@ -145,7 +147,8 @@ public class CanvasInventory : MonoBehaviour
                             s.action = "chopping";
                             fridge_slot.GetComponent<Slot>().action = "chopping";
                         }
-                        else if(name == "banana"){
+                        else if(name == "banana" || name == "smolderdough")
+                        {
                             s.action = "baking";
                             fridge_slot.GetComponent<Slot>().action = "baking";
                         }
@@ -194,6 +197,7 @@ public class CanvasInventory : MonoBehaviour
 
                 if(sub[name] <= 0)
                 {
+                    s.filled = false;
                     temp.SetActive(false);
                     temp_f.SetActive(false);
 
@@ -201,6 +205,8 @@ public class CanvasInventory : MonoBehaviour
                     t_f.text = "x0";
 
                     prep.SetActive(false); 
+
+                    sub.Remove(name);
                 } 
                 else 
                 { 
