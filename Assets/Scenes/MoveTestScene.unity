@@ -1249,9 +1249,6 @@ MonoBehaviour:
   doubleJumpMultiplier: 0.8
   climbSpeed: 5
   climbCheckDistance: 0.5
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 0
   crouchSpeed: 5
   crouchHeight: 0.5
   standingHeight: 2
@@ -3170,7 +3167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d1933233dffaf044aac7c7599184b86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Scene: TestScene_AkaDialog
+  Scene: Carolyn_stable
 --- !u!65 &342550056
 BoxCollider:
   m_ObjectHideFlags: 0

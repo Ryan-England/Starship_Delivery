@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;  // Required for UI elements
 using UnityEngine.EventSystems;
 using UnityEditor;
-using System.Data.Common;
-using Unity.VisualScripting.ReorderableList;
 using System;
 
 public class MixingTemplate : MonoBehaviour

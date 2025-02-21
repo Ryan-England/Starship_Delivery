@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using System.Data.Common;
-using Unity.VisualScripting.ReorderableList;
 
 public class RecipeDictionary : MonoBehaviour
 {

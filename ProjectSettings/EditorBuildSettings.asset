@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TestScene_AkaDialog.unity
     guid: 54d1c8ad32de598439ccf020d16b88f2
   - enabled: 1
+    path: Assets/Scenes/Carolyn_stable.unity
+    guid: f0a2c114512df80479784ee5c218bb04
+  - enabled: 1
     path: Assets/Scenes/TestScene-ChangeObject.unity
     guid: 69556f87276070e43ae52f2a6a9f0a7b
   m_configObjects: {}
