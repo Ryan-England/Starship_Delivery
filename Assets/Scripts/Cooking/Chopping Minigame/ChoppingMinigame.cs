@@ -32,20 +32,20 @@ public class GameController : MonoBehaviour
     void Update()
     {
         // Check for interaction to start the minigame
-        if (!isMinigameActive && Vector3.Distance(player.position, interactableObject.position) <= interactionRange)
-        {
-            keyIndicator.SetActive(true);
-            keyIndicatorText.text = "Press E to Start Chopping";
+        // if (!isMinigameActive && Vector3.Distance(player.position, interactableObject.position) <= interactionRange)
+        // {
+        //     keyIndicator.SetActive(true);
+        //     keyIndicatorText.text = "Press E to Start Chopping";
 
-            if (Input.GetKeyDown(interactionKey))
-            {
-                StartMinigame();
-            }
-        }
-        else if (!isMinigameActive)
-        {
-            keyIndicator.SetActive(false); // Hide indicator when out of range
-        }
+        //     if (Input.GetKeyDown(interactionKey))
+        //     {
+        //         StartMinigame();
+        //     }
+        // }
+        // else if (!isMinigameActive)
+        // {
+        //     keyIndicator.SetActive(false); // Hide indicator when out of range
+        // }
 
         // Minigame logic
         if (isMinigameActive && Input.GetKeyDown(KeyCode.Space))
@@ -126,7 +126,7 @@ public class GameController : MonoBehaviour
         isMinigameActive = false; // Fully deactivate minigame after win message
     }
 
-    private void StartMinigame()
+    public void StartMinigame()
     {
         Debug.Log("Minigame Started!");
         redSection.gameObject.SetActive(true);  // Show minigame UI

@@ -13,6 +13,7 @@ public class MixingTemplate : MonoBehaviour
     public PlayerMovement pm;
     public GameObject kitchenUI;
     public GameObject startButton;
+    public MixingMinigame minigame; // Reference to the minigame script
     public Text timerText; // Assign in Unity
     public float bakingTime = 5f; // Adjust as needed
     private bool isBaking = false;
@@ -33,6 +34,7 @@ public class MixingTemplate : MonoBehaviour
     private string parent;
     void Start()
     {
+        minigame = FindObjectOfType<MixingMinigame>(); // Ensure assignment
         parent = gameObject.name;
         cookbook = Dictionary.GetComponent<RecipeDictionary>();
         foreach (Transform k in cook_items) {
@@ -145,6 +147,8 @@ public class MixingTemplate : MonoBehaviour
 
         if (cookbook.MixDict.ContainsKey(key))
         {
+            BackButtonKitchen();
+            minigame.StartMinigame(); // Start the minigame independently of the timer
             StartCoroutine(MixingProcess(cookbook.MixDict[key]));
         }
         else

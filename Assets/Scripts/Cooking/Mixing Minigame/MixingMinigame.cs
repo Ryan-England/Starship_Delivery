@@ -10,7 +10,7 @@ public class MixingMinigame : MonoBehaviour
     public Text keyIndicatorText;         // UI text to show which keys to press
     public Text successMessage;           // Message displayed when gauge is full
 
-    public Transform interactableObject;  // Object to trigger the minigame
+    //public Transform interactableObject;  // Object to trigger the minigame
     public KeyCode interactionKey = KeyCode.E; // Key to start the minigame
     public float interactionRange = 2f;   // Range to interact with the object
 
@@ -31,19 +31,19 @@ public class MixingMinigame : MonoBehaviour
     void Update()
     {
         // Interaction to start the minigame
-        if (!GameController.isMinigameActive && !hasWon && Vector3.Distance(player.position, interactableObject.position) <= interactionRange)
-        {
-            keyIndicator.SetActive(true);
-            keyIndicatorText.text = "Press E to Start Mixing";
-            if (Input.GetKeyDown(interactionKey))
-            {
-                StartMinigame();
-            }
-        }
-        else if (!GameController.isMinigameActive && !hasWon)
-        {
-            keyIndicator.SetActive(false); // Hide indicator if not near the object
-        }
+        // if (!GameController.isMinigameActive && !hasWon && Vector3.Distance(player.position, interactableObject.position) <= interactionRange)
+        // {
+        //     keyIndicator.SetActive(true);
+        //     keyIndicatorText.text = "Press E to Start Mixing";
+        //     if (Input.GetKeyDown(interactionKey))
+        //     {
+        //         StartMinigame();
+        //     }
+        // }
+        // else if (!GameController.isMinigameActive && !hasWon)
+        // {
+        //     keyIndicator.SetActive(false); // Hide indicator if not near the object
+        // }
 
         // Minigame logic
         if (GameController.isMinigameActive)
