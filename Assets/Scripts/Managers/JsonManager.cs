@@ -27,7 +27,7 @@ public class JsonManager : MonoBehaviour
 
     private JSONObject json_Object;
 
-    void Start()
+    void Awake()
     {
         ChangeLanguage(Language.English);
     }
@@ -71,13 +71,19 @@ public class JsonManager : MonoBehaviour
         }
         foreach (JSONObject element in json_Object.list[0]) {
             var dialogues = new Dictionary<string, Discourse>();
-            NPC newNPC = new NPC(element["name"].stringValue, element["UnitID"].stringValue, dialogues, element["QuestID"].stringValue);
+            var newNPC = new NPC(element["name"].stringValue, element["UnitID"].stringValue, dialogues);
+            if (element["QuestID"] != null)
+            {
+                newNPC.QuestID = element["QuestID"].stringValue;
+            }
             if(element["dialogues"] != null){
+                int i = 0;
                 foreach(JSONObject dialogue in element["dialogues"].list){
-                    Discourse newDialogue = new Discourse(element["speaker"].stringValue, element["line_ID"].stringValue, element["text"].stringValue, 
-                        element["flag_ID"].intValue, element["prev_line_ID"].stringValue, element["next_line_ID"].stringValue, element["quest_ID"].stringValue, 
-                        element["choice_A"].stringValue, element["choice_A_ID"].stringValue, element["choice_B"].stringValue, element["choice_B_ID"].stringValue);
+                    Discourse newDialogue = new Discourse(dialogue["speaker"].stringValue, dialogue["line_ID"].stringValue, dialogue["text"].stringValue, 
+                        dialogue["flag_ID"].intValue, dialogue["prev_line_ID"].stringValue, dialogue["next_line_ID"].stringValue, dialogue["quest_ID"].stringValue, 
+                        dialogue["choice_A"].stringValue, dialogue["choice_A_ID"].stringValue, dialogue["choice_B"].stringValue, dialogue["choice_B_ID"].stringValue);
                     newNPC.dialogues.Add(dialogue["line_ID"].stringValue, newDialogue);
+                    i++;
                 }
             }
             npcList.Add(newNPC.UnitID, newNPC);

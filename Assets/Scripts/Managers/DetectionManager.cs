@@ -52,6 +52,11 @@ public class DetectionManager : MonoBehaviour
                 else{
                     Debug.Log(interaction);
                 }
+                ConversationHandler conversation = obj.GetComponent<ConversationHandler>();
+                if (conversation != null)
+                {
+                    conversation.Interact();
+                }
             }
         }
     }

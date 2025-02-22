@@ -12,6 +12,9 @@ public class ConversationHandler : MonoBehaviour
     [SerializeField] private Text dialogueText;
     [SerializeField] private Text dialogueName;
     [SerializeField] private GameObject jsonManager;
+    [SerializeField] private Text opt1;
+    [SerializeField] private Text opt2;
+    [SerializeField] private Choice c;
     private Dictionary<string, Discourse> conversations;
     private NPC character;
     private string first_Line;
@@ -19,9 +22,7 @@ public class ConversationHandler : MonoBehaviour
     private Discourse curr_discourse;
     private int curr_flag = 0;
     private Quest quest;  //Unclear, may be able to just be the questID
-    private Text opt1;
-    private Text opt2;
-    private Choice c;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -91,8 +92,6 @@ public class ConversationHandler : MonoBehaviour
 
     private string getDiscourseStart()
     {
-        // Get the first line of dialogue
-        // ISSUES: There will be multiple starting lines, need to find a way to determine which one to start with
         foreach (KeyValuePair<string, Discourse> entry in conversations)
         {
             if (entry.Value.flag_ID == curr_flag && entry.Value.prev_line_ID == null)
@@ -115,7 +114,9 @@ public class ConversationHandler : MonoBehaviour
         foreach(char i in sentence.ToCharArray()){
             dialogueText.text += i; 
             yield return null;
-        }
+        } //maybe include something to reduce font size if text is too long
+        // futher issue - skipping text on repeated button presses
+        // focus on matching current implementation first, improvements later
     }
 
     public void loadNPC(string unitID){
