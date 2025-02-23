@@ -8,4 +8,6 @@ public class NPCQuest : MonoBehaviour
     public string quest_name;
     public int quest_type;
     public string item_name;
+    public QuestMarker itemMarker;
+    public QuestMarker questMarker;
 }
