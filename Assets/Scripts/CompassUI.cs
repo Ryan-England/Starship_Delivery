@@ -89,7 +89,7 @@ public class CompassUI : MonoBehaviour
         float angle = Vector2.SignedAngle(cameraForward2D, directionToTarget2D);
 
         // Normalize the angle to fit the compass position range (-1 to 1)
-        float compassPositionX = Mathf.Clamp(angle / 180f, -1, 1);  // -1 is left, 1 is right
+        float compassPositionX = Mathf.Clamp(-angle / 180f, -1, 1);  // -1 is left, 1 is right
 
         // Smoothly transition the marker's position using Lerp
         float smoothPositionX = Mathf.Lerp(markerTransform.anchoredPosition.x, compassBarTransform.rect.width / 2 * compassPositionX, Time.deltaTime * 10f);
