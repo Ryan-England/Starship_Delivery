@@ -9,10 +9,13 @@ public class OpenInventory : MonoBehaviour
     public GameObject DiaChoice;
     public GameObject Inventory;
 
+    [SerializeField] private GameObject crosshair;
+
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Q))
         {
+            Debug.Log(gameObject.name);
             DiaChoice.SetActive(false);
             DiaBox.SetActive(false);
             Menu.SetActive(false);
@@ -20,6 +23,15 @@ public class OpenInventory : MonoBehaviour
 
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+
+            if (crosshair != null)
+            {
+                crosshairscript chs = crosshair.GetComponent<crosshairscript>();
+                if (chs != null && chs.enabled)
+                {
+                    chs.SetVisible(false);
+                }
+            }
         }
     }
     public void BackButton(){
@@ -30,5 +42,14 @@ public class OpenInventory : MonoBehaviour
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+
+            if (crosshair != null)
+            {
+                crosshairscript chs = crosshair.GetComponent<crosshairscript>();
+                if (chs != null && chs.enabled)
+                {
+                chs.SetVisible(true);
+            }
+            }
     }
 }

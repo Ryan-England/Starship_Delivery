@@ -7,7 +7,10 @@ public class DetectionManager : MonoBehaviour
     // The detection range of the sphere that is created to find objects nearby the player
     [SerializeField] private float detectionRange = 1f;
     // If we want to search for a specific layer of objects so not everything is being searched, we use this.
-    [SerializeField] private LayerMask detectionLayer; 
+    [SerializeField] private LayerMask detectionLayer;
+    [SerializeField] private Transform cam;
+
+    [SerializeField] private GameObject crosshair;
 
     public InventoryManager im; 
     public Inventory inv;
@@ -22,21 +25,28 @@ public class DetectionManager : MonoBehaviour
         // Pressing E to interact with objects/npcs from a range
         if(Input.GetKeyDown(KeyCode.E))
         {
+            
             Debug.Log("Pressed E");
             DetectObjects();
         }
+
     }
 
     private void DetectObjects()
     {
-        // Creates a sphere around the player and checks for colliders nearby
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectionRange, detectionLayer);
 
-        // Checks for each object found within the array of colliders and does something to each one
-        foreach (Collider collider in hitColliders)
+        // Checks for a game object within a specified distance in front of the player.
+        RaycastHit hit;
+        Physics.Raycast(cam.position, cam.forward, out hit, detectionRange, detectionLayer);
+        Collider collider = hit.collider;
+        Debug.Log(cam.forward.x + " " + cam.forward.y + " " + cam.forward.z);
+
+        if (collider != null)//If one is found, see if/how it can be interacted with.
         {
+
             // Sets collider as an object reference
             GameObject obj = collider.gameObject;
+            Debug.Log("Collided with " + obj.name);
             //Debug.Log("Hit: " + obj);
             Debug.Log(obj.tag);
             Debug.Log(obj.name);
@@ -44,15 +54,26 @@ public class DetectionManager : MonoBehaviour
             if (MatchesTag(obj))
             {
                 Debug.Log(obj.tag);
-                if(obj.tag == "Collectible"){
+                if (obj.tag == "Collectible")
+                {
                     im.CollectItem(obj, Inventory.ItemType.Ingredient);
                 }
-                else if(obj.tag == "Stations"){
+                else if (obj.tag == "Stations")
+                {
+                    if (crosshair != null)
+                    {
+                        crosshairscript chs = crosshair.GetComponent<crosshairscript>();
+                        if (chs != null && chs.enabled)
+                        {
+                            chs.SetVisible(false);
+                        }
+                    }
                     Debug.Log("found a station. ");
-                    switch(obj.name){
+                    switch (obj.name)
+                    {
                         case "Fridge":
                             fridge.FridgeMenu();
-                            break; 
+                            break;
                         case "Kitchen":
                             kitchen.KitchenMenu();
                             break;
@@ -61,11 +82,12 @@ public class DetectionManager : MonoBehaviour
                             break;
                         case "Mixing":
                             mix.KitchenMenu();
-                            break; 
-                        default: 
+                            break;
+                        default:
                             break;
                     }
                 }
+                
                 // Debug.Log("Interaction found");
                 // // Makes a interactionhandler reference and connects with the script on the object found
                 InteractionHandler interaction = obj.GetComponent<InteractionHandler>();
@@ -75,11 +97,19 @@ public class DetectionManager : MonoBehaviour
                     // Debug.Log("Call interactor");
                     interaction.Interact(); // Call the interactionhandler's interact function
                 }
-                else{
+                else
+                {
                     Debug.Log(interaction);
                 }
             }
+
         }
+        else
+        {
+            Debug.Log("Didn't collide with anything.");
+        }
+
+        
     }
 
     // Function to compare the object's tag to see if it matches
