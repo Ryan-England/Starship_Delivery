@@ -36,8 +36,10 @@ public class InventoryManager : MonoBehaviour
         {
             Debug.Log(c_collectibleItem.itemName);
             // Debug.Log(collectibleItem.quantity);
-            inventory.AddItem(c_collectibleItem.itemName, type, c_collectibleItem.quantity);
-            c_collectibleItem.harvest();
+            if (inventory.AddItem(c_collectibleItem.itemName, type, c_collectibleItem.quantity))
+            {
+                c_collectibleItem.harvest();
+            }
 
             // Print new acquired item message
             inventory.PrintItem(c_collectibleItem.itemName);
@@ -49,10 +51,14 @@ public class InventoryManager : MonoBehaviour
         {
             Debug.Log(collectibleItem.itemName + "not");
             // Debug.Log(collectibleItem.quantity);
-            inventory.AddItem(collectibleItem.itemName, type, collectibleItem.quantity);
-            collectibleItem.harvest();
+            if(inventory.AddItem(collectibleItem.itemName, type, collectibleItem.quantity))
+            {
+                collectibleItem.harvest();
+            }
+            
 
             // Print new acquired item message
+            
             inventory.PrintItem(collectibleItem.itemName);
 
             // Print updated inventory contents after collection

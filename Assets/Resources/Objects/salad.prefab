@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5527627391023344572
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 618130682423589205, guid: 96e2bd048b74a10419df9ad3c64f1d5c,
+        type: 3}
+      propertyPath: itemName
+      value: salad
+      objectReference: {fileID: 0}
+    - target: {fileID: 5516624961986663600, guid: 96e2bd048b74a10419df9ad3c64f1d5c,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -2157487522870996241, guid: 9155746b8dbe508448f226cc595153ba,
+        type: 3}
+    - target: {fileID: 5546030587335216762, guid: 96e2bd048b74a10419df9ad3c64f1d5c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -219.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5546030587335216762, guid: 96e2bd048b74a10419df9ad3c64f1d5c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.02894495
+      objectReference: {fileID: 0}
+    - target: {fileID: 5546030587335216762, guid: 96e2bd048b74a10419df9ad3c64f1d5c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1090.0377
+      objectReference: {fileID: 0}
+    - target: {fileID: 5546030587335216762, guid: 96e2bd048b74a10419df9ad3c64f1d5c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99956626
+      objectReference: {fileID: 0}
+    - target: {fileID: 5546030587335216762, guid: 96e2bd048b74a10419df9ad3c64f1d5c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.029452989
+      objectReference: {fileID: 0}
+    - target: {fileID: 5546030587335216762, guid: 96e2bd048b74a10419df9ad3c64f1d5c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5546030587335216762, guid: 96e2bd048b74a10419df9ad3c64f1d5c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5546030587335216762, guid: 96e2bd048b74a10419df9ad3c64f1d5c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 3.376
+      objectReference: {fileID: 0}
+    - target: {fileID: 5546030587335216762, guid: 96e2bd048b74a10419df9ad3c64f1d5c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5546030587335216762, guid: 96e2bd048b74a10419df9ad3c64f1d5c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548049117379891688, guid: 96e2bd048b74a10419df9ad3c64f1d5c,
+        type: 3}
+      propertyPath: m_Name
+      value: salad Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 96e2bd048b74a10419df9ad3c64f1d5c, type: 3}
