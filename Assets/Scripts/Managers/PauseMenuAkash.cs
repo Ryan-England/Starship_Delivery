@@ -10,6 +10,7 @@ public class PauseMenuAkash : MonoBehaviour
 
     public GameObject pause;
     public GameObject options;
+    public GameObject map;
     public PlayerMovement pm; 
     public GameObject player; 
     public Vector3 pos;
@@ -52,7 +53,10 @@ public class PauseMenuAkash : MonoBehaviour
         options.SetActive(false);
         pause.SetActive(true);
     }
-
+    public void BackButtonMap(){
+        map.SetActive(false);
+        pause.SetActive(true);
+    }
     public void ExitButtonPause(){
         Application.Quit();
     }
@@ -60,6 +64,10 @@ public class PauseMenuAkash : MonoBehaviour
     public void OptionsButtonPause(){
         pause.SetActive(false);
         options.SetActive(true);
+    }
+    public void MapButtonPause(){
+        pause.SetActive(false);
+        map.SetActive(true);
     }
     public void SaveGame(){
         Debug.Log(pos);
