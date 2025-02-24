@@ -77,10 +77,6 @@ public class JsonManager : MonoBehaviour
         foreach (JSONObject element in json_Object.list[0]) {
             var dialogues = new Dictionary<string, Discourse>();
             var newNPC = new NPC(element["name"].stringValue, element["UnitID"].stringValue, dialogues);
-            if (element["QuestID"] != null)
-            {
-                newNPC.QuestID = element["QuestID"].stringValue;
-            }
             if(element["dialogues"] != null){
                 foreach(JSONObject dialogue in element["dialogues"].list){
                     Discourse newDialogue = new Discourse(dialogue["speaker"].stringValue, dialogue["line_ID"].stringValue, dialogue["text"].stringValue, 
