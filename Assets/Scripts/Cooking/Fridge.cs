@@ -24,6 +24,7 @@ public class Fridge : MonoBehaviour
     public Dictionary<string, int> fsub = new Dictionary<string, int>();
     public CanvasInventory ci; 
     public Inventory inv;
+    public RecipeDictionary dict;
 
     [SerializeField] private GameObject crosshair;
 
@@ -42,7 +43,11 @@ public class Fridge : MonoBehaviour
         }   
         foreach(Transform o in mix_items){
             mix_it.Add(o.gameObject);
-        }       
+        }
+        if (dict == null)
+        {
+            Debug.Log("Recipe dictionary has not been supplied! Please link the RecipeDictionary script attached to the GameManager to the Fridge script attached to " + gameObject.name);
+        }
     }
     public void FridgeMenu(){
         Cursor.lockState = CursorLockMode.None;
@@ -78,9 +83,11 @@ public class Fridge : MonoBehaviour
         Slot s  = temp.GetComponent<Slot>();
         if(s.action != "food")
         {
-            AddToFridge(s.name, 1);
-            inv.RemoveItem(s.name, Inventory.ItemType.Ingredient, 1);
-            ci.DeleteItems(s.name, 1);
+            if (AddToFridge(s.name, 1))
+            {
+                inv.RemoveItem(s.name, Inventory.ItemType.Ingredient, 1);
+                ci.DeleteItems(s.name, 1);
+            }
         }
     }
 
@@ -93,161 +100,114 @@ public class Fridge : MonoBehaviour
             // add one of that item to the fridge
             // can we use an inventory object for this?
             //honestly yeah probably, inventory script at the end of the day is just a generic that can be applied to the fridge
-    public void AddToFridge(string name, int quantity){
+    public bool AddToFridge(string name, int quantity){
         Debug.Log("Adding " + quantity + " " + name + " to fridge");
-        foreach(GameObject j in fridge_it){
-            GameObject chop_slot = chop_it.Find(obj => obj.name == j.name);
-            GameObject bake_slot = bake_it.Find(obj => obj.name == j.name);
-            GameObject mix_slot = mix_it.Find(obj => obj.name == j.name);
+        if (dict.Items.ContainsKey(name))
+        {
+            foreach (GameObject j in fridge_it)
+            {
+                GameObject chop_slot = chop_it.Find(obj => obj.name == j.name);
+                GameObject bake_slot = bake_it.Find(obj => obj.name == j.name);
+                GameObject mix_slot = mix_it.Find(obj => obj.name == j.name);
 
-            string path = "Icons";
-
-
-            GameObject temp = j.transform.Find("Items").Find("apple").gameObject;
-            GameObject temp_c = chop_slot.transform.Find("Items").Find("apple").gameObject;
-            GameObject temp_b = bake_slot.transform.Find("Items").Find("apple").gameObject;
-            GameObject temp_m = mix_slot.transform.Find("Items").Find("apple").gameObject;
-
-            GameObject qty = j.transform.Find("qty").gameObject; 
-            GameObject qty_c = chop_slot.transform.Find("qty").gameObject; 
-            GameObject qty_b = bake_slot.transform.Find("qty").gameObject; 
-            GameObject qty_m = mix_slot.transform.Find("qty").gameObject; 
-
-            Text t = qty.GetComponent<Text>();
-            Text t_c = qty_c.GetComponent<Text>();
-            Text t_b = qty_b.GetComponent<Text>();
-            Text t_m = qty_m.GetComponent<Text>();
-
-            Slot s = j.GetComponent<Slot>();
-            if(!s.filled && !fsub.ContainsKey(name)){
-                //check the name of the item
-                //check the quantity
-                //set active the icon in that slot 
-                //update the qty according to the item
-                switch (name){
-                    case "apple":
-                    case "banana":
-                    case "Apple": 
-                    case "Banana":
-                    case "cinderwheat":
-                    case "salt":
-                    case "smolderdough":
-
-                        Image test = temp.GetComponent<Image>();
-                        test.sprite = Resources.Load<Sprite>(path + "/" + name);
-                        Image test2 = temp_c.GetComponent<Image>();
-                        test2.sprite = Resources.Load<Sprite>(path + "/" + name);
-                        Image test3 = temp_b.GetComponent<Image>();
-                        test3.sprite = Resources.Load<Sprite>(path + "/" + name);
-                        Image test4 = temp_m.GetComponent<Image>();
-                        test4.sprite = Resources.Load<Sprite>(path + "/" + name);
+                string path = "Icons";
 
 
-                        
-                        temp.SetActive(true);
-                        temp_c.SetActive(true);
-                        temp_b.SetActive(true);
-                        temp_m.SetActive(true);
+                GameObject temp = j.transform.Find("Items").Find("apple").gameObject;
+                GameObject temp_c = chop_slot.transform.Find("Items").Find("apple").gameObject;
+                GameObject temp_b = bake_slot.transform.Find("Items").Find("apple").gameObject;
+                GameObject temp_m = mix_slot.transform.Find("Items").Find("apple").gameObject;
 
-                        t.text= "x" + quantity;
-                        t_c.text = "x" + quantity;
-                        t_b.text = "x" + quantity;
-                        t_m.text = "x" + quantity;
+                GameObject qty = j.transform.Find("qty").gameObject;
+                GameObject qty_c = chop_slot.transform.Find("qty").gameObject;
+                GameObject qty_b = bake_slot.transform.Find("qty").gameObject;
+                GameObject qty_m = mix_slot.transform.Find("qty").gameObject;
 
-                        s.filled = true;
-                        chop_slot.GetComponent<Slot>().filled = true;
-                        bake_slot.GetComponent<Slot>().filled = true;
-                        mix_slot.GetComponent<Slot>().filled = true;
+                Text t = qty.GetComponent<Text>();
+                Text t_c = qty_c.GetComponent<Text>();
+                Text t_b = qty_b.GetComponent<Text>();
+                Text t_m = qty_m.GetComponent<Text>();
 
-                        s.name = name;
-                        chop_slot.GetComponent<Slot>().name = name;
-                        bake_slot.GetComponent<Slot>().name = name;
-                        mix_slot.GetComponent<Slot>().name = name;
+                Slot s = j.GetComponent<Slot>();
+                if (!s.filled && !fsub.ContainsKey(name))
+                {
+                    //check the name of the item
+                    //check the quantity
+                    //set active the icon in that slot 
+                    //update the qty according to the item
 
-                        fsub.Add(name, quantity);
-                        if(name == "apple"){
-                            s.action = "chopping";
-                            chop_slot.GetComponent<Slot>().action = "chopping";
-                            bake_slot.GetComponent<Slot>().action = "chopping";
-                            mix_slot.GetComponent<Slot>().action = "chopping";
 
-                        }
-                        else if(name == "banana"){
-                            s.action = "baking";
-                            chop_slot.GetComponent<Slot>().action = "baking";
-                            bake_slot.GetComponent<Slot>().action = "baking";
-                            mix_slot.GetComponent<Slot>().action = "baking";
-    
-                        }
-                        else if(name == "cinderwheat"){
-                            s.action = "mixing";
-                            chop_slot.GetComponent<Slot>().action = "mixing";
-                            bake_slot.GetComponent<Slot>().action = "mixing";
-                            mix_slot.GetComponent<Slot>().action = "mixing";
-                        }
-                        break;
-                    default:
-                        Debug.Log("sdf;lks;dlfk;sldkf");
-                        break;
+                    Image test = temp.GetComponent<Image>();
+                    test.sprite = Resources.Load<Sprite>(path + "/" + name);
+                    Image test2 = temp_c.GetComponent<Image>();
+                    test2.sprite = Resources.Load<Sprite>(path + "/" + name);
+                    Image test3 = temp_b.GetComponent<Image>();
+                    test3.sprite = Resources.Load<Sprite>(path + "/" + name);
+                    Image test4 = temp_m.GetComponent<Image>();
+                    test4.sprite = Resources.Load<Sprite>(path + "/" + name);
+
+                    fsub.Add(name, quantity);
+
+                    temp.SetActive(true);
+                    temp_c.SetActive(true);
+                    temp_b.SetActive(true);
+                    temp_m.SetActive(true);
+
+                    t.text = "x" + quantity;
+                    t_c.text = "x" + quantity;
+                    t_b.text = "x" + quantity;
+                    t_m.text = "x" + quantity;
+
+                    s.filled = true;
+                    chop_slot.GetComponent<Slot>().filled = true;
+                    bake_slot.GetComponent<Slot>().filled = true;
+                    mix_slot.GetComponent<Slot>().filled = true;
+
+                    s.name = name;
+                    chop_slot.GetComponent<Slot>().name = name;
+                    bake_slot.GetComponent<Slot>().name = name;
+                    mix_slot.GetComponent<Slot>().name = name;
+
+                    s.action = dict.Items[name];
+                    chop_slot.GetComponent<Slot>().action = dict.Items[name];
+                    bake_slot.GetComponent<Slot>().action = dict.Items[name];
+                    mix_slot.GetComponent<Slot>().action = dict.Items[name];
+                    return (true);
+
                 }
-                
-            }
-            else if(s.filled && s.name == name){
-                Debug.Log("test1");
-                //check the name of the item
-                //check the quantity
-                //set active the icon in that slot 
-                //update the qty according to the item
-                switch (name){
-                    case "apple":
-                    case "banana":
-                    case "Apple": 
-                    case "Banana":
-                    case "cinderwheat":
-                    case "salt":
-                    case "smolderdough":
-                        temp.SetActive(true);
-                        temp_c.SetActive(true);
-                        temp_b.SetActive(true);
-                        temp_m.SetActive(true);
+                else if (s.filled && s.name == name)
+                {
+                    Debug.Log("test1");
+                    //check the name of the item
+                    //check the quantity
+                    //set active the icon in that slot 
+                    //update the qty according to the item
 
-                        fsub[name] += quantity;
+                    temp.SetActive(true);
+                    temp_c.SetActive(true);
+                    temp_b.SetActive(true);
+                    temp_m.SetActive(true);
 
-                        t.text= "x" + (fsub[name]);
-                        t_c.text= "x" + (fsub[name]);
-                        t_b.text= "x" + (fsub[name]);
-                        t_m.text= "x" + (fsub[name]);
+                    fsub[name] += quantity;
 
-                        if(name == "apple"){
-                            s.action = "chopping";
-                            chop_slot.GetComponent<Slot>().action = "chopping";
-                            bake_slot.GetComponent<Slot>().action = "chopping";
-                            mix_slot.GetComponent<Slot>().action = "chopping";
+                    t.text = "x" + (fsub[name]);
+                    t_c.text = "x" + (fsub[name]);
+                    t_b.text = "x" + (fsub[name]);
+                    t_m.text = "x" + (fsub[name]);
 
-                        }
-                        else if(name == "banana"){
-                            s.action = "baking";
-                            chop_slot.GetComponent<Slot>().action = "baking";
-                            bake_slot.GetComponent<Slot>().action = "baking";
-                            mix_slot.GetComponent<Slot>().action = "baking";
-                        }
-                        else if(name == "cinderwheat"){
-                            s.action = "mixing";
-                            chop_slot.GetComponent<Slot>().action = "mixing";
-                            bake_slot.GetComponent<Slot>().action = "mixing";
-                            mix_slot.GetComponent<Slot>().action = "mixing";
-                        }
-                        break;
-                    default:
-                        Debug.Log("sdf;lks;dlfk;sldkf");
-                        break;
+                    s.action = dict.Items[name];
+                    chop_slot.GetComponent<Slot>().action = dict.Items[name];
+                    bake_slot.GetComponent<Slot>().action = dict.Items[name];
+                    mix_slot.GetComponent<Slot>().action = dict.Items[name];
+
+
+                    return (true); ;
+
                 }
-                //inv.RemoveItem(name, Inventory.ItemType.Ingredient, 1);
-                //ci.DeleteItems(name, 1);
-
+                // ci.DeleteItems(name, 1);
             }
-            // ci.DeleteItems(name, 1);
         }
+        return (false);
     }
     public void DeleteItems(string name, int quantity){
         Debug.Log("1");
