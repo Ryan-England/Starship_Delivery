@@ -25,6 +25,8 @@ public class Fridge : MonoBehaviour
     public CanvasInventory ci; 
     public Inventory inv;
 
+    [SerializeField] private GameObject crosshair;
+
     void Start(){
         foreach(Transform k in fridge_items){
             fridge_it.Add(k.gameObject);
@@ -57,6 +59,16 @@ public class Fridge : MonoBehaviour
         Time.timeScale = 1;
         pm.enabled =true;
         FridgeUI.SetActive(false);
+
+        if (crosshair != null)
+        {
+            crosshairscript chs = crosshair.GetComponent<crosshairscript>();
+            if (chs != null && chs.enabled)
+            {
+                chs.SetVisible(true);
+            }
+        }
+
     }
 
     public void Prep(){

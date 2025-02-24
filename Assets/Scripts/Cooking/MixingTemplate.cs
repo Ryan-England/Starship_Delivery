@@ -30,6 +30,9 @@ public class MixingTemplate : MonoBehaviour
 
     private string path = "Objects/";
     private string parent;
+
+    [SerializeField] private GameObject crosshair;
+
     void Start()
     {
         minigame = FindObjectOfType<MixingMinigame>(); // Ensure assignment
@@ -62,6 +65,15 @@ public class MixingTemplate : MonoBehaviour
         Time.timeScale = 1;
         pm.enabled = true;
         kitchenUI.SetActive(false);
+
+        if (crosshair != null)
+        {
+            crosshairscript chs = crosshair.GetComponent<crosshairscript>();
+            if (chs != null && chs.enabled)
+            {
+                chs.SetVisible(true);
+            }
+        }
     }
 
     public void MoveToCook() {
