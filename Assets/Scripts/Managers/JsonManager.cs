@@ -6,9 +6,13 @@ using Defective.JSON;
 public class JsonManager : MonoBehaviour
 {
     //ENGLISH JSON FILES
+    [Tooltip("The JSON file containing the NPC data in English")]
     [SerializeField] private TextAsset engNPCJson;
+    [Tooltip("The JSON file containing the Recipe data in English")]
     [SerializeField] private TextAsset engRecipeJson;
+    [Tooltip("The JSON file containing the Quest data in English")]
     [SerializeField] private TextAsset engQuestJson;
+    [Tooltip("The JSON file containing the Item data in English")]
     [SerializeField] private TextAsset engItemJson;
 
 
@@ -18,6 +22,7 @@ public class JsonManager : MonoBehaviour
         English,
         Simlish
     }
+    [Tooltip("The current language of the game")]
     public Language current_language;
 
     private Dictionary<string, NPC> npcList;
@@ -27,7 +32,7 @@ public class JsonManager : MonoBehaviour
 
     private JSONObject json_Object;
 
-    void Start()
+    void Awake()
     {
         ChangeLanguage(Language.English);
     }
@@ -48,7 +53,7 @@ public class JsonManager : MonoBehaviour
                 PopulateNPCs(engNPCJson.text);
                 PopulateQuests(engQuestJson.text);
                 PopulateRecipes(engRecipeJson.text);
-                PopulateItems(engItemJson.text);
+                //PopulateItems(engItemJson.text);
                 break;
             case Language.Simlish:
                 //populate the dictionaries with the objects from the json files
@@ -70,14 +75,18 @@ public class JsonManager : MonoBehaviour
             return;
         }
         foreach (JSONObject element in json_Object.list[0]) {
-            var dialogues = new Dictionary<string, Dialogue>();
-            NPC newNPC = new NPC(element["name"].stringValue, element["UnitID"].stringValue, dialogues, element["QuestID"].stringValue);
+            var dialogues = new Dictionary<string, Discourse>();
+            var newNPC = new NPC(element["name"].stringValue, element["UnitID"].stringValue, dialogues);
+            if (element["QuestID"] != null)
+            {
+                newNPC.QuestID = element["QuestID"].stringValue;
+            }
             if(element["dialogues"] != null){
                 foreach(JSONObject dialogue in element["dialogues"].list){
-                    Dialogue newDialogue = new Dialogue();
-                    newDialogue.name = newNPC.name;
-                    //newDialogue.text = dialogue["text"].stringValue;
-                    newNPC.dialogues.Add(dialogue["id"].stringValue, newDialogue);
+                    Discourse newDialogue = new Discourse(dialogue["speaker"].stringValue, dialogue["line_ID"].stringValue, dialogue["text"].stringValue, 
+                        dialogue["flag_ID"].intValue, dialogue["prev_line_ID"].stringValue, dialogue["next_line_ID"].stringValue, dialogue["quest_ID"].stringValue, 
+                        dialogue["choice_A"].stringValue, dialogue["choice_A_ID"].stringValue, dialogue["choice_B"].stringValue, dialogue["choice_B_ID"].stringValue);
+                    newNPC.dialogues.Add(dialogue["line_ID"].stringValue, newDialogue);
                 }
             }
             npcList.Add(newNPC.UnitID, newNPC);
