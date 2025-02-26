@@ -2,8 +2,72 @@
     "NPCList": [{
         "name": "genericNPC",
         "UnitID": "generic",
-        "dialogues": [{
-            "greetText": "Hello, I am a generic NPC"
-        }]
+        "dialogues": [
+            {
+                "speaker": "genericNPC",
+                "line_ID": "greeting",
+                "next_line_ID": "greeting2",
+                "prev_line_ID": null,
+                "flag_ID": 0,
+                "text": "Greetings.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "genericNPC",
+                "line_ID": "greeting2",
+                "next_line_ID": "greeting3",
+                "prev_line_ID": "greeting",
+                "flag_ID": 0,
+                "text": "This is a test of the dialogue system.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "genericNPC",
+                "line_ID": "greeting3",
+                "next_line_ID": null,
+                "prev_line_ID": "greeting2",
+                "flag_ID": 0,
+                "text": "If you are seeing this, and you are not testing the dialogue system, then there is an error.",
+                "quest_ID": null,
+                "choice_A": "This was a test.",
+                "choice_A_ID": "greeting4",
+                "choice_B": "An error? What error?",
+                "choice_B_ID": "greeting5"
+            },
+            {
+                "speaker": "genericNPC",
+                "line_ID": "greeting4",
+                "next_line_ID": null,
+                "prev_line_ID": "greeting3",
+                "flag_ID": 0,
+                "text": "Good. Multi-line dialogue and choices are functional.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "genericNPC",
+                "line_ID": "greeting5",
+                "next_line_ID": null,
+                "prev_line_ID": "greeting3",
+                "flag_ID": 0,
+                "text": "Well, either you have not given this character a unit ID in the Unity properties window under its respective script, or you have not made a valid NPC in the NPC JSON files.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            }
+        ]
     }]
 }
