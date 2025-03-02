@@ -59,7 +59,7 @@ public class PlayerCam : MonoBehaviour
     private void HandleZoom()
     {
         
-        float targetFOV = Input.GetKey(KeyCode.Q) ? zoomFOV : normalFOV;
+        float targetFOV = Input.GetKey(KeyCode.V) ? zoomFOV : normalFOV;
         
         cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetFOV, Time.deltaTime * zoomSpeed);
     }
