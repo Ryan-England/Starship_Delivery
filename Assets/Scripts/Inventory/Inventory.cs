@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
@@ -38,8 +39,14 @@ public class Inventory : MonoBehaviour
     }
 
     // Method to add item to the inventory
-    public void AddItem(string name, ItemType type, int qty)
+    public bool AddItem(string name, ItemType type, int qty)
     {
+        if(!ci.AddItems(name, qty))
+        {
+            Debug.Log("Couldn't add item to inventory");
+            return (false);
+        }
+        Debug.Log("Successfully added item");
         // Debug.Log("2"); 
         // Check if the item already exists in the inventory
         foreach (var item in itemCollection[type])
@@ -50,8 +57,8 @@ public class Inventory : MonoBehaviour
                 // Debug.Log("4"); 
                 // Increment the quantity of the existing item
                 item.quantity += qty;
-                ci.AddItems(name, qty);
-                return;
+                return(true);
+                
             }
             // Debug.Log("5"); 
         }
@@ -61,7 +68,7 @@ public class Inventory : MonoBehaviour
         Item newItem = new Item(name, type, qty);
         // Debug.Log("7"); 
         itemCollection[type].Add(newItem);
-        ci.AddItems(name, qty);
+        return(true);
         // Debug.Log("8"); 
 
     }
