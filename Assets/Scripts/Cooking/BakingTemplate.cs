@@ -138,7 +138,7 @@ public class BakingTemplate : MonoBehaviour
 
     private void CheckSlots()
     {
-        Debug.Log(parent);
+        //Debug.Log(parent);
         int filledCount = 0;
         foreach (GameObject slotObj in cook_it)
         {

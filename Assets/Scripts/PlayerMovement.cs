@@ -392,6 +392,15 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.useGravity = false;
         }
+        GameObject Other = collision.gameObject;
+        if(Other.tag == "Platform")
+        {
+            PlatformManager Manager = Other.GetComponentInParent<PlatformManager>();
+            if( Manager != null && Manager.lethal)
+            {
+                respawn();
+            }
+        }
     }
 
     private void OnCollisionExit(Collision collision)

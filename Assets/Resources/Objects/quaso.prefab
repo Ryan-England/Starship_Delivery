@@ -41,11 +41,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1829371231341652, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
       propertyPath: m_Name
-      value: quaso Variant
+      value: quaso
       objectReference: {fileID: 0}
     - target: {fileID: 1829371231341652, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1829371231341652, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
       propertyPath: m_TagString
@@ -193,6 +193,7 @@ MonoBehaviour:
   dialogueSphere: {fileID: 8815447320048454212}
   dialogueDistance: 2
   isTriggered: 0
+  enabled: 1
   selector: {fileID: 8207289409959032464}
 --- !u!114 &618130682423589205
 MonoBehaviour:
@@ -209,6 +210,10 @@ MonoBehaviour:
   itemName: quaso
   quantity: 1
   type: 1
+  regenerating: 0
+  regenTime: 30
+  FreshModel: {fileID: 0}
+  DepleteModel: {fileID: 0}
 --- !u!1001 &7475554960954428792
 PrefabInstance:
   m_ObjectHideFlags: 0
