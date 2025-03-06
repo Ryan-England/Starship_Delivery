@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 5715748543815992959}
   - component: {fileID: 4523447115728944937}
   - component: {fileID: 2422850627509040061}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SaltNode
   m_TagString: Collectible
   m_Icon: {fileID: 0}

@@ -16,6 +16,7 @@ public class BakingTemplate : MonoBehaviour
     List<GameObject> cook_it = new List<GameObject>();
     public Transform cook_items;
     public Fridge f;
+    public Inventory inv;
 
     Dictionary<string, int> csub = new Dictionary<string, int>();
     public GameObject product;
@@ -195,9 +196,10 @@ public class BakingTemplate : MonoBehaviour
         timerText.text = "";
         isBaking = false;
         Vector3 spawn_coords = spawner.transform.position;
-        GameObject output = (GameObject)Instantiate(Resources.Load(path + r.product), spawn_coords, Quaternion.identity);
-        CollectibleItem i = output.GetComponent<CollectibleItem>();
-        i.quantity = r.batchSize * b;
+        //GameObject output = (GameObject)Instantiate(Resources.Load(path + r.product), spawn_coords, Quaternion.identity);
+        //CollectibleItem i = output.GetComponent<CollectibleItem>();
+        //i.quantity = r.batchSize * b;
+        inv.AddItem(r.product, Inventory.ItemType.Ingredient, r.batchSize * b);
     }
 
     string[] GetSlotContents()

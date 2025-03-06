@@ -63,7 +63,7 @@ public class CanvasInventory : MonoBehaviour
 
                     temp.SetActive(true);
                     temp_f.SetActive(true);
-                    prep.SetActive(true);
+                    
 
                     t.text = "x" + quantity;
                     t_f.text = "x" + quantity;
@@ -78,6 +78,10 @@ public class CanvasInventory : MonoBehaviour
 
                     s.action = dict.Items[name];
                     fridge_slot.GetComponent<Slot>().action = dict.Items[name];
+                    if (dict.Items[name] == "ingredient")
+                    {
+                        prep.SetActive(true);
+                    }
 
                     return (true);
 
@@ -112,7 +116,7 @@ public class CanvasInventory : MonoBehaviour
 
                     temp.SetActive(true);
                     temp_f.SetActive(true);
-                    prep.SetActive(true);
+                    //prep.SetActive(true);
 
                     sub[name] += quantity;
                     t.text = "x" + (sub[name]);
