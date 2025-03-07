@@ -22,7 +22,8 @@ public class PauseMenuAkash : MonoBehaviour
     void Start()
     {
         pause.SetActive(false);
-        mouseValue = mouseSens.value;
+        mouseValue = PlayerPrefs.GetFloat("MouseSensitivity", 10.0f);
+        mouseSens.value = mouseValue;
     }
 
     // Update is called once per frame
@@ -37,8 +38,14 @@ public class PauseMenuAkash : MonoBehaviour
             Cursor.visible = true;
             pm.enabled = false;
             Time.timeScale = 0f;
-            mouseValue = mouseSens.value;
         }    
+    }
+
+    public void SaveMouseSensitivity()
+    {
+        mouseValue = mouseSens.value;
+        PlayerPrefs.SetFloat("MouseSensitivity", mouseValue);
+        PlayerPrefs.Save();
     }
 
     public void BackButtonPause(){
