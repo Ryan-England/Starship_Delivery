@@ -78,6 +78,8 @@ public class Fridge : MonoBehaviour
 
     public void Prep(){
         //go inside the canvas inventory next to the fridge
+
+        Debug.Log(EventSystem.current.currentSelectedGameObject.name);
         GameObject temp = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
         // GameObject temp = gameObject.transform.parent.gameObject;
         Slot s  = temp.GetComponent<Slot>();
