@@ -15,6 +15,7 @@ TagManager:
   - Stations
   - Collectible
   - Harvested
+  - Soil
   layers:
   - Default
   - TransparentFX

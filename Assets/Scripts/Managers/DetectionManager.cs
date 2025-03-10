@@ -87,6 +87,9 @@ public class DetectionManager : MonoBehaviour
                             break;
                     }
                 }
+                else if(obj.tag == "Soil"){
+                    
+                }
                 
                 // Debug.Log("Interaction found");
                 // // Makes a interactionhandler reference and connects with the script on the object found
