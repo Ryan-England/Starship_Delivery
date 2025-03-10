@@ -27,5 +27,29 @@ public class ColorBlindFilter : MonoBehaviour
                 Debug.LogError("ColorGrading effect not found in PostProcessProfile.");
             }
         }
+        else if(Menu1.detuer){
+            if (postProcessVolume.profile.TryGet(out ColorAdjustments ca))
+            {
+                // Successfully got the ColorGrading settings
+                ca.hueShift.value = -19f;
+                ca.saturation.value = 31f;
+            }
+            else
+            {
+                Debug.LogError("ColorGrading effect not found in PostProcessProfile.");
+            }
+        }
+        else if(Menu1.trit){
+            if (postProcessVolume.profile.TryGet(out ColorAdjustments ca))
+            {
+                // Successfully got the ColorGrading settings
+                ca.hueShift.value = -44f;
+                // ca.saturation.value = 31f;
+            }
+            else
+            {
+                Debug.LogError("ColorGrading effect not found in PostProcessProfile.");
+            }
+        }
     }
 }
