@@ -36,7 +36,6 @@ public class ConversationHandler : MonoBehaviour
     private string next_line_ID;
     private Discourse curr_discourse;
     private int curr_flag = 0;
-    private Quest Nquest;  //Unclear, may be able to just be the questID
 
     // TEMPORARY WHILE QUEST JSON IS NOT IMPLEMENTED
     public NPCQuest quest;
@@ -61,6 +60,14 @@ public class ConversationHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (chatBoxPrefab.activeSelf)
+        {
+            //if the distance between the player and the NPC is greater than 5, close the dialogue
+            if (Vector3.Distance(transform.position, GameObject.Find("Player").transform.position) > 5)
+            {
+                closeDialogue();
+            }
+        }
         if(optionBoxPrefab.activeSelf){
             if(c.ans == 1){
                 optionBoxPrefab.SetActive(false);
@@ -103,7 +110,7 @@ public class ConversationHandler : MonoBehaviour
                         quest = jsonManager.GetComponent<JsonManager>().getQuest(curr_discourse.quest_ID);
                         //Supposed to set quest to active, once JSON quest system is functional
                     }*/
-                    chatBoxPrefab.SetActive(false);
+                    closeDialogue();
                     if(quest.have_quest){
                         quest_name.text = quest.quest_name;
                         quest_anim.SetActive(true);
@@ -148,8 +155,22 @@ public class ConversationHandler : MonoBehaviour
         // focus on matching current implementation first, improvements later
     }
 
+    IEnumerator TypeSentenceReverse(string sentence){
+        dialogueText.text = "";
+        for(int i = sentence.Length - 1; i >= 0; i--){
+            dialogueText.text = sentence[i] + dialogueText.text; 
+            yield return null;
+        }
+    }
+
     public void loadNPC(string unitID){
         character = jsonManager.GetComponent<JsonManager>().getNPC(unitID);
+    }
+
+    public void closeDialogue(){
+        chatBoxPrefab.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }
 

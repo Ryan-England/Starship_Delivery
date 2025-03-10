@@ -231,7 +231,7 @@ public class InteractionHandler : MonoBehaviour
                 qm.AddQuest(quest);
             }
             else if(qm.Quests[quest.quest_name] && quest_complete_first){
-                quest_name.text = "Quest Complete: " + quest.quest_name;
+                quest_name.text = "Quest Complete: " + quest.quest_name;  //NEEDS LOCALIZATION
                 quest_anim.SetActive(true);
                 quest_complete_first = false;
             }

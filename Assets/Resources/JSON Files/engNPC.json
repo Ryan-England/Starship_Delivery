@@ -1,5 +1,6 @@
 {
-    "NPCList": [{
+    "NPCList": [
+        {
         "name": "genericNPC",
         "UnitID": "generic",
         "dialogues": [

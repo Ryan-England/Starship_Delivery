@@ -8,18 +8,45 @@ public class JsonManager : MonoBehaviour
     //ENGLISH JSON FILES
     [Tooltip("The JSON file containing the NPC data in English")]
     [SerializeField] private TextAsset engNPCJson;
-    [Tooltip("The JSON file containing the Recipe data in English")]
-    [SerializeField] private TextAsset engRecipeJson;
     [Tooltip("The JSON file containing the Quest data in English")]
     [SerializeField] private TextAsset engQuestJson;
+    /*
+    [Tooltip("The JSON file containing the Recipe data in English")]
+    [SerializeField] private TextAsset engRecipeJson;
     [Tooltip("The JSON file containing the Item data in English")]
     [SerializeField] private TextAsset engItemJson;
+    */
 
+    //FRENCH JSON FILES
+    [Tooltip("The JSON file containing the NPC data in French")]
+    [SerializeField] private TextAsset frNPCJson;
+    [Tooltip("The JSON file containing the Quest data in French")]
+    [SerializeField] private TextAsset frQuestJson;
+    /*
+    [Tooltip("The JSON file containing the Recipe data in French")]
+    [SerializeField] private TextAsset frRecipeJson;
+    [Tooltip("The JSON file containing the Item data in French")]
+    [SerializeField] private TextAsset frItemJson;
+    */
+
+    //HEBREW JSON FILES
+    [Tooltip("The JSON file containing the NPC data in Hebrew")]
+    [SerializeField] private TextAsset hebNPCJson;
+    [Tooltip("The JSON file containing the Quest data in Hebrew")]
+    [SerializeField] private TextAsset hebQuestJson;
+    /*
+    [Tooltip("The JSON file containing the Recipe data in Hebrew")]
+    [SerializeField] private TextAsset hebRecipeJson;
+    [Tooltip("The JSON file containing the Item data in Hebrew")]
+    [SerializeField] private TextAsset hebItemJson;*/
 
     //LANGUAGE SETTINGS
     public enum Language
     {
         English,
+        French,
+        Hebrew,
+        Yiddish,
         Simlish
     }
     [Tooltip("The current language of the game")]
@@ -52,8 +79,20 @@ public class JsonManager : MonoBehaviour
             case Language.English:
                 PopulateNPCs(engNPCJson.text);
                 PopulateQuests(engQuestJson.text);
-                PopulateRecipes(engRecipeJson.text);
+                //PopulateRecipes(engRecipeJson.text);
                 //PopulateItems(engItemJson.text);
+                break;
+            case Language.French:
+                PopulateNPCs(frNPCJson.text);
+                PopulateQuests(frQuestJson.text);
+                //PopulateRecipes(frRecipeJson.text);
+                //PopulateItems(frItemJson.text);
+                break;
+            case Language.Hebrew:
+                PopulateNPCs(hebNPCJson.text);
+                PopulateQuests(hebQuestJson.text);
+                //PopulateRecipes(hebRecipeJson.text);
+                //PopulateItems(hebItemJson.text);
                 break;
             case Language.Simlish:
                 //populate the dictionaries with the objects from the json files
