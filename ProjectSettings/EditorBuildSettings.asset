@@ -26,4 +26,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Test_Scene_Merged_1.unity
     guid: 1482f31923360f04c818956a0ca6e935
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 7de7b053e5c86403f92034bf5d0cc704,
+      type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: a877e741b741147be8cf176b46a0a512,
+      type: 2}
