@@ -46,6 +46,10 @@ MonoBehaviour:
     m_Localized: "Arr\xEAter"
     m_Metadata:
       m_Items: []
+  - m_Id: 457841235189760
+    m_Localized: "R\xE9glages"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

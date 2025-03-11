@@ -16,7 +16,7 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: 305daa3dd8f93415cb876d6e1c9e7c0b
   m_Entries:
   - m_Id: 32576102400
-    m_Key: options
+    m_Key: optionsTitle
     m_Metadata:
       m_Items: []
   - m_Id: 1628483608576
@@ -41,6 +41,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3789791682560
     m_Key: quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 457841235189760
+    m_Key: options
     m_Metadata:
       m_Items: []
   m_Metadata:
