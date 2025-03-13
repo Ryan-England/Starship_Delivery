@@ -7,10 +7,18 @@ public class CanvasInventory : MonoBehaviour
 {
     public Transform items;
     List<GameObject> it = new List<GameObject>();
+    public Transform fridge_items;
+    List<GameObject> fr_it = new List<GameObject>();
+    public Transform chop_items;
+    public Transform mix_items;
+    List<GameObject> mx_it = new List<GameObject>();
+    public Transform bake_items;
+    List<GameObject> bk_it = new List<GameObject>();
+
     public Inventory inv;
     public Dictionary<string, int> sub = new Dictionary<string, int>();
-    public Transform fridge_items; 
-    List<GameObject> fr_it = new List<GameObject>();
+    
+    
     public RecipeDictionary dict; 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +29,15 @@ public class CanvasInventory : MonoBehaviour
         foreach(Transform k in fridge_items){
             fr_it.Add(k.gameObject);
         }
+        foreach (Transform m in mix_items)
+        {
+            mx_it.Add(m.gameObject);
+        }
+        foreach (Transform b in bake_items)
+        {
+            bk_it.Add(b.gameObject);
+        }
+
 
         if (dict == null) {
             Debug.Log("Recipe dictionary has not been supplied! Please link the RecipeDictionary script attached to the GameManager to the CanvasInventory script attached to " + gameObject.name);
@@ -42,42 +59,66 @@ public class CanvasInventory : MonoBehaviour
                     //set active the icon in that slot 
                     //update the qty according to the item
                     GameObject fridge_slot = fr_it.Find(obj => obj.name == j.name);
+                    GameObject mix_slot = mx_it.Find(obj => obj.name == j.name);
+                    GameObject bake_slot = bk_it.Find(obj => obj.name == j.name);
+                    
 
 
                     GameObject temp = j.transform.Find("apple").gameObject;
                     GameObject temp_f = fridge_slot.transform.Find("Items").Find("apple").gameObject;
+                    GameObject temp_m = mix_slot.transform.Find("Items").Find("apple").gameObject;
+                    GameObject temp_b = bake_slot.transform.Find("Items").Find("apple").gameObject;
 
                     Image test = temp.GetComponent<Image>();
                     Debug.Log(test + "skjdflksdjflksjdklfj " + temp);
                     test.sprite = Resources.Load<Sprite>(path + "/" + name);
                     Image test2 = temp_f.GetComponent<Image>();
                     test2.sprite = Resources.Load<Sprite>(path + "/" + name);
+                    Image test4 = temp_m.GetComponent<Image>();
+                    test4.sprite = Resources.Load<Sprite>(path + "/" + name);
+                    Image test5 = temp_b.GetComponent<Image>();
+                    test5.sprite = Resources.Load<Sprite>(path + "/" + name);
 
                     GameObject prep = fridge_slot.transform.Find("Prep").gameObject;
 
                     GameObject qty = j.transform.Find("qty").gameObject;
                     GameObject qty_f = fridge_slot.transform.Find("qty").gameObject;
+                    GameObject qty_m = mix_slot.transform.Find("qty").gameObject;
+                    GameObject qty_b = bake_slot.transform.Find("qty").gameObject;
 
                     Text t = qty.GetComponent<Text>();
                     Text t_f = qty_f.GetComponent<Text>();
+                    Text t_m = qty_m.GetComponent<Text>();
+                    Text t_b = qty_b.GetComponent<Text>();
 
                     temp.SetActive(true);
                     temp_f.SetActive(true);
-                    
+                    temp_m.SetActive(true);
+                    temp_b.SetActive(true);
+
 
                     t.text = "x" + quantity;
                     t_f.text = "x" + quantity;
+                    t_m.text = "x" + quantity;
+                    t_b.text = "x" + quantity;
 
                     s.filled = true;
                     fridge_slot.GetComponent<Slot>().filled = true;
+                    mix_slot.GetComponent<Slot>().filled = true;
+                    bake_slot.GetComponent<Slot>().filled = true;
 
                     s.name = name;
                     fridge_slot.GetComponent<Slot>().name = name;
+                    mix_slot.GetComponent<Slot>().name = name;
+                    bake_slot.GetComponent<Slot>().name = name;
 
                     sub.Add(name, quantity);
 
                     s.action = dict.Items[name];
                     fridge_slot.GetComponent<Slot>().action = dict.Items[name];
+                    mix_slot.GetComponent<Slot>().action = dict.Items[name];
+                    bake_slot.GetComponent<Slot>().action = dict.Items[name];
+
                     if (dict.Items[name] == "ingredient")
                     {
                         prep.SetActive(true);
@@ -95,32 +136,49 @@ public class CanvasInventory : MonoBehaviour
                     //set active the icon in that slot 
                     //update the qty according to the item
                     GameObject fridge_slot = fr_it.Find(obj => obj.name == j.name);
-                    
-                    Debug.Log("test2");
+                    GameObject mix_slot = mx_it.Find(obj => obj.name == j.name);
+                    GameObject bake_slot = bk_it.Find(obj => obj.name == j.name);
+
+
+
                     GameObject temp = j.transform.Find("apple").gameObject;
                     GameObject temp_f = fridge_slot.transform.Find("Items").Find("apple").gameObject;
+                    GameObject temp_m = mix_slot.transform.Find("Items").Find("apple").gameObject;
+                    GameObject temp_b = bake_slot.transform.Find("Items").Find("apple").gameObject;
 
                     Image test = temp.GetComponent<Image>();
+                    Debug.Log(test + "skjdflksdjflksjdklfj " + temp);
                     test.sprite = Resources.Load<Sprite>(path + "/" + name);
                     Image test2 = temp_f.GetComponent<Image>();
                     test2.sprite = Resources.Load<Sprite>(path + "/" + name);
+                    Image test4 = temp_m.GetComponent<Image>();
+                    test4.sprite = Resources.Load<Sprite>(path + "/" + name);
+                    Image test5 = temp_b.GetComponent<Image>();
+                    test5.sprite = Resources.Load<Sprite>(path + "/" + name);
 
                     GameObject prep = fridge_slot.transform.Find("Prep").gameObject;
 
                     GameObject qty = j.transform.Find("qty").gameObject;
                     GameObject qty_f = fridge_slot.transform.Find("qty").gameObject;
-
+                    GameObject qty_m = mix_slot.transform.Find("qty").gameObject;
+                    GameObject qty_b = bake_slot.transform.Find("qty").gameObject;
 
                     Text t = qty.GetComponent<Text>();
                     Text t_f = qty_f.GetComponent<Text>();
+                    Text t_m = qty_m.GetComponent<Text>();
+                    Text t_b = qty_b.GetComponent<Text>();
 
                     temp.SetActive(true);
                     temp_f.SetActive(true);
+                    temp_m.SetActive(true);
+                    temp_b.SetActive(true);
                     //prep.SetActive(true);
 
                     sub[name] += quantity;
                     t.text = "x" + (sub[name]);
                     t_f.text = "x" + (sub[name]);
+                    t_m.text = "x" + (sub[name]);
+                    t_b.text = "x" + (sub[name]);
 
                     s.action = dict.Items[name];
                     fridge_slot.GetComponent<Slot>().action = dict.Items[name];
@@ -144,7 +202,8 @@ public class CanvasInventory : MonoBehaviour
     }
 
     public void DeleteItems(string name, int quantity){
-        foreach(GameObject j in it){
+        Debug.Log("Removing item from canvas inventory");
+        foreach (GameObject j in it){
             Slot s = j.GetComponent<Slot>();
             if(s.filled && s.name == name){
                 Debug.Log("test1");
@@ -153,28 +212,45 @@ public class CanvasInventory : MonoBehaviour
                 //set active the icon in that slot 
                 //update the qty according to the item
                 GameObject fridge_slot = fr_it.Find(obj => obj.name == j.name);
-                
+                GameObject mix_slot = mx_it.Find(obj => obj.name == j.name);
+                GameObject bake_slot = bk_it.Find(obj => obj.name == j.name);
+
+
                 Debug.Log("test2");
                 GameObject temp = j.transform.Find("apple").gameObject;
                 GameObject temp_f = fridge_slot.transform.Find("Items").Find("apple").gameObject;
+                GameObject temp_m = mix_slot.transform.Find("Items").Find("apple").gameObject;
+                GameObject temp_b = bake_slot.transform.Find("Items").Find("apple").gameObject;
 
                 GameObject prep = fridge_slot.transform.Find("Prep").gameObject;
 
-                GameObject qty = j.transform.Find("qty").gameObject; 
-                GameObject qty_f = fridge_slot.transform.Find("qty").gameObject; 
+                GameObject qty = j.transform.Find("qty").gameObject;
+                GameObject qty_f = fridge_slot.transform.Find("qty").gameObject;
+                GameObject qty_m = mix_slot.transform.Find("qty").gameObject;
+                GameObject qty_b = bake_slot.transform.Find("qty").gameObject;
 
                 Text t = qty.GetComponent<Text>();
                 Text t_f = qty_f.GetComponent<Text>();
+                Text t_m = qty_m.GetComponent<Text>();
+                Text t_b = qty_b.GetComponent<Text>();
                 sub[name] -= quantity;
 
                 if(sub[name] <= 0)
                 {
                     s.filled = false;
+                    fridge_slot.GetComponent<Slot>().filled = false;
+                    mix_slot.GetComponent<Slot>().filled = false;
+                    bake_slot.GetComponent<Slot>().filled = false;
+
                     temp.SetActive(false);
                     temp_f.SetActive(false);
+                    temp_m.SetActive(false);
+                    temp_b.SetActive(false);
 
                     t.text = "x0";
                     t_f.text = "x0";
+                    t_m.text = "x0";
+                    t_b.text = "x0";
 
                     prep.SetActive(false); 
 
@@ -184,9 +260,13 @@ public class CanvasInventory : MonoBehaviour
                 { 
                     temp.SetActive(true);
                     temp_f.SetActive(true);
+                    temp_m.SetActive(true);
+                    temp_b.SetActive(true);
 
                     t.text= "x" + (sub[name]);
                     t_f.text= "x" + (sub[name]);
+                    t_m.text = "x" + (sub[name]);
+                    t_b.text = "x" + (sub[name]);
                 }
                 
 

@@ -79,14 +79,14 @@ public class BakingTemplate : MonoBehaviour
         Debug.Log(parent);
         GameObject temp = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
         Slot s = temp.GetComponent<Slot>();
-
+        
         if (s.filled)
         {
-            AddToCook(s.name, 1);
+            AddToCook(s.name, 1, temp.transform.parent.name);
         }
     }
 
-    public void AddToCook(string name, int quantity)
+    public void AddToCook(string name, int quantity, string list)
     {
         Debug.Log(parent);
         string path = "Icons";
@@ -122,7 +122,7 @@ public class BakingTemplate : MonoBehaviour
                 }
 
                 Debug.Log("Removing " + quantity + " " + name + " from fridge");
-                f.DeleteItems(name, quantity);
+                Remove(name, quantity, list);
                 return;
             }
             else if (s.name == name)
@@ -131,9 +131,25 @@ public class BakingTemplate : MonoBehaviour
                 csub[name] += quantity;
                 Debug.Log("csub contains " + csub[name] + " " + name);
                 t.text = "x" + csub[name];
-                f.DeleteItems(name, quantity);
+                Remove(name, quantity, list);
                 return;
             }
+        }
+    }
+
+    void Remove(string name, int quantity, string source)
+    {
+        switch (source)
+        {
+            case "Fridge_List":
+                //Debug.Log("Removing item from fridge");
+                f.DeleteItems(name, quantity);
+                break;
+            default:
+                //Debug.Log("Removing item from inventory");
+                inv.RemoveItem(name, Inventory.ItemType.Ingredient, quantity); 
+                break;
+
         }
     }
 

@@ -38,7 +38,7 @@ public class ToolTip : MonoBehaviour
         //Debug.Log("x " + eventData.position.x.ToString() + " y " + eventData.position.y.ToString());
         List<RaycastResult> results = new List<RaycastResult>();
         raycaster.Raycast(eventData, results);
-        Debug.Log(results.Count);
+        //Debug.Log(results.Count);
         Slot s = FindSlot(results);
         if (s != null)
         {
@@ -60,7 +60,7 @@ public class ToolTip : MonoBehaviour
         {
             
             GameObject g = r.gameObject;
-            Debug.Log(g.name);
+            //Debug.Log(g.name);
             Slot slot = g.GetComponent<Slot>();
             if (slot != null && slot.filled)
             {

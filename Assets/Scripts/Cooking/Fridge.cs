@@ -88,8 +88,19 @@ public class Fridge : MonoBehaviour
             if (AddToFridge(s.name, 1))
             {
                 inv.RemoveItem(s.name, Inventory.ItemType.Ingredient, 1);
-                ci.DeleteItems(s.name, 1);
+                //ci.DeleteItems(s.name, 1);
             }
+        }
+    }
+
+    public void Retrieve()
+    {
+        GameObject temp = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
+        // GameObject temp = gameObject.transform.parent.gameObject;
+        Slot s = temp.GetComponent<Slot>();
+        if (s != null && s.filled && inv.AddItem(s.name, Inventory.ItemType.Ingredient, 1))
+        {
+            DeleteItems(s.name, 1);
         }
     }
 
@@ -98,10 +109,10 @@ public class Fridge : MonoBehaviour
     //check the fridge ui inventory and make the prep buttons visible for every item
     // if an item gets removed and it's now gone, then we need to remove the prep buttons for that slot
     // the prep function basically needs to do the same thing as the AddItems function and it needs to add ONE of the current item into the fridge
-            // remove one of that item from the inventory
-            // add one of that item to the fridge
-            // can we use an inventory object for this?
-            //honestly yeah probably, inventory script at the end of the day is just a generic that can be applied to the fridge
+    // remove one of that item from the inventory
+    // add one of that item to the fridge
+    // can we use an inventory object for this?
+    //honestly yeah probably, inventory script at the end of the day is just a generic that can be applied to the fridge
     public bool AddToFridge(string name, int quantity){
         Debug.Log("Adding " + quantity + " " + name + " to fridge");
         if (dict.Items.ContainsKey(name))
