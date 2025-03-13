@@ -76,6 +76,9 @@ public class Inventory : MonoBehaviour
     // Method to remove an item from the inventory
     public void RemoveItem(string name, ItemType type, int qty)
     {
+        Debug.Log("Removing item from inventory");
+        ci.DeleteItems(name, qty);
+
         // Iterate through the items in the specified category
         for (int i = 0; i < itemCollection[type].Count; i++)
         {
@@ -94,6 +97,7 @@ public class Inventory : MonoBehaviour
                 return;
             }
         }
+        
 
         Debug.LogWarning($"Item {name} not found in inventory.");
     }

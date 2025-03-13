@@ -8,6 +8,7 @@ public class OpenInventory : MonoBehaviour
     public GameObject DiaBox; 
     public GameObject DiaChoice;
     public GameObject Inventory;
+    public PlayerMovement pm;
 
     [SerializeField] private GameObject crosshair;
 
@@ -23,6 +24,8 @@ public class OpenInventory : MonoBehaviour
 
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            pm.enabled = false;
+            Time.timeScale = 0f;
 
             if (crosshair != null)
             {
@@ -40,16 +43,19 @@ public class OpenInventory : MonoBehaviour
             Menu.SetActive(false);
             Inventory.SetActive(false);
 
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
 
-            if (crosshair != null)
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        pm.enabled = true;
+        Time.timeScale = 1;
+
+        if (crosshair != null)
+        {
+            crosshairscript chs = crosshair.GetComponent<crosshairscript>();
+            if (chs != null && chs.enabled)
             {
-                crosshairscript chs = crosshair.GetComponent<crosshairscript>();
-                if (chs != null && chs.enabled)
-                {
-                chs.SetVisible(true);
+               chs.SetVisible(true);
             }
-            }
+        }
     }
 }
