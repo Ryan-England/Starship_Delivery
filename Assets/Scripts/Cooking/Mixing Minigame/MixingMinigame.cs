@@ -54,7 +54,7 @@ public class MixingMinigame : MonoBehaviour
         }
 
         // Dismiss the success message with Spacebar
-        if (hasWon && Input.GetKeyDown(KeyCode.Space))
+        if (hasWon)
         {
             HideSuccessMessage();
         }
