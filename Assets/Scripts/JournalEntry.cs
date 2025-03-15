@@ -35,19 +35,21 @@ public class JournalEntry : MonoBehaviour
     public void ExpandEntry()
     {
         isExpanded = true;
-        inputArea.SetActive(true);
-        previewText.gameObject.SetActive(false);
         inputField.gameObject.SetActive(true);
-        inputField.ActivateInputField();
+        inputArea.SetActive(true);
+        // inputField.ActivateInputField();
     }
 
     public void CollapseEntry()
     {
         if (!isExpanded) return;
 
+        Debug.Log("Collapsed");
+
         isExpanded = false;
-        inputArea.SetActive(false);
-        previewText.text = GetFirstLine(inputField.text);
+        // inputArea.SetActive(false);
+        inputField.gameObject.SetActive(false);
+        // previewText.text = GetFirstLine(inputField.text);
         previewText.gameObject.SetActive(true);
     }
 

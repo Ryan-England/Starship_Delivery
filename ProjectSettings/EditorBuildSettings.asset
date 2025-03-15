@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MoveTestScene.unity
     guid: 6e217449ed2fd44bd86eba00f2a48e80
   - enabled: 1
+    path: Assets/Scenes/Main_Example.unity
+    guid: f7157b2604f406541bce44d40b061d4f
+  - enabled: 1
     path: Assets/Scenes/Korgath.unity
     guid: 1fe6fc59572bc4ed2bf1aa81446b6116
   - enabled: 1

@@ -23,6 +23,7 @@ public class JournalManager : MonoBehaviour
         GameObject newEntryObj = Instantiate(journalEntryPrefab, journalContainer);
         JournalEntry newEntry = newEntryObj.GetComponent<JournalEntry>();
         journalEntries.Add(newEntry);
+        CollapseAllExcept(newEntry);
         newEntry.Initialize(this, title, content);
     }
 
