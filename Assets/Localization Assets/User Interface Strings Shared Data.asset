@@ -67,6 +67,34 @@ MonoBehaviour:
     m_Key: normal
     m_Metadata:
       m_Items: []
+  - m_Id: 2004474959749120
+    m_Key: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2004513929027584
+    m_Key: Sprint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2004546447466496
+    m_Key: Zoom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2004600507850752
+    m_Key: Climb
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2004637451280384
+    m_Key: Interact
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2004675212599296
+    m_Key: Inventory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2147636776787968
+    m_Key: Jump
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
