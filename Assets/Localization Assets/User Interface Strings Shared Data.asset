@@ -15,36 +15,24 @@ MonoBehaviour:
   m_TableCollectionName: User Interface Strings
   m_TableCollectionNameGuidString: 305daa3dd8f93415cb876d6e1c9e7c0b
   m_Entries:
-  - m_Id: 32576102400
-    m_Key: optionsTitle
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1628483608576
-    m_Key: sensitivity
-    m_Metadata:
-      m_Items: []
-  - m_Id: 2067950198784
-    m_Key: languages
-    m_Metadata:
-      m_Items: []
   - m_Id: 3128886812672
     m_Key: back
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3685881995264
-    m_Key: title
     m_Metadata:
       m_Items: []
   - m_Id: 3720556306432
     m_Key: start
     m_Metadata:
       m_Items: []
-  - m_Id: 3789791682560
-    m_Key: quit
+  - m_Id: 32576102400
+    m_Key: optionsTitle
     m_Metadata:
       m_Items: []
   - m_Id: 457841235189760
     m_Key: options
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3789791682560
+    m_Key: quit
     m_Metadata:
       m_Items: []
   - m_Id: 1959329124048896
@@ -63,8 +51,80 @@ MonoBehaviour:
     m_Key: Tritanopia
     m_Metadata:
       m_Items: []
+  - m_Id: 2067950198784
+    m_Key: languages
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1628483608576
+    m_Key: sensitivity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3685881995264
+    m_Key: title
+    m_Metadata:
+      m_Items: []
   - m_Id: 1973054740619264
     m_Key: normal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2004474959749120
+    m_Key: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2004513929027584
+    m_Key: Sprint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2004546447466496
+    m_Key: Zoom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2004600507850752
+    m_Key: Climb
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2004637451280384
+    m_Key: Interact
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2004675212599296
+    m_Key: Inventory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2147636776787968
+    m_Key: Jump
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2151226379591680
+    m_Key: map
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2162204567658496
+    m_Key: Mixing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2162281164038144
+    m_Key: Ingredients
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2162363280121856
+    m_Key: Fridge
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2168012323938304
+    m_Key: Baking
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2173850665082880
+    m_Key: Chopping
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2174982745481216
+    m_Key: Item
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2176816323223552
+    m_Key: New Entry
     m_Metadata:
       m_Items: []
   m_Metadata:

@@ -70,6 +70,66 @@ MonoBehaviour:
     m_Localized: Normal Vision
     m_Metadata:
       m_Items: []
+  - m_Id: 2004474959749120
+    m_Localized: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2004513929027584
+    m_Localized: Sprint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2004546447466496
+    m_Localized: Zoom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2004600507850752
+    m_Localized: Climb
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2004637451280384
+    m_Localized: Interact
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2004675212599296
+    m_Localized: Inventory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2147636776787968
+    m_Localized: Jump
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2151226379591680
+    m_Localized: Map
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2162204567658496
+    m_Localized: Mixing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2162281164038144
+    m_Localized: Ingredients
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2162363280121856
+    m_Localized: Fridge
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2168012323938304
+    m_Localized: Baking
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2173850665082880
+    m_Localized: Chopping
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2174982745481216
+    m_Localized: Item
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2176816323223552
+    m_Localized: New Entry
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
