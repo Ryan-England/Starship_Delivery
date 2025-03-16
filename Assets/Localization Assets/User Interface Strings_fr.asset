@@ -98,6 +98,34 @@ MonoBehaviour:
     m_Localized: Saut
     m_Metadata:
       m_Items: []
+  - m_Id: 2151226379591680
+    m_Localized: Carte
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2162204567658496
+    m_Localized: "M\xE9langer"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2162281164038144
+    m_Localized: "Ingr\xE9dients"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2162363280121856
+    m_Localized: Frigo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2168012323938304
+    m_Localized: Cuisson
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2173850665082880
+    m_Localized: Hacher
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2174982745481216
+    m_Localized: L'Objet
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
