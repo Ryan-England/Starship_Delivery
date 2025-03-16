@@ -126,6 +126,10 @@ MonoBehaviour:
     m_Localized: L'Objet
     m_Metadata:
       m_Items: []
+  - m_Id: 2176816323223552
+    m_Localized: "Nouvelle Entr\xE9e"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
