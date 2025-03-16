@@ -15,22 +15,22 @@ EditorBuildSettings:
     path: Assets/Scenes/Main_Example.unity
     guid: f7157b2604f406541bce44d40b061d4f
   - enabled: 1
-    path: Assets/Scenes/Korgath.unity
+    path: Assets/Scenes/Experimental Scenes/Korgath.unity
     guid: 1fe6fc59572bc4ed2bf1aa81446b6116
   - enabled: 1
-    path: Assets/Scenes/TestScene_AkaDialog.unity
+    path: Assets/Scenes/Experimental Scenes/TestScene_AkaDialog.unity
     guid: 54d1c8ad32de598439ccf020d16b88f2
   - enabled: 1
-    path: Assets/Scenes/Carolyn_stable.unity
+    path: Assets/Scenes/Experimental Scenes/Carolyn_stable.unity
     guid: f0a2c114512df80479784ee5c218bb04
   - enabled: 1
-    path: Assets/Scenes/TestScene-ChangeObject.unity
+    path: Assets/Scenes/Experimental Scenes/TestScene-ChangeObject.unity
     guid: 69556f87276070e43ae52f2a6a9f0a7b
   - enabled: 1
-    path: Assets/Scenes/Test_Scene_Merged_2.unity
+    path: Assets/Scenes/Experimental Scenes/Test_Scene_Merged_2.unity
     guid: 76b7d9961c93b0848a818cc29b36a68f
   - enabled: 1
-    path: Assets/Scenes/Test_Scene_Merged_1.unity
+    path: Assets/Scenes/Experimental Scenes/Test_Scene_Merged_1.unity
     guid: 1482f31923360f04c818956a0ca6e935
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 7de7b053e5c86403f92034bf5d0cc704,

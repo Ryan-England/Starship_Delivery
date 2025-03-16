@@ -61,6 +61,12 @@ public class Menu1 : MonoBehaviour
         trit = false;
     }
 
+    public void normal(){
+        detuer = false; 
+        protan = false; 
+        trit = false;
+    }
+
     public void ExitGame()
     {
         Debug.Log("Application has ended!");

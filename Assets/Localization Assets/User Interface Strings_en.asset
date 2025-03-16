@@ -50,6 +50,26 @@ MonoBehaviour:
     m_Localized: Options
     m_Metadata:
       m_Items: []
+  - m_Id: 1959329124048896
+    m_Localized: Color-Blind Mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1966994847948800
+    m_Localized: Deuteranopia
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1967126721060864
+    m_Localized: Protanopia
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1967130449797120
+    m_Localized: Tritanopia
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1973054740619264
+    m_Localized: Normal Vision
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

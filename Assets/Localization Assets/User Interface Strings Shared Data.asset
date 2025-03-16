@@ -47,6 +47,26 @@ MonoBehaviour:
     m_Key: options
     m_Metadata:
       m_Items: []
+  - m_Id: 1959329124048896
+    m_Key: colorblind_button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1966994847948800
+    m_Key: Deuteranopia
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1967126721060864
+    m_Key: Protanopia
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1967130449797120
+    m_Key: Tritanopia
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1973054740619264
+    m_Key: normal
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

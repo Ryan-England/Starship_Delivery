@@ -50,6 +50,26 @@ MonoBehaviour:
     m_Localized: "R\xE9glages"
     m_Metadata:
       m_Items: []
+  - m_Id: 1959329124048896
+    m_Localized: Mode Daltonien
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1966994847948800
+    m_Localized: "Deut\xE9ranopie"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1967126721060864
+    m_Localized: Protanopie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1967130449797120
+    m_Localized: Tritanopie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1973054740619264
+    m_Localized: Vision Normale
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
