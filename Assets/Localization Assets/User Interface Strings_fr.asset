@@ -119,7 +119,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2173850665082880
-    m_Localized: Hacher
+    m_Localized: Hachage
     m_Metadata:
       m_Items: []
   - m_Id: 2174982745481216
@@ -128,6 +128,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2176816323223552
     m_Localized: "Nouvelle Entr\xE9e"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2187573144313856
+    m_Localized: "M\xE9lange Termin\xE9!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2188417902305280
+    m_Localized: "Hachage Termin\xE9!"
     m_Metadata:
       m_Items: []
   references:
