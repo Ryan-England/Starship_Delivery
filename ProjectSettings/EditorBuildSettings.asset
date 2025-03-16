@@ -15,9 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Main_Example.unity
     guid: f7157b2604f406541bce44d40b061d4f
   - enabled: 1
-    path: Assets/Scenes/Korgath.unity
-    guid: 1fe6fc59572bc4ed2bf1aa81446b6116
-  - enabled: 1
     path: Assets/Scenes/Experimental Scenes/TestScene_AkaDialog.unity
     guid: 54d1c8ad32de598439ccf020d16b88f2
   - enabled: 1

@@ -31,8 +31,8 @@ public class PlayerCam : MonoBehaviour
     private void HandleRotation()
     {
         
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * (PauseMenu.mouseValue * 50f);
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * (PauseMenu.mouseValue * 50f);
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * (TabManager.mouseValue * 50f);
+        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * (TabManager.mouseValue * 50f);
 
         
         float arrowHorizontal = 0f;
