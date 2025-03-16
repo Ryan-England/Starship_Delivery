@@ -23,6 +23,7 @@ public class BakingTemplate : MonoBehaviour
     public GameObject spawner;
 
     public GameObject Dictionary;
+    public PositionToObject pos;
     private RecipeDictionary cookbook;
     private int SLOT_COUNT = 2;
 
