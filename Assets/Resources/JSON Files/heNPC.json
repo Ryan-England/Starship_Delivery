@@ -1,0 +1,74 @@
+{
+    "NPCList": [
+        {
+        "name": "אדם גנרי",
+        "UnitID": "generic",
+        "dialogues": [
+            {
+                "speaker": "אדם גנרי",
+                "line_ID": "greeting",
+                "next_line_ID": "greeting2",
+                "prev_line_ID": null,
+                "flag_ID": 0,
+                "text": "שלום רב.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "אדם גנרי",
+                "line_ID": "greeting2",
+                "next_line_ID": "greeting3",
+                "prev_line_ID": "greeting",
+                "flag_ID": 0,
+                "text": "זהו מבחן של מערכת הדיאלוג.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "אדם גנרי",
+                "line_ID": "greeting3",
+                "next_line_ID": null,
+                "prev_line_ID": "greeting2",
+                "flag_ID": 0,
+                "text": "אם אתה רואה זאת, ואינך בודק את מערכת הדיאלוג, אז יש שגיאה.",
+                "quest_ID": null,
+                "choice_A": "זו הייתה בדיקה.",
+                "choice_A_ID": "greeting4",
+                "choice_B": "שגיאה? איזו שגיאה?",
+                "choice_B_ID": "greeting5"
+            },
+            {
+                "speaker": "אדם גנרי",
+                "line_ID": "greeting4",
+                "next_line_ID": null,
+                "prev_line_ID": "greeting3",
+                "flag_ID": 0,
+                "text": "טוֹב. דיאלוג רב-קו ובחירות הם פונקציונליים",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "אדם גנרי",
+                "line_ID": "greeting5",
+                "next_line_ID": null,
+                "prev_line_ID": "greeting3",
+                "flag_ID": 0,
+                "text": "ובכן, או שלא נתת לתו הזה מזהה יחידה בחלון המאפיינים של Unity תחת הסקריפט המתאים לו, או שלא עשית NPC חוקי בקובצי ה-NPC JSON.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            }
+        ]
+    }]
+}

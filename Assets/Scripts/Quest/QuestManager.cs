@@ -7,6 +7,7 @@ public class QuestManager : MonoBehaviour
     public Inventory inv;
     public Dictionary<string, bool> Quests = new Dictionary<string, bool>();
     private CompassUI compassUI;
+    public JournalManager journalManager;
     private void Start()
     {
         // Try to find the CompassUI in the scene
@@ -19,6 +20,7 @@ public class QuestManager : MonoBehaviour
     }
     public void AddQuest(NPCQuest n){
         Quests.Add(n.quest_name, false);
+        journalManager.AddPreWrittenEntry(n.quest_name, n.quest_description);
 
         if (n.questMarker != null && compassUI != null)
         {

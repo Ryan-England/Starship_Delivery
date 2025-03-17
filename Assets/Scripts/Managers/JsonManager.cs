@@ -6,28 +6,58 @@ using Defective.JSON;
 public class JsonManager : MonoBehaviour
 {
     //ENGLISH JSON FILES
+    [Tooltip("The JSON file containing the NPC data in English")]
     [SerializeField] private TextAsset engNPCJson;
-    [SerializeField] private TextAsset engRecipeJson;
+    /*
+    [Tooltip("The JSON file containing the Quest data in English")]
     [SerializeField] private TextAsset engQuestJson;
+    [Tooltip("The JSON file containing the Recipe data in English")]
+    [SerializeField] private TextAsset engRecipeJson;
+    [Tooltip("The JSON file containing the Item data in English")]
     [SerializeField] private TextAsset engItemJson;
+    */
 
+    //FRENCH JSON FILES
+    [Tooltip("The JSON file containing the NPC data in French")]
+    [SerializeField] private TextAsset frNPCJson;
+    /*
+    [Tooltip("The JSON file containing the Quest data in French")]
+    [SerializeField] private TextAsset frQuestJson;
+    [Tooltip("The JSON file containing the Recipe data in French")]
+    [SerializeField] private TextAsset frRecipeJson;
+    [Tooltip("The JSON file containing the Item data in French")]
+    [SerializeField] private TextAsset frItemJson;
+    */
+
+    //HEBREW JSON FILES
+    [Tooltip("The JSON file containing the NPC data in Hebrew")]
+    [SerializeField] private TextAsset hebNPCJson;
+    /*
+    [Tooltip("The JSON file containing the Quest data in Hebrew")]
+    [SerializeField] private TextAsset hebQuestJson;
+    [Tooltip("The JSON file containing the Recipe data in Hebrew")]
+    [SerializeField] private TextAsset hebRecipeJson;
+    [Tooltip("The JSON file containing the Item data in Hebrew")]
+    [SerializeField] private TextAsset hebItemJson;*/
 
     //LANGUAGE SETTINGS
     public enum Language
     {
         English,
-        Simlish
+        French,
+        Hebrew
     }
+    [Tooltip("The current language of the game")]
     public Language current_language;
 
     private Dictionary<string, NPC> npcList;
     private Dictionary<string, Recipe> recipeList;
-    private Dictionary<string, Quest> questList;
+    //private Dictionary<string, Quest> questList;
     private Dictionary<string, Item> itemList;
 
     private JSONObject json_Object;
 
-    void Start()
+    void Awake()
     {
         ChangeLanguage(Language.English);
     }
@@ -40,22 +70,27 @@ public class JsonManager : MonoBehaviour
     private void PopulateDictionaries(Language curr_Lang){
         npcList = new Dictionary<string, NPC>();
         recipeList = new Dictionary<string, Recipe>();
-        questList = new Dictionary<string, Quest>();
+        //questList = new Dictionary<string, Quest>();
         itemList = new Dictionary<string, Item>();
         switch (curr_Lang)
         {
             case Language.English:
                 PopulateNPCs(engNPCJson.text);
-                PopulateQuests(engQuestJson.text);
-                PopulateRecipes(engRecipeJson.text);
-                PopulateItems(engItemJson.text);
+                //PopulateQuests(engQuestJson.text);
+                //PopulateRecipes(engRecipeJson.text);
+                //PopulateItems(engItemJson.text);
                 break;
-            case Language.Simlish:
-                //populate the dictionaries with the objects from the json files
-                //NPC
-                //Recipe
-                //Quest
-                //Item
+            case Language.French:
+                PopulateNPCs(frNPCJson.text);
+                //PopulateQuests(frQuestJson.text);
+                //PopulateRecipes(frRecipeJson.text);
+                //PopulateItems(frItemJson.text);
+                break;
+            case Language.Hebrew:
+                PopulateNPCs(hebNPCJson.text);
+                //PopulateQuests(hebQuestJson.text);
+                //PopulateRecipes(hebRecipeJson.text);
+                //PopulateItems(hebItemJson.text);
                 break;
         }
     }
@@ -70,20 +105,20 @@ public class JsonManager : MonoBehaviour
             return;
         }
         foreach (JSONObject element in json_Object.list[0]) {
-            var dialogues = new Dictionary<string, Dialogue>();
-            NPC newNPC = new NPC(element["name"].stringValue, element["UnitID"].stringValue, dialogues, element["QuestID"].stringValue);
+            var dialogues = new Dictionary<string, Discourse>();
+            var newNPC = new NPC(element["name"].stringValue, element["UnitID"].stringValue, dialogues);
             if(element["dialogues"] != null){
                 foreach(JSONObject dialogue in element["dialogues"].list){
-                    Dialogue newDialogue = new Dialogue();
-                    newDialogue.name = newNPC.name;
-                    //newDialogue.text = dialogue["text"].stringValue;
-                    newNPC.dialogues.Add(dialogue["id"].stringValue, newDialogue);
+                    Discourse newDialogue = new Discourse(dialogue["speaker"].stringValue, dialogue["line_ID"].stringValue, dialogue["text"].stringValue, 
+                        dialogue["flag_ID"].intValue, dialogue["prev_line_ID"].stringValue, dialogue["next_line_ID"].stringValue, dialogue["quest_ID"].stringValue, 
+                        dialogue["choice_A"].stringValue, dialogue["choice_A_ID"].stringValue, dialogue["choice_B"].stringValue, dialogue["choice_B_ID"].stringValue);
+                    newNPC.dialogues.Add(dialogue["line_ID"].stringValue, newDialogue);
                 }
             }
             npcList.Add(newNPC.UnitID, newNPC);
         }
     }
-
+    /*
     private void PopulateQuests(string json)
     {
         var json_Object = new JSONObject(json);
@@ -173,7 +208,19 @@ public class JsonManager : MonoBehaviour
             itemList.Add(newItem.ItemID, newItem);
         }
     }
-
+    */
+        public NPC getNPC(string id){
+        if (npcList.ContainsKey(id))
+        {
+            return npcList[id];
+        }
+        else
+        {
+            Debug.LogError("NPC with id " + id + " not found");
+            return npcList["generic"];
+        }
+    }
+    /*
     public Quest getQuest(string id){
         if (questList.ContainsKey(id))
         {
@@ -185,6 +232,7 @@ public class JsonManager : MonoBehaviour
             return null;
         }
     }
+    */
         public Item getItem(string id){
         if (itemList.ContainsKey(id))
         {
@@ -207,15 +255,5 @@ public class JsonManager : MonoBehaviour
             return null;
         }
     }
-    public NPC getNPC(string id){
-        if (npcList.ContainsKey(id))
-        {
-            return npcList[id];
-        }
-        else
-        {
-            Debug.LogError("NPC with id " + id + " not found");
-            return npcList["generic"];
-        }
-    }
+    
 }

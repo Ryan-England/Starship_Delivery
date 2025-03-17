@@ -10,6 +10,7 @@ public class PauseMenuAkash : MonoBehaviour
 
     public GameObject pause;
     public GameObject options;
+    public GameObject map;
     public PlayerMovement pm; 
     public GameObject player; 
     public Vector3 pos;
@@ -21,7 +22,8 @@ public class PauseMenuAkash : MonoBehaviour
     void Start()
     {
         pause.SetActive(false);
-        mouseValue = mouseSens.value;
+        mouseValue = PlayerPrefs.GetFloat("MouseSensitivity", 10.0f);
+        mouseSens.value = mouseValue;
     }
 
     // Update is called once per frame
@@ -36,8 +38,14 @@ public class PauseMenuAkash : MonoBehaviour
             Cursor.visible = true;
             pm.enabled = false;
             Time.timeScale = 0f;
-            mouseValue = mouseSens.value;
         }    
+    }
+
+    public void SaveMouseSensitivity()
+    {
+        mouseValue = mouseSens.value;
+        PlayerPrefs.SetFloat("MouseSensitivity", mouseValue);
+        PlayerPrefs.Save();
     }
 
     public void BackButtonPause(){
@@ -52,7 +60,10 @@ public class PauseMenuAkash : MonoBehaviour
         options.SetActive(false);
         pause.SetActive(true);
     }
-
+    public void BackButtonMap(){
+        map.SetActive(false);
+        pause.SetActive(true);
+    }
     public void ExitButtonPause(){
         Application.Quit();
     }
@@ -60,6 +71,10 @@ public class PauseMenuAkash : MonoBehaviour
     public void OptionsButtonPause(){
         pause.SetActive(false);
         options.SetActive(true);
+    }
+    public void MapButtonPause(){
+        pause.SetActive(false);
+        map.SetActive(true);
     }
     public void SaveGame(){
         Debug.Log(pos);

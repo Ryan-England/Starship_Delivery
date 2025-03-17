@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2806047072659564668}
   - component: {fileID: 6701729231202578177}
   - component: {fileID: 5789010783976490716}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: smolderdough
   m_TagString: Collectible
   m_Icon: {fileID: 0}

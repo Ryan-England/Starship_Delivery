@@ -1,9 +1,357 @@
 {
-    "NPCList": [{
+    "NPCList": [
+        {
         "name": "genericNPC",
         "UnitID": "generic",
-        "dialogues": [{
-            "greetText": "Hello, I am a generic NPC"
-        }]
+        "dialogues": [
+            {
+                "speaker": "genericNPC",
+                "line_ID": "greeting",
+                "next_line_ID": "greeting2",
+                "prev_line_ID": null,
+                "flag_ID": 0,
+                "text": "Greetings.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "genericNPC",
+                "line_ID": "greeting2",
+                "next_line_ID": "greeting3",
+                "prev_line_ID": "greeting",
+                "flag_ID": 0,
+                "text": "This is a test of the dialogue system.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "genericNPC",
+                "line_ID": "greeting3",
+                "next_line_ID": null,
+                "prev_line_ID": "greeting2",
+                "flag_ID": 0,
+                "text": "If you are seeing this, and you are not testing the dialogue system, then there is an error.",
+                "quest_ID": null,
+                "choice_A": "This was a test.",
+                "choice_A_ID": "greeting4",
+                "choice_B": "An error? What error?",
+                "choice_B_ID": "greeting5"
+            },
+            {
+                "speaker": "genericNPC",
+                "line_ID": "greeting4",
+                "next_line_ID": null,
+                "prev_line_ID": "greeting3",
+                "flag_ID": 0,
+                "text": "Good. Multi-line dialogue and choices are functional.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "genericNPC",
+                "line_ID": "greeting5",
+                "next_line_ID": null,
+                "prev_line_ID": "greeting3",
+                "flag_ID": 0,
+                "text": "Well, either you have not given this character a unit ID in the Unity properties window under its respective script, or you have not made a valid NPC in the NPC JSON files.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            }
+        ]
+    },
+    {
+        "name": "Magma Slug",
+        "UnitID": "quasoslug",
+        "dialogues": [
+            {
+                "speaker": "Magma Slug",
+                "line_ID": "order",
+                "next_line_ID": "order2",
+                "prev_line_ID": null,
+                "flag_ID": 0,
+                "text": "I've been craving traditional quaso from my home planet.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "Magma Slug",
+                "line_ID": "order2",
+                "next_line_ID": null,
+                "prev_line_ID": "order",
+                "flag_ID": 0,
+                "text": "Ah, I can almost taste that crisp, mineral bite of the sea. Refreshing, isn't it?",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "Magma Slug",
+                "line_ID": "quest",
+                "next_line_ID": "quest2",
+                "prev_line_ID": null,
+                "flag_ID": 1,
+                "text": "Ah, this reminds me of the youthful spirit of my childhood.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "Magma Slug",
+                "line_ID": "quest2",
+                "next_line_ID": null,
+                "prev_line_ID": "quest",
+                "flag_ID": 1,
+                "text": "There you go, thank you for the meal.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "Magma Slug",
+                "line_ID": "questcomplete",
+                "next_line_ID": "questcomplete2",
+                "prev_line_ID": null,
+                "flag_ID": 2,
+                "text": "Thank you for reminding me of youthful life in my childhood, ah, the good ol' days.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "Magma Slug",
+                "line_ID": "questcomplete2",
+                "next_line_ID": null,
+                "prev_line_ID": "questcomplete",
+                "flag_ID": 2,
+                "text": "I'll definitely recommend you to my superiors.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            }
+        ]
+    },
+    {
+        "name": "Remmy",
+        "UnitID": "jumpslug",
+        "dialogues": [
+            {
+                "speaker": "Remmy",
+                "line_ID": "greeting",
+                "next_line_ID": "greeting2",
+                "prev_line_ID": null,
+                "flag_ID": 0,
+                "text": "Hey, did you know that you can double jump to jump higher?",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "Remmy",
+                "line_ID": "greeting2",
+                "next_line_ID": null,
+                "prev_line_ID": "greeting",
+                "flag_ID": 0,
+                "text": "How about you use these platforms to test it out?",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            }
+        ]
+    },
+    {
+        "name": "Jerry",
+        "UnitID": "snake",
+        "dialogues": [
+            {
+                "speaker": "Jerry",
+                "line_ID": "question",
+                "next_line_ID": "question2",
+                "prev_line_ID": null,
+                "flag_ID": 0,
+                "text": "Hey bud! Got a question for ya!.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "Jerry",
+                "line_ID": "question2",
+                "next_line_ID": null,
+                "prev_line_ID": "question",
+                "flag_ID": 0,
+                "text": "Ya think pinapples belong on pizza?",
+                "quest_ID": null,
+                "choice_A": "yes",
+                "choice_A_ID": "yes",
+                "choice_B": "no",
+                "choice_B_ID": "no"
+            },
+            {
+                "speaker": "Jerry",
+                "line_ID": "yes",
+                "next_line_ID": null,
+                "prev_line_ID": "question2",
+                "flag_ID": 0,
+                "text": "Me too! I love me some pineapple!",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "Jerry",
+                "line_ID": "no",
+                "next_line_ID": null,
+                "prev_line_ID": "question2",
+                "flag_ID": 0,
+                "text": "That is literally the worst opinion I have ever heard in my entire history of being please do not open your mouth in my presence again.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            }
+        ]
+    },
+    {
+        "name": "Monke",
+        "UnitID": "monke",
+        "dialogues": [
+            {
+                "speaker": "Monke",
+                "line_ID": "sentences",
+                "next_line_ID": "sentences2",
+                "prev_line_ID": null,
+                "flag_ID": 0,
+                "text": "I long for the taste of the scrumptious fruit of the yellow variety... It hath been many a moon since I have feasted on one...",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "Monke",
+                "line_ID": "sentences2",
+                "next_line_ID": "sentences3",
+                "prev_line_ID": "sentences",
+                "flag_ID": 0,
+                "text": "Alas... I hath endured too much strife in these last few moons... I fear I lack the strerngth to make the pilgrimage to procure one...",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "Monke",
+                "line_ID": "sentences3",
+                "next_line_ID": null,
+                "prev_line_ID": "sentences2",
+                "flag_ID": 0,
+                "text": "Would you be so kind as to embark upon this journey in my stead? I will pay you handsomely for thine troubles.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "Monke",
+                "line_ID": "sentences",
+                "next_line_ID": "sentences2",
+                "prev_line_ID": null,
+                "flag_ID": 1,
+                "text": "You hath procured me a banana?",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "Monke",
+                "line_ID": "sentences2",
+                "next_line_ID": "sentences3",
+                "prev_line_ID": "sentences",
+                "flag_ID": 1,
+                "text": "I shan't ever forget this act of kindness. I thank you graciously. This shall provide sustenance for mine self.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            }
+        ]
+    },
+    {
+        "name": "Monke",
+        "UnitID": "investor",
+        "dialogues": [
+            {
+                "speaker": "Monke",
+                "line_ID": "greeting",
+                "next_line_ID": "greeting2",
+                "prev_line_ID": null,
+                "flag_ID": 0,
+                "text": "Greetings.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            }
+        ]
+    },
+    {
+        "name": "Atty",
+        "UnitID": "atty",
+        "dialogues": [
+            {
+                "speaker": "Atty",
+                "line_ID": "greeting",
+                "next_line_ID": "greeting2",
+                "prev_line_ID": null,
+                "flag_ID": 0,
+                "text": "Greetings.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            }
+        ]
     }]
 }

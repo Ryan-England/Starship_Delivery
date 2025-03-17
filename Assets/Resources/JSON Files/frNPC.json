@@ -1,0 +1,74 @@
+{
+    "NPCList": [
+        {
+        "name": "Personne Générique",
+        "UnitID": "generic",
+        "dialogues": [
+            {
+                "speaker": "Personne Générique",
+                "line_ID": "greeting",
+                "next_line_ID": "greeting2",
+                "prev_line_ID": null,
+                "flag_ID": 0,
+                "text": "Salutations.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "Personne Générique",
+                "line_ID": "greeting2",
+                "next_line_ID": "greeting3",
+                "prev_line_ID": "greeting",
+                "flag_ID": 0,
+                "text": "Ceci est un test du système de dialogue.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "Personne Générique",
+                "line_ID": "greeting3",
+                "next_line_ID": null,
+                "prev_line_ID": "greeting2",
+                "flag_ID": 0,
+                "text": "Si vous voyez ceci et que vous ne testez pas le système de dialogue, alors il y a une erreur.",
+                "quest_ID": null,
+                "choice_A": "C'était un test.",
+                "choice_A_ID": "greeting4",
+                "choice_B": "Une erreur ? Quelle erreur ?",
+                "choice_B_ID": "greeting5"
+            },
+            {
+                "speaker": "Personne Générique",
+                "line_ID": "greeting4",
+                "next_line_ID": null,
+                "prev_line_ID": "greeting3",
+                "flag_ID": 0,
+                "text": "Bien. Le dialogue multiligne et les choix sont fonctionnels.",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            },
+            {
+                "speaker": "Personne Générique",
+                "line_ID": "greeting5",
+                "next_line_ID": null,
+                "prev_line_ID": "greeting3",
+                "flag_ID": 0,
+                "text": "Eh bien, soit vous n'avez pas donné à ce personnage un identifiant d'unité dans la fenêtre des propriétés d'Unity sous son script respectif, soit vous n'avez pas créé de PNJ valide dans les fichiers JSON du PNJ..",
+                "quest_ID": null,
+                "choice_A": null,
+                "choice_A_ID": null,
+                "choice_B": null,
+                "choice_B_ID": null
+            }
+        ]
+    }]
+}

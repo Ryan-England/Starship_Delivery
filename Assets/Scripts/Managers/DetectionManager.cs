@@ -39,7 +39,7 @@ public class DetectionManager : MonoBehaviour
         RaycastHit hit;
         Physics.Raycast(cam.position, cam.forward, out hit, detectionRange, detectionLayer);
         Collider collider = hit.collider;
-        Debug.Log(cam.forward.x + " " + cam.forward.y + " " + cam.forward.z);
+        //Debug.Log(cam.forward.x + " " + cam.forward.y + " " + cam.forward.z);
 
         if (collider != null)//If one is found, see if/how it can be interacted with.
         {
