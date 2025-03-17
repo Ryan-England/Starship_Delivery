@@ -132,6 +132,11 @@ public class InteractionHandler : MonoBehaviour
 
     public void CheckQuest(){
         if(quest.have_quest){
+            if (PlayerPrefs.HasKey("Quest_" + quest.quest_name)){
+            bool isCompleted = PlayerPrefs.GetInt("Quest_" + quest.quest_name) == 1;
+            qm.Quests[quest.quest_name] = isCompleted;
+            }
+
             if(qm.Quests.ContainsKey(quest.quest_name)){
                 if(qm.Quests[quest.quest_name]){
                     sentences = dialogue.quest_complete;
@@ -146,6 +151,10 @@ public class InteractionHandler : MonoBehaviour
                             sentences = dialogue.quest_check;
                             qm.CompleteQuest(quest);
                             quest_complete_first = true;
+
+                            // Save quest completion state
+                            PlayerPrefs.SetInt("Quest_" + quest.quest_name, 1);
+                            PlayerPrefs.Save();
                             return;
                         }
                         break;
@@ -267,5 +276,18 @@ public class InteractionHandler : MonoBehaviour
             }
         }
         Debug.Log("End of Conversation");
+    }
+
+    public void ResetQuestProgress()
+    {
+         if(quest.have_quest){
+            string questKey = "Quest_" + quest.quest_name;
+            if (PlayerPrefs.HasKey(questKey)){
+                PlayerPrefs.DeleteKey(questKey);
+            }
+         }
+
+        PlayerPrefs.Save();
+        Debug.Log("All quest progress has been reset.");
     }
 }
