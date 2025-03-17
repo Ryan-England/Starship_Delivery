@@ -142,6 +142,66 @@ MonoBehaviour:
     m_Localized: Continuer
     m_Metadata:
       m_Items: []
+  - m_Id: 2304966499753984
+    m_Localized: "Contr\xF4les"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2303774944124928
+    m_Localized: Conserver
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2303791448711168
+    m_Localized: Charger
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2303828975149056
+    m_Localized: Journal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2304987571937280
+    m_Localized: W - Avancer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2305012897144832
+    m_Localized: "S - Arri\xE8re"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2305054953431040
+    m_Localized: A - Gauche
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2305072976355328
+    m_Localized: D - Droit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2305114629988352
+    m_Localized: E - Interagir
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2305144342437888
+    m_Localized: Barre d'Espace - Saut
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2305208108441600
+    m_Localized: Q - Inventaire
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2307757981032448
+    m_Localized: "Touche Majuscule \xE0 gauche - Sprint"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2310174164377600
+    m_Localized: V - Zoomer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2310203428036608
+    m_Localized: F - Grimper
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2303754085851136
+    m_Localized: Recommencer
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

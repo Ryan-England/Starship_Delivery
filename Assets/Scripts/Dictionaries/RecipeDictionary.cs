@@ -21,12 +21,6 @@ public class RecipeDictionary : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public string GetKey(string[] ingredients)
     {
         UnityEngine.Debug.Log(ingredients);

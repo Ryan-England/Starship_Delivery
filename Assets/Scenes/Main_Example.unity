@@ -35391,7 +35391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchType: 0
-  unitID: 
+  unitID: snake
   hasDialogue: 0
   chatBoxPrefab: {fileID: 2020387750}
   optionBoxPrefab: {fileID: 475889443}
@@ -56319,7 +56319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchType: 0
-  unitID: 
+  unitID: atty
   hasDialogue: 0
   chatBoxPrefab: {fileID: 2020387750}
   optionBoxPrefab: {fileID: 475889443}
@@ -58969,7 +58969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchType: 0
-  unitID: 
+  unitID: monke
   hasDialogue: 0
   chatBoxPrefab: {fileID: 2020387750}
   optionBoxPrefab: {fileID: 475889443}
@@ -72902,7 +72902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchType: 0
-  unitID: 
+  unitID: quasoslug
   hasDialogue: 0
   chatBoxPrefab: {fileID: 2020387750}
   optionBoxPrefab: {fileID: 475889443}
@@ -97411,7 +97411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchType: 0
-  unitID: 
+  unitID: jumpslug
   hasDialogue: 0
   chatBoxPrefab: {fileID: 2020387750}
   optionBoxPrefab: {fileID: 475889443}
@@ -150661,7 +150661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchType: 0
-  unitID: 
+  unitID: investor
   hasDialogue: 0
   chatBoxPrefab: {fileID: 2020387750}
   optionBoxPrefab: {fileID: 475889443}
