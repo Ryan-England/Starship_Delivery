@@ -35391,8 +35391,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchType: 0
-  unitID: snake
-  hasDialogue: 0
   chatBoxPrefab: {fileID: 2020387750}
   optionBoxPrefab: {fileID: 475889443}
   dialogue:
@@ -35408,6 +35406,44 @@ MonoBehaviour:
     choices:
     - 
     - yes,no
+    - 
+    - 
+  dialogue_french:
+    name: Jerry
+    sentences:
+    - Salut mon pote ! J'ai une question pour toi !
+    - Tu penses que les ananas ont leur place sur une pizza ?
+    - Moi aussi ! J'adore l'ananas !
+    - "C'est litt\xE9ralement la pire opinion que j'ai jamais entendue de toute mon
+      histoire, qui dit : \xAB S'il vous pla\xEEt, n'ouvrez plus la bouche en ma
+      pr\xE9sence. \xBB"
+    quest_check: []
+    quest_complete: []
+    choices:
+    - 
+    - oui, non
+    - 
+    - 
+  dialogue_hebrew:
+    name: Jerry
+    sentences:
+    - "\u05D4\u05D9\u05D9 \u05D7\u05D1\u05E8! \u05D9\u05E9 \u05DC\u05D9 \u05E9\u05D0\u05DC\u05D4
+      \u05D0\u05DC\u05D9\u05D9\u05DA!"
+    - "\u05D0\u05EA\u05D4 \u05D7\u05D5\u05E9\u05D1 \u05E9\u05D0\u05E0\u05E0\u05E1
+      \u05E9\u05D9\u05D9\u05DA \u05DC\u05E4\u05D9\u05E6\u05D4?"
+    - "\u05D2\u05DD \u05D0\u05E0\u05D9! \u05D0\u05E0\u05D9 \u05D0\u05D5\u05D4\u05D1
+      \u05D0\u05D5\u05EA\u05D9 \u05E7\u05E6\u05EA \u05D0\u05E0\u05E0\u05E1!"
+    - "\u05D6\u05D5 \u05DE\u05DE\u05E9 \u05D4\u05D3\u05E2\u05D4 \u05D4\u05D2\u05E8\u05D5\u05E2\u05D4
+      \u05D1\u05D9\u05D5\u05EA\u05E8 \u05E9\u05E9\u05DE\u05E2\u05EA\u05D9 \u05D1\u05D7\u05D9\u05D9
+      \u05D1\u05DB\u05DC \u05D4\u05D4\u05D9\u05E1\u05D8\u05D5\u05E8\u05D9\u05D4 \u05E9\u05DC\u05D9,
+      \u05D1\u05D1\u05E7\u05E9\u05D4 \u05D0\u05DC \u05EA\u05E4\u05EA\u05D7 \u05D0\u05EA
+      \u05D4\u05E4\u05D4 \u05E9\u05DC\u05DA \u05D1\u05E0\u05D5\u05DB\u05D7\u05D5\u05EA\u05D9
+      \u05E9\u05D5\u05D1."
+    quest_check: []
+    quest_complete: []
+    choices:
+    - 
+    - "\u05DB\u05DF, \u05DC\u05D0"
     - 
     - 
   dialogueText: {fileID: 2134645054}
@@ -56319,8 +56355,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchType: 0
-  unitID: atty
-  hasDialogue: 0
   chatBoxPrefab: {fileID: 2020387750}
   optionBoxPrefab: {fileID: 475889443}
   dialogue:
@@ -56352,6 +56386,94 @@ MonoBehaviour:
     - 
     - 
     - 
+  dialogue_french:
+    name: Atty
+    sentences:
+    - "Bonjour \xE9tranger ! Je m'appelle Atty ! Bienvenue sur la plan\xE8te de feu
+      Krogath ! J'ai entendu dire que vous \xEAtes un restaurateur prometteur ! J'en
+      ai \xE9t\xE9 un moi-m\xEAme, alors je peux vous expliquer les bases !"
+    - "En tant que chef, vous pouvez hacher, m\xE9langer et cuire des ingr\xE9dients.
+      Ce monde regorge d'ingr\xE9dients \xE0 cueillir et \xE0 conserver, alors n'h\xE9sitez
+      pas \xE0 les explorer\_!"
+    - "\u05DC\u05E7\u05D5\u05D7\u05D5\u05EA \u05D9\u05D2\u05D9\u05E2\u05D5 \u05DC\u05E4\u05E2\u05DE\u05D9\u05DD
+      \u05DC\u05DE\u05D5\u05E1\u05D3 \u05E9\u05DC\u05DB\u05DD \u05E2\u05DD \u05D4\u05D6\u05DE\u05E0\u05D5\u05EA/\u05DE\u05E9\u05D9\u05DE\u05D5\u05EA,
+      \u05D0\u05D6 \u05E0\u05E1\u05D5 \u05DC\u05D4\u05D0\u05DB\u05D9\u05DC \u05DB\u05DC
+      \u05E4\u05D4 \u05E8\u05E2\u05D1!"
+    - "Exer\xE7ons-nous avec une question simple. Pour l'instant, pourquoi ne pas
+      essayer de m'apporter une banane\_?"
+    quest_check:
+    - "Salut ! Oh ! On dirait que tu as trouv\xE9 une banane !"
+    - "Le syst\xE8me vous indiquera qu'une qu\xEAte est termin\xE9e une fois que
+      j'aurai fini de parler. Mais pour les vrais clients, il ne suffit pas de leur
+      donner des ingr\xE9dients, il faut cuisiner\_!"
+    - "Pour cela, vous devez d'abord pr\xE9parer les aliments au r\xE9frig\xE9rateur\_!
+      Ensuite, vous pouvez utiliser l'une des trois autres stations pour les cuisiner\_!"
+    - "Dirigez-vous vers l'ouest et vous trouverez votre espace de travail\_! Amusez-vous\_!"
+    quest_complete:
+    - Salut encore !
+    - Comment se porte le secteur de la restauration ?
+    - "Votre r\xE9frig\xE9rateur a beaucoup d'espace alors que votre inventaire n'en
+      a pas, alors assurez-vous d'y stocker tous vos ingr\xE9dients d\xE8s que possible\_!"
+    - "Le processus peut \xEAtre d\xE9routant au d\xE9but, mais pers\xE9v\xE9rez\_!"
+    choices: []
+  dialogue_hebrew:
+    name: Atty
+    sentences:
+    - "\u05E9\u05DC\u05D5\u05DD \u05D6\u05E8! \u05E9\u05DE\u05D9 \u05D0\u05D8\u05D9!
+      \u05D1\u05E8\u05D5\u05DB\u05D9\u05DD \u05D4\u05D1\u05D0\u05D9\u05DD \u05DC\u05DB\u05D5\u05DB\u05D1
+      \u05D4\u05D0\u05E9 \u05E7\u05E8\u05D5\u05D2\u05D0\u05EA'! \u05E9\u05DE\u05E2\u05EA\u05D9
+      \u05E9\u05D0\u05EA\u05D4 \u05D1\u05E2\u05DC \u05DE\u05E1\u05E2\u05D3\u05D4
+      \u05DE\u05EA\u05E4\u05EA\u05D7! \u05E4\u05E2\u05DD \u05D4\u05D9\u05D9\u05EA\u05D9
+      \u05DB\u05D6\u05D4 \u05D1\u05E2\u05E6\u05DE\u05D9, \u05D0\u05D6 \u05D0\u05E0\u05D9
+      \u05D9\u05DB\u05D5\u05DC \u05DC\u05E7\u05D7\u05EA \u05D0\u05D5\u05EA\u05DA
+      \u05D3\u05E8\u05DA \u05D4\u05D9\u05E1\u05D5\u05D3\u05D5\u05EA!"
+    - "\u05DB\u05E9\u05E3, \u05D0\u05EA\u05D4 \u05D9\u05DB\u05D5\u05DC \u05DC\u05E7\u05E6\u05D5\u05E5,
+      \u05DC\u05E2\u05E8\u05D1\u05D1, \u05D5\u05DC\u05D0\u05E4\u05D5\u05EA \u05DE\u05E8\u05DB\u05D9\u05D1\u05D9\u05DD.
+      \u05D1\u05E2\u05D5\u05DC\u05DD \u05D4\u05D6\u05D4 \u05D9\u05E9 \u05D7\u05D1\u05D5\u05E8\u05D4
+      \u05E9\u05DC \u05DE\u05E8\u05DB\u05D9\u05D1\u05D9\u05DD \u05E9\u05EA\u05D5\u05DB\u05DC\u05D5
+      \u05DC\u05D7\u05E4\u05E9 \u05D5\u05DC\u05D0\u05D7\u05E1\u05DF \u05D0\u05D5\u05EA\u05DD,
+      \u05D0\u05D6 \u05D4\u05E7\u05E4\u05D9\u05D3\u05D5 \u05DC\u05D7\u05E7\u05D5\u05E8!"
+    - "\u05DC\u05E7\u05D5\u05D7\u05D5\u05EA \u05D9\u05D2\u05D9\u05E2\u05D5 \u05DC\u05E4\u05E2\u05DE\u05D9\u05DD
+      \u05DC\u05DE\u05D5\u05E1\u05D3 \u05E9\u05DC\u05DB\u05DD \u05E2\u05DD \u05D4\u05D6\u05DE\u05E0\u05D5\u05EA/\u05DE\u05E9\u05D9\u05DE\u05D5\u05EA,
+      \u05D0\u05D6 \u05E0\u05E1\u05D5 \u05DC\u05D4\u05D0\u05DB\u05D9\u05DC \u05DB\u05DC
+      \u05E4\u05D4 \u05E8\u05E2\u05D1!"
+    - "\u05D1\u05D5\u05D0\u05D5 \u05E0\u05EA\u05D0\u05DE\u05DF \u05E2\u05DD \u05D0\u05D7\u05D3
+      \u05E4\u05E9\u05D5\u05D8. \u05DC\u05E2\u05EA \u05E2\u05EA\u05D4, \u05DE\u05D4
+      \u05D3\u05E2\u05EA\u05DA \u05DC\u05E0\u05E1\u05D5\u05EA \u05DC\u05D4\u05D1\u05D9\u05D0
+      \u05DC\u05D9 \u05D1\u05E0\u05E0\u05D4?"
+    quest_check:
+    - "\u05D4\u05D9\u05D9 \u05E9\u05D5\u05D1! \u05D4\u05D5! \u05E0\u05E8\u05D0\u05D4
+      \u05E9\u05DE\u05E6\u05D0\u05EA \u05D1\u05E0\u05E0\u05D4!"
+    - "\u05D4\u05DE\u05E2\u05E8\u05DB\u05EA \u05EA\u05D2\u05D9\u05D3 \u05DC\u05DA
+      \u05E9\u05DE\u05E9\u05D9\u05DE\u05D4 \u05D4\u05D5\u05E9\u05DC\u05DE\u05D4 \u05DC\u05D0\u05D7\u05E8
+      \u05E9\u05D0\u05E1\u05D9\u05D9\u05DD \u05DC\u05D3\u05D1\u05E8. \u05D0\u05D1\u05DC
+      \u05E2\u05D1\u05D5\u05E8 \u05DC\u05E7\u05D5\u05D7\u05D5\u05EA \u05D0\u05DE\u05D9\u05EA\u05D9\u05D9\u05DD,
+      \u05D0\u05EA\u05D4 \u05DC\u05D0 \u05D9\u05DB\u05D5\u05DC \u05E8\u05E7 \u05DC\u05EA\u05EA
+      \u05DC\u05D4\u05DD \u05DE\u05E8\u05DB\u05D9\u05D1\u05D9\u05DD, \u05D0\u05EA\u05D4
+      \u05E6\u05E8\u05D9\u05DA \u05DC\u05D1\u05E9\u05DC!"
+    - "\u05DB\u05D3\u05D9 \u05DC\u05E2\u05E9\u05D5\u05EA \u05D6\u05D0\u05EA, \u05EA\u05D7\u05D9\u05DC\u05D4
+      \u05E2\u05DC\u05D9\u05DA \u05DC\u05E9\u05D9\u05DD \u05E4\u05E8\u05D9\u05D8\u05D9\u05DD
+      \u05D1\u05DE\u05E7\u05E8\u05E8 \u05DC\u05D4\u05DB\u05E0\u05D4! \u05D0\u05D7\u05E8\u05D9
+      \u05D6\u05D4 \u05D0\u05EA\u05D4 \u05D9\u05DB\u05D5\u05DC \u05DC\u05D4\u05E9\u05EA\u05DE\u05E9
+      \u05D1\u05D0\u05D7\u05EA \u05DE\u05E9\u05DC\u05D5\u05E9 \u05D4\u05EA\u05D7\u05E0\u05D5\u05EA
+      \u05D4\u05D0\u05D7\u05E8\u05D5\u05EA \u05DB\u05D3\u05D9 \u05DC\u05D1\u05E9\u05DC
+      \u05D0\u05D5\u05EA\u05DF!"
+    - "\u05E4\u05E0\u05D4 \u05DC\u05DE\u05E2\u05E8\u05D1 \u05DE\u05DB\u05D0\u05DF
+      \u05D5\u05EA\u05DE\u05E6\u05D0 \u05D0\u05EA \u05E1\u05D1\u05D9\u05D1\u05EA
+      \u05D4\u05E2\u05D1\u05D5\u05D3\u05D4 \u05E9\u05DC\u05DA! \u05EA\u05D4\u05E0\u05D4!"
+    quest_complete:
+    - "\u05D4\u05D9\u05D9 \u05E9\u05D5\u05D1!"
+    - "\u05D0\u05D9\u05DA \u05DE\u05EA\u05E0\u05D4\u05DC \u05E2\u05E1\u05E7\u05D9
+      \u05D4\u05DE\u05E1\u05E2\u05D3\u05E0\u05D5\u05EA?"
+    - "\u05DC\u05DE\u05E7\u05E8\u05E8 \u05E9\u05DC\u05DA \u05D9\u05E9 \u05D4\u05E8\u05D1\u05D4
+      \u05DE\u05E7\u05D5\u05DD \u05D1\u05E2\u05D5\u05D3 \u05E9\u05D4\u05DE\u05DC\u05D0\u05D9
+      \u05E9\u05DC\u05DA \u05DC\u05D0, \u05D0\u05D6 \u05D4\u05E7\u05E4\u05D3 \u05DC\u05D0\u05D7\u05E1\u05DF
+      \u05D0\u05EA \u05DB\u05DC \u05D4\u05DE\u05E8\u05DB\u05D9\u05D1\u05D9\u05DD
+      \u05E9\u05DC\u05DA \u05E9\u05DD \u05D1\u05D4\u05E7\u05D3\u05DD \u05D4\u05D0\u05E4\u05E9\u05E8\u05D9!"
+    - "\u05D4\u05EA\u05D4\u05DC\u05D9\u05DA \u05E2\u05E9\u05D5\u05D9 \u05DC\u05D4\u05D9\u05D5\u05EA
+      \u05DE\u05D1\u05DC\u05D1\u05DC \u05D1\u05D4\u05EA\u05D7\u05DC\u05D4, \u05D0\u05D1\u05DC
+      \u05D4\u05DE\u05E9\u05D9\u05DB\u05D5 \u05DB\u05DA!"
+    choices: []
   dialogueText: {fileID: 2134645054}
   dialogueName: {fileID: 37501561}
   opt1: {fileID: 835184099}
@@ -58969,8 +59091,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchType: 0
-  unitID: monke
-  hasDialogue: 0
   chatBoxPrefab: {fileID: 2020387750}
   optionBoxPrefab: {fileID: 475889443}
   dialogue:
@@ -58998,6 +59118,64 @@ MonoBehaviour:
     - 
     - 
     - 
+  dialogue_french:
+    name: Monke
+    sentences:
+    - .....
+    - "J'ai envie de go\xFBter au d\xE9licieux fruit de la vari\xE9t\xE9 jaune...
+      Cela fait bien longtemps que je n'en ai pas mang\xE9 un..."
+    - "H\xE9las... J'ai endur\xE9 trop de conflits ces derni\xE8res lunes... Je crains
+      de manquer de force pour faire le p\xE8lerinage pour m'en procurer un..."
+    - "Auriez-vous l'amabilit\xE9 d'entreprendre ce voyage \xE0 ma place\_? Je vous
+      r\xE9compenserai g\xE9n\xE9reusement pour vos efforts."
+    quest_check:
+    - ...
+    - "Tu m'as procur\xE9 une banane ?"
+    - Je n'oublierai jamais cet acte de gentillesse. Je vous en remercie chaleureusement.
+    - "Cela me permettra de subvenir \xE0 mes besoins."
+    quest_complete:
+    - "Nous nous retrouvons \xE0 nouveau...."
+    - "Je voudrais encore une fois exprimer ma gratitude pour m'avoir procur\xE9
+      la banane..."
+    - "Cela a rendu ce p\xE8lerinage beaucoup plus supportable..."
+    - "H\xE9las, si seulement je pouvais en trouver un autre..."
+    choices: []
+  dialogue_hebrew:
+    name: Monke
+    sentences:
+    - .....
+    - "\u05D0\u05E0\u05D9 \u05DE\u05E9\u05EA\u05D5\u05E7\u05E7 \u05DC\u05D8\u05E2\u05DD
+      \u05D4\u05E4\u05E8\u05D9 \u05D4\u05DE\u05E4\u05E0\u05E7 \u05DE\u05D4\u05D6\u05DF
+      \u05D4\u05E6\u05D4\u05D5\u05D1... \u05E2\u05D1\u05E8 \u05D4\u05E8\u05D1\u05D4
+      \u05D9\u05E8\u05D7 \u05DE\u05D0\u05D6 \u05E9\u05D7\u05D2\u05D2\u05EA\u05D9
+      \u05D1\u05D0\u05D7\u05D3..."
+    - "\u05D0\u05D1\u05D5\u05D9... \u05E1\u05D1\u05DC\u05EA\u05D9 \u05D9\u05D5\u05EA\u05E8
+      \u05DE\u05D3\u05D9 \u05DE\u05E8\u05D9\u05D1\u05D5\u05EA \u05D1\u05D9\u05E8\u05D7\u05D9\u05DD
+      \u05D4\u05D0\u05D7\u05E8\u05D5\u05E0\u05D9\u05DD \u05D4\u05D0\u05DC\u05D4...
+      \u05D0\u05E0\u05D9 \u05D7\u05D5\u05E9\u05E9 \u05E9\u05D7\u05E1\u05E8 \u05DC\u05D9
+      \u05D4\u05DB\u05D5\u05D7 \u05DC\u05E2\u05DC\u05D5\u05EA \u05DC\u05E8\u05D2\u05DC
+      \u05DB\u05D3\u05D9 \u05DC\u05D4\u05E9\u05D9\u05D2 \u05D0\u05D7\u05D3..."
+    - "\u05D4\u05D0\u05DD \u05D0\u05EA\u05D4 \u05DE\u05D5\u05DB\u05DF \u05DC\u05E6\u05D0\u05EA
+      \u05DC\u05DE\u05E1\u05E2 \u05D4\u05D6\u05D4 \u05D1\u05DE\u05E7\u05D5\u05DE\u05D9?
+      \u05D0\u05E9\u05DC\u05DD \u05DC\u05DA \u05E0\u05D0\u05D4 \u05E2\u05DC \u05E6\u05E8\u05D5\u05EA\u05D9\u05DA."
+    quest_check:
+    - ...
+    - "\u05D4\u05E9\u05D2\u05EA \u05DC\u05D9 \u05D1\u05E0\u05E0\u05D4?"
+    - "\u05DC\u05E2\u05D5\u05DC\u05DD \u05DC\u05D0 \u05D0\u05E9\u05DB\u05D7 \u05D0\u05EA
+      \u05DE\u05E2\u05E9\u05D4 \u05D4\u05D7\u05E1\u05D3 \u05D4\u05D6\u05D4. \u05D0\u05E0\u05D9
+      \u05DE\u05D5\u05D3\u05D4 \u05DC\u05DA \u05D1\u05D0\u05D3\u05D9\u05D1\u05D5\u05EA."
+    - "\u05D6\u05D4 \u05D9\u05E1\u05E4\u05E7 \u05E4\u05E8\u05E0\u05E1\u05D4 \u05DC\u05E2\u05E6\u05DE\u05D9."
+    quest_complete:
+    - "\u05E0\u05E4\u05D2\u05E9\u05D9\u05DD \u05E9\u05D5\u05D1...."
+    - "\u05D0\u05E0\u05D9 \u05E9\u05D5\u05D1 \u05E8\u05D5\u05E6\u05D4 \u05DC\u05D4\u05D1\u05D9\u05E2
+      \u05D0\u05EA \u05EA\u05D5\u05D3\u05EA\u05D9 \u05E2\u05DC \u05E9\u05E8\u05DB\u05E9\u05EA\u05D9
+      \u05DC\u05D9 \u05D0\u05EA \u05D4\u05D1\u05E0\u05E0\u05D4..."
+    - "\u05D6\u05D4 \u05D4\u05E4\u05DA \u05D0\u05EA \u05D4\u05E2\u05DC\u05D9\u05D9\u05D4
+      \u05DC\u05E8\u05D2\u05DC \u05D4\u05D6\u05D5 \u05DC\u05D4\u05E8\u05D1\u05D4
+      \u05D9\u05D5\u05EA\u05E8 \u05E0\u05E1\u05D1\u05DC\u05EA..."
+    - "\u05D0\u05D5\u05D9 \u05D5\u05D0\u05D1\u05D5\u05D9, \u05DC\u05D5 \u05E8\u05E7
+      \u05D9\u05DB\u05D5\u05DC\u05EA\u05D9 \u05DC\u05DE\u05E6\u05D5\u05D0 \u05D0\u05D7\u05E8...."
+    choices: []
   dialogueText: {fileID: 2134645054}
   dialogueName: {fileID: 37501561}
   opt1: {fileID: 835184099}
@@ -72902,8 +73080,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchType: 0
-  unitID: quasoslug
-  hasDialogue: 0
   chatBoxPrefab: {fileID: 2020387750}
   optionBoxPrefab: {fileID: 475889443}
   dialogue:
@@ -72922,6 +73098,42 @@ MonoBehaviour:
     choices:
     - 
     - 
+  dialogue_french:
+    name: Magma Slug
+    sentences:
+    - "J'ai envie de quaso traditionnel de ma plan\xE8te natale."
+    - "Ah, je peux presque go\xFBter cette morsure min\xE9rale et croquante de la
+      mer. Rafra\xEEchissant, n\u2019est-ce pas?"
+    quest_check:
+    - "Ah, cela me rappelle l\u2019esprit de jeunesse de mon enfance."
+    - "Voil\xE0, merci pour le repas."
+    quest_complete:
+    - Merci de me rappeler la vie de jeunesse de mon enfance, ah, le bon vieux temps.
+    - "Je vous recommanderai certainement \xE0 mes sup\xE9rieurs."
+    choices: []
+  dialogue_hebrew:
+    name: Magma Slug
+    sentences:
+    - "\u05D4\u05E9\u05EA\u05D5\u05E7\u05E7\u05EA\u05D9 \u05DC\u05E7\u05D5\u05D5\u05E1\u05D5
+      \u05DE\u05E1\u05D5\u05E8\u05EA\u05D9 \u05DE\u05DB\u05D5\u05DB\u05D1 \u05D4\u05D1\u05D9\u05EA
+      \u05E9\u05DC\u05D9."
+    - "\u05D0\u05D4, \u05D0\u05E0\u05D9 \u05DB\u05DE\u05E2\u05D8 \u05D9\u05DB\u05D5\u05DC
+      \u05DC\u05D8\u05E2\u05D5\u05DD \u05D0\u05EA \u05D4\u05D1\u05D9\u05E1 \u05D4\u05E4\u05E8\u05D9\u05DA
+      \u05D5\u05D4\u05DE\u05D9\u05E0\u05E8\u05DC\u05D9 \u05E9\u05DC \u05D4\u05D9\u05DD.
+      \u05DE\u05E8\u05E2\u05E0\u05DF, \u05DC\u05D0?"
+    quest_check:
+    - "\u05D0\u05D4, \u05D6\u05D4 \u05DE\u05D6\u05DB\u05D9\u05E8 \u05DC\u05D9 \u05D0\u05EA
+      \u05E8\u05D5\u05D7 \u05D4\u05E0\u05E2\u05D5\u05E8\u05D9\u05DD \u05E9\u05DC
+      \u05D9\u05DC\u05D3\u05D5\u05EA\u05D9."
+    - "\u05D4\u05E0\u05D4, \u05EA\u05D5\u05D3\u05D4 \u05E2\u05DC \u05D4\u05D0\u05E8\u05D5\u05D7\u05D4."
+    quest_complete:
+    - "\u05EA\u05D5\u05D3\u05D4 \u05E9\u05D4\u05D6\u05DB\u05E8\u05EA \u05DC\u05D9
+      \u05D0\u05EA \u05D7\u05D9\u05D9 \u05D4\u05E0\u05E2\u05D5\u05E8\u05D9\u05DD
+      \u05D1\u05D9\u05DC\u05D3\u05D5\u05EA\u05D9, \u05D0\u05D4, \u05D4\u05D9\u05DE\u05D9\u05DD
+      \u05D4\u05D8\u05D5\u05D1\u05D9\u05DD."
+    - "\u05D0\u05E0\u05D9 \u05D1\u05D4\u05D7\u05DC\u05D8 \u05D0\u05DE\u05DC\u05D9\u05E5
+      \u05E2\u05DC\u05D9\u05DA \u05DC\u05DE\u05DE\u05D5\u05E0\u05D9\u05DD \u05E2\u05DC\u05D9."
+    choices: []
   dialogueText: {fileID: 2134645054}
   dialogueName: {fileID: 37501561}
   opt1: {fileID: 835184099}
@@ -97411,8 +97623,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchType: 0
-  unitID: jumpslug
-  hasDialogue: 0
   chatBoxPrefab: {fileID: 2020387750}
   optionBoxPrefab: {fileID: 475889443}
   dialogue:
@@ -97425,6 +97635,27 @@ MonoBehaviour:
     choices:
     - 
     - 
+  dialogue_french:
+    name: Remmy
+    sentences:
+    - "H\xE9, saviez-vous que vous pouvez faire un double saut pour sauter plus haut?"
+    - Et si vous utilisiez ces plateformes pour le tester?
+    quest_check: []
+    quest_complete: []
+    choices: []
+  dialogue_hebrew:
+    name: Remmy
+    sentences:
+    - "\u05D4\u05D9\u05D9, \u05D4\u05D0\u05DD \u05D9\u05D3\u05E2\u05EA \u05E9\u05D0\u05EA\u05D4
+      \u05D9\u05DB\u05D5\u05DC \u05DC\u05E7\u05E4\u05D5\u05E5 \u05E4\u05E2\u05DE\u05D9\u05D9\u05DD
+      \u05DB\u05D3\u05D9 \u05DC\u05E7\u05E4\u05D5\u05E5 \u05D2\u05D1\u05D5\u05D4
+      \u05D9\u05D5\u05EA\u05E8?"
+    - "\u05DE\u05D4 \u05D3\u05E2\u05EA\u05DA \u05DC\u05D4\u05E9\u05EA\u05DE\u05E9
+      \u05D1\u05E4\u05DC\u05D8\u05E4\u05D5\u05E8\u05DE\u05D5\u05EA \u05D4\u05D0\u05DC\u05D4
+      \u05DB\u05D3\u05D9 \u05DC\u05D1\u05D3\u05D5\u05E7 \u05D0\u05EA \u05D6\u05D4?"
+    quest_check: []
+    quest_complete: []
+    choices: []
   dialogueText: {fileID: 2134645054}
   dialogueName: {fileID: 37501561}
   opt1: {fileID: 835184099}
@@ -150661,8 +150892,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchType: 0
-  unitID: investor
-  hasDialogue: 0
   chatBoxPrefab: {fileID: 2020387750}
   optionBoxPrefab: {fileID: 475889443}
   dialogue:
@@ -150721,6 +150950,93 @@ MonoBehaviour:
     - 
     - 
     - 
+  dialogue_french:
+    name: Monke
+    sentences:
+    - "Ah, te voil\xE0 ! Je te cherchais ! Je suis Monke, ton investisseur !"
+    - Tu ne sais pas cuisiner ! Tant pis ! Je peux t'apprendre !
+    - "Vous voyez que l'appareil le plus \xE0 droite est l'\xE9vier, o\xF9 vous aurez
+      parfois besoin de couper des ingr\xE9dients en morceaux plus petits."
+    - "\xC0 gauche se trouve le r\xE9frig\xE9rateur. Avant de pouvoir cuisiner avec
+      un ingr\xE9dient, vous devez l'ajouter au r\xE9frig\xE9rateur\_! Si vous ne
+      pouvez pas ajouter un ingr\xE9dient, cela signifie probablement qu'il s'agit
+      d'un repas."
+    - "Le four est fait pour la p\xE2tisserie ! Vous pouvez y cuire des ingr\xE9dients
+      comme de la p\xE2te et des p\xE2tes \xE0 frire pour pr\xE9parer vos plats !"
+    - "La station la plus \xE0 gauche est r\xE9serv\xE9e au m\xE9lange\_! Vous pouvez
+      y m\xE9langer la p\xE2te et, occasionnellement, pr\xE9parer d'autres plats."
+    - "Enfin, si vous voyez des points rouges sur votre mini-carte, cela signifie
+      qu'un client approche\_! N'oubliez pas de prendre rapidement sa commande\_!"
+    - "Ceci conclut notre cours intensif\_! Pour l'instant, essayez de pr\xE9parer
+      un Quaso. M\xE9langez simplement du bl\xE9 cendr\xE9 et du sel pour obtenir
+      une p\xE2te, et enfournez\_!"
+    - "Hmm ? O\xF9 peut-on trouver du sel ? Il y a une \xE9norme g\xE9ode de sel
+      au sud, impossible de la manquer !"
+    - "Oh, et j'ai un jumeau qui s'appelle aussi Monke et qui vit dans le coin. Aux
+      derni\xE8res nouvelles, il \xE9tait perdu quelque part dans le lac de lave,
+      mais si vous le trouvez, apportez-lui une banane, s'il vous pla\xEEt. Il n'a
+      pas mang\xE9 depuis des jours\u2026"
+    quest_check: []
+    quest_complete: []
+    choices: []
+  dialogue_hebrew:
+    name: Monke
+    sentences:
+    - "\u05D0\u05D4 \u05D4\u05E0\u05D4 \u05D0\u05EA\u05D4! \u05D7\u05D9\u05E4\u05E9\u05EA\u05D9
+      \u05D0\u05D5\u05EA\u05DA! \u05D0\u05E0\u05D9 \u05DE\u05D5\u05E0\u05E7\u05D4,
+      \u05D0\u05E0\u05D9 \u05D4\u05DE\u05E9\u05E7\u05D9\u05E2 \u05E9\u05DC\u05DA!"
+    - "\u05D0\u05EA\u05D4 \u05DC\u05D0 \u05D9\u05D5\u05D3\u05E2 \u05DC\u05D1\u05E9\u05DC!
+      \u05E0\u05D5 \u05D8\u05D5\u05D1 \u05D6\u05D4 \u05D1\u05E1\u05D3\u05E8! \u05D0\u05E0\u05D9
+      \u05D9\u05DB\u05D5\u05DC \u05DC\u05DC\u05DE\u05D3 \u05D0\u05D5\u05EA\u05DA!"
+    - "\u05D0\u05EA\u05D4 \u05E8\u05D5\u05D0\u05D4 \u05E9\u05D4\u05DE\u05DB\u05E9\u05D9\u05E8
+      \u05D4\u05D9\u05DE\u05E0\u05D9 \u05D1\u05D9\u05D5\u05EA\u05E8 \u05D4\u05D5\u05D0
+      \u05D4\u05DB\u05D9\u05D5\u05E8, \u05E9\u05D1\u05D5 \u05EA\u05E6\u05D8\u05E8\u05DA
+      \u05DE\u05D3\u05D9 \u05E4\u05E2\u05DD \u05DC\u05E7\u05E6\u05D5\u05E5 \u05DE\u05E8\u05DB\u05D9\u05D1\u05D9\u05DD
+      \u05DC\u05D7\u05EA\u05D9\u05DB\u05D5\u05EA \u05E7\u05D8\u05E0\u05D5\u05EA \u05D9\u05D5\u05EA\u05E8."
+    - "\u05DE\u05E9\u05DE\u05D0\u05DC \u05E0\u05DE\u05E6\u05D0 \u05D4\u05DE\u05E7\u05E8\u05E8.
+      \u05DC\u05E4\u05E0\u05D9 \u05E9\u05EA\u05D5\u05DB\u05DC \u05DC\u05D1\u05E9\u05DC
+      \u05E2\u05DD \u05DE\u05E8\u05DB\u05D9\u05D1, \u05EA\u05E6\u05D8\u05E8\u05DA
+      \u05DC\u05D4\u05D5\u05E1\u05D9\u05E3 \u05D0\u05D5\u05EA\u05D5 \u05DC\u05DE\u05E7\u05E8\u05E8
+      \u05E9\u05DC\u05DA! \u05D0\u05DD \u05D0\u05EA\u05D4 \u05DC\u05D0 \u05D9\u05DB\u05D5\u05DC
+      \u05DC\u05D4\u05D5\u05E1\u05D9\u05E3 \u05DE\u05E8\u05DB\u05D9\u05D1, \u05E1\u05D1\u05D9\u05E8
+      \u05DC\u05D4\u05E0\u05D9\u05D7 \u05E9\u05D6\u05D4 \u05D0\u05D5\u05DE\u05E8
+      \u05E9\u05D6\u05D5 \u05D1\u05E2\u05E6\u05DD \u05D0\u05E8\u05D5\u05D7\u05D4."
+    - "\u05D4\u05EA\u05E0\u05D5\u05E8 \u05DE\u05D9\u05D5\u05E2\u05D3 \u05DC\u05D0\u05E4\u05D9\u05D9\u05D4!
+      \u05DB\u05D0\u05DF \u05EA\u05D5\u05DB\u05DC\u05D5 \u05DC\u05D0\u05E4\u05D5\u05EA
+      \u05DE\u05E8\u05DB\u05D9\u05D1\u05D9\u05DD \u05DB\u05DE\u05D5 \u05D1\u05E6\u05E7
+      \u05D5\u05D1\u05DC\u05D9\u05DC\u05D4 \u05DC\u05D0\u05E8\u05D5\u05D7\u05D5\u05EA!"
+    - "\u05D4\u05EA\u05D7\u05E0\u05D4 \u05D4\u05E9\u05DE\u05D0\u05DC\u05D9\u05EA
+      \u05D1\u05D9\u05D5\u05EA\u05E8 \u05DE\u05D9\u05D5\u05E2\u05D3\u05EA \u05DC\u05DE\u05D9\u05E7\u05E1!
+      \u05DB\u05D0\u05DF \u05D0\u05EA\u05D4 \u05D9\u05DB\u05D5\u05DC \u05DC\u05E2\u05E8\u05D1\u05D1
+      \u05D1\u05E6\u05E7 \u05D9\u05D7\u05D3, \u05D5\u05DE\u05D3\u05D9 \u05E4\u05E2\u05DD
+      \u05DC\u05D4\u05DB\u05D9\u05DF \u05E1\u05D5\u05D2\u05D9\u05DD \u05D0\u05D7\u05E8\u05D9\u05DD
+      \u05E9\u05DC \u05D0\u05E8\u05D5\u05D7\u05D5\u05EA."
+    - "\u05DC\u05D1\u05E1\u05D5\u05E3, \u05D0\u05DD \u05D0\u05EA\u05D4 \u05E8\u05D5\u05D0\u05D4
+      \u05E0\u05E7\u05D5\u05D3\u05D5\u05EA \u05D0\u05D3\u05D5\u05DE\u05D5\u05EA \u05DB\u05DC\u05E9\u05D4\u05DF
+      \u05E2\u05DC \u05D4\u05DE\u05E4\u05D4 \u05E9\u05DC\u05DA, \u05D6\u05D4 \u05D0\u05D5\u05DE\u05E8
+      \u05E9\u05DC\u05E7\u05D5\u05D7 \u05DE\u05EA\u05E7\u05E8\u05D1! \u05D6\u05DB\u05D5\u05E8
+      \u05DC\u05E7\u05D7\u05EA \u05D1\u05DE\u05D4\u05D9\u05E8\u05D5\u05EA \u05D0\u05EA
+      \u05D4\u05D4\u05D6\u05DE\u05E0\u05D4 \u05E9\u05DC\u05D4\u05DD!"
+    - "\u05D1\u05DB\u05DA \u05DE\u05E1\u05EA\u05D9\u05D9\u05DD \u05D4\u05E7\u05D5\u05E8\u05E1
+      \u05D4\u05DE\u05D4\u05D9\u05E8 \u05E9\u05DC\u05E0\u05D5! \u05DC\u05E2\u05EA
+      \u05E2\u05EA\u05D4, \u05E0\u05E1\u05D4 \u05DC\u05D4\u05DB\u05D9\u05DF Quaso.
+      \u05E4\u05E9\u05D5\u05D8 \u05DE\u05E2\u05E8\u05D1\u05D1\u05D9\u05DD \u05D7\u05D9\u05D8\u05D4
+      \u05D5\u05DE\u05DC\u05D7 \u05D9\u05D7\u05D3 \u05DC\u05D1\u05E6\u05E7 \u05D5\u05D0\u05D5\u05E4\u05D9\u05DD!"
+    - "\u05D4\u05DE\u05DE? \u05D0\u05D9\u05E4\u05D4 \u05D0\u05E4\u05E9\u05E8 \u05DC\u05DE\u05E6\u05D5\u05D0
+      \u05DE\u05DC\u05D7? \u05D9\u05E9 \u05D2\u05D9\u05D0\u05D5\u05D3 \u05E2\u05E0\u05E7
+      \u05E9\u05DC \u05D4\u05D7\u05D5\u05DE\u05E8 \u05D1\u05D3\u05E8\u05D5\u05DD,
+      \u05D0\u05EA\u05D4 \u05DC\u05D0 \u05D9\u05DB\u05D5\u05DC \u05DC\u05E4\u05E1\u05E4\u05E1
+      \u05D0\u05D5\u05EA\u05D5!"
+    - "\u05D0\u05D4 \u05D5\u05D9\u05E9 \u05DC\u05D9 \u05EA\u05D0\u05D5\u05DD \u05D1\u05E9\u05DD
+      \u05E0\u05D6\u05D9\u05E8 \u05E9\u05D7\u05D9 \u05DB\u05D0\u05DF. \u05DC\u05D0\u05D7\u05E8\u05D5\u05E0\u05D4
+      \u05E9\u05DE\u05E2\u05EA\u05D9 \u05E9\u05D4\u05D5\u05D0 \u05D0\u05D1\u05D3
+      \u05D0\u05D9\u05E4\u05E9\u05D4\u05D5 \u05D1\u05D0\u05D2\u05DD \u05D4\u05DC\u05D1\u05D4,
+      \u05D0\u05D1\u05DC \u05D0\u05DD \u05EA\u05DE\u05E6\u05D0 \u05D0\u05D5\u05EA\u05D5,
+      \u05EA\u05D1\u05D9\u05D0 \u05DC\u05D5 \u05D1\u05E0\u05E0\u05D4 \u05D1\u05D1\u05E7\u05E9\u05D4.
+      \u05D4\u05D5\u05D0 \u05DC\u05D0 \u05D0\u05DB\u05DC \u05DB\u05D1\u05E8 \u05D9\u05DE\u05D9\u05DD...."
+    quest_check: []
+    quest_complete: []
+    choices: []
   dialogueText: {fileID: 2134645054}
   dialogueName: {fileID: 37501561}
   opt1: {fileID: 835184099}
