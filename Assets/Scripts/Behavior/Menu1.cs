@@ -8,6 +8,7 @@ public class Menu1 : MonoBehaviour
     public GameObject start;
     public GameObject options;
     public GameObject colorblind; // Reference to the Colorblind menu
+    public GameObject credits;
 
     public static bool detuer;
     public static bool trit;
@@ -23,6 +24,7 @@ public class Menu1 : MonoBehaviour
         options.SetActive(true);
         start.SetActive(false);
         colorblind.SetActive(false);
+        credits.SetActive(false);
     }
 
     public void Back()
@@ -30,6 +32,7 @@ public class Menu1 : MonoBehaviour
         options.SetActive(false);
         start.SetActive(true);
         colorblind.SetActive(false);
+        credits.SetActive(false);
     }
 
     public void OpenColorblindMenu()
@@ -37,6 +40,7 @@ public class Menu1 : MonoBehaviour
         colorblind.SetActive(true);
         options.SetActive(false);
         start.SetActive(false);
+        credits.SetActive(false);
     }
 
     public void BackToOptions()
@@ -44,6 +48,14 @@ public class Menu1 : MonoBehaviour
         colorblind.SetActive(false);
         options.SetActive(true);
         start.SetActive(false);
+        credits.SetActive(false);
+    }
+    public void openCredits()
+    {
+        colorblind.SetActive(false);
+        options.SetActive(false);
+        start.SetActive(false);
+        credits.SetActive(true);
     }
     public void det(){
         detuer = true; 
