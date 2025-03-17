@@ -138,6 +138,10 @@ MonoBehaviour:
     m_Localized: "!\u05DD\u05DC\u05E9\u05D5\u05D4 \u05E5\u05D5\u05E6\u05D9\u05E7\u05D4"
     m_Metadata:
       m_Items: []
+  - m_Id: 2302059826110464
+    m_Localized: "\u05DA\u05D9\u05E9\u05C1\u05B4\u05DE\u05D4\u05B7\u05DC\u05B0"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

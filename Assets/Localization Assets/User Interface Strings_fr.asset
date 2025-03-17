@@ -138,6 +138,10 @@ MonoBehaviour:
     m_Localized: "Hachage Termin\xE9!"
     m_Metadata:
       m_Items: []
+  - m_Id: 2302059826110464
+    m_Localized: Continuer
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

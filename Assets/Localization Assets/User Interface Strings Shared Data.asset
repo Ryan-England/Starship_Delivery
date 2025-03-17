@@ -135,6 +135,70 @@ MonoBehaviour:
     m_Key: Chopping Complete!
     m_Metadata:
       m_Items: []
+  - m_Id: 2302059826110464
+    m_Key: Resume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2303754085851136
+    m_Key: Restart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2303774944124928
+    m_Key: Save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2303791448711168
+    m_Key: Load
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2303828975149056
+    m_Key: Journal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2304966499753984
+    m_Key: Controls
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2304987571937280
+    m_Key: Forward
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2305012897144832
+    m_Key: Backward
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2305054953431040
+    m_Key: Left
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2305072976355328
+    m_Key: Right
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2305114629988352
+    m_Key: interact_key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2305144342437888
+    m_Key: Space
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2305208108441600
+    m_Key: inventory_key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2307757981032448
+    m_Key: sprint_key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2310174164377600
+    m_Key: zoom_key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2310203428036608
+    m_Key: climb_key
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
