@@ -21,9 +21,15 @@ public class PlayerMovement : MonoBehaviour
     public int maxJumps = 2;  
     private int jumpsRemaining;  
     bool readyToJump;
-    private float jumpBoost = 1.0f;
+    private float jumpBoost = 1f;
     public bool IsJumpingCheck = false;
     public float doubleJumpMultiplier = 0.8f;  
+    
+    [Header("Jetpack")]
+    public float jetfuel = 100f;
+    public bool jetpack = true;
+    private float jetBoost = 0.3f;
+
 
     [Header("Climbing")]
     public float climbSpeed = 5f;
@@ -164,18 +170,36 @@ public class PlayerMovement : MonoBehaviour
        
         isSprinting = Input.GetKey(sprintKey) && grounded && !isCrouching;
 
-     
-        if (Input.GetKeyDown(jumpKey) && readyToJump && jumpsRemaining > 0)
-        {
-            readyToJump = false;
-
-         
-            if (!GameController.isMinigameActive)
+        if(jetpack){
+            if (Input.GetKey(jumpKey) && readyToJump && jetfuel > 0)
             {
-                Jump();
-            }
+                readyToJump = false;
 
-            Invoke(nameof(ResetJump), jumpCooldown);
+            
+                if (!GameController.isMinigameActive)
+                {
+                    Jet();
+                    jetfuel -=10f;
+                    Debug.Log(jetfuel);
+                }
+
+                Invoke(nameof(ResetJump), jumpCooldown);
+            }
+        }
+        else if(!jetpack){
+            if (Input.GetKey(jumpKey) && readyToJump && jumpsRemaining > 0)
+            {
+                readyToJump = false;
+
+            
+                if (!GameController.isMinigameActive)
+                {
+                    Jump();
+                    // Debug.Log(jetfuel);
+                }
+
+                Invoke(nameof(ResetJump), jumpCooldown);
+            }            
         }
 
       
@@ -341,7 +365,7 @@ public class PlayerMovement : MonoBehaviour
     #region Jump Logic
     private void Jump()
     {
-        jumpsRemaining--;
+        // jumpsRemaining--;
 
  
         if (grounded)
@@ -358,6 +382,24 @@ public class PlayerMovement : MonoBehaviour
     private void ResetJump()
     {
         readyToJump = true;
+    }
+    #endregion
+
+    #region Jetpack Logic
+    private void Jet()
+    {
+        // jumpsRemaining--;
+
+ 
+        if (grounded)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        }
+
+      
+        float currentJumpForce = grounded ? jumpForce : jumpForce * doubleJumpMultiplier;
+        
+        rb.AddForce(transform.up * currentJumpForce * jetBoost, ForceMode.VelocityChange);
     }
     #endregion
 
@@ -385,6 +427,7 @@ public class PlayerMovement : MonoBehaviour
         {
             grounded = true;
             jumpsRemaining = maxJumps;  
+            jetfuel = 100f;
             StopClimbing();
         }
 
