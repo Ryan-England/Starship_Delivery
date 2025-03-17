@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 
 public class InteractionHandler : MonoBehaviour
@@ -13,10 +15,10 @@ public class InteractionHandler : MonoBehaviour
     [SerializeField] private SearchType searchType;
 
     // UnitID - used for linking object in game and in JSON
-    [SerializeField] private string unitID;
+    //[SerializeField] private string unitID;
     
     // Decide whether the interaction will be dialogue or not
-    [SerializeField] private bool hasDialogue = false;
+    //[SerializeField] private bool hasDialogue = false;
     // List of string lines shown in the inspector
     [SerializeField] private Queue<string> dialogueLines = new Queue<string>();
     [SerializeField] private Queue<string> dialogueOptions = new Queue<string>();
@@ -26,6 +28,8 @@ public class InteractionHandler : MonoBehaviour
     [SerializeField] private GameObject optionBoxPrefab;
 
     [SerializeField] private Dialogue dialogue;
+    [SerializeField] private Dialogue dialogue_french;
+    [SerializeField] private Dialogue dialogue_hebrew;
     
     // Text components for dialogue box
     [SerializeField] private Text dialogueText;
@@ -87,9 +91,22 @@ public class InteractionHandler : MonoBehaviour
         }
         else{
             chatBoxPrefab.SetActive(true);
-            sentences = dialogue.sentences;
-            CheckQuest();
-            StartDialogue(dialogue);
+            if (LocalizationSettings.SelectedLocale.name == "fr-FR"){
+                sentences = dialogue_french.sentences;
+                CheckQuest();
+                StartDialogue(dialogue_french);
+            }
+            else if (LocalizationSettings.SelectedLocale.name == "he-IL"){
+                sentences = dialogue_hebrew.sentences;
+                CheckQuest();
+                StartDialogue(dialogue_hebrew);
+            }
+            else{
+                sentences = dialogue.sentences;
+                CheckQuest();
+                StartDialogue(dialogue);
+            }
+            
         }
     }
     void Update(){
@@ -196,7 +213,12 @@ public class InteractionHandler : MonoBehaviour
         }
         //source.PlayOneShot(clip);
         StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
+        if (LocalizationSettings.SelectedLocale.name == "he-IL"){
+            StartCoroutine(TypeHebrew(sentence));
+        }
+        else{
+            StartCoroutine(TypeSentence(sentence));
+        }
 
     }
 
@@ -204,6 +226,14 @@ public class InteractionHandler : MonoBehaviour
         dialogueText.text = "";
         foreach(char i in sentence.ToCharArray()){
             dialogueText.text += i; 
+            yield return null;
+        }
+    }
+
+    IEnumerator TypeHebrew(string sentence){
+        dialogueText.text = "";
+        foreach(char i in sentence.ToCharArray()){
+            dialogueText.text = i + dialogueText.text; 
             yield return null;
         }
     }
@@ -231,7 +261,7 @@ public class InteractionHandler : MonoBehaviour
                 qm.AddQuest(quest);
             }
             else if(qm.Quests[quest.quest_name] && quest_complete_first){
-                quest_name.text = "Quest Complete: " + quest.quest_name;  //NEEDS LOCALIZATION
+                quest_name.text = "Quest Complete: " + quest.quest_name;
                 quest_anim.SetActive(true);
                 quest_complete_first = false;
             }
