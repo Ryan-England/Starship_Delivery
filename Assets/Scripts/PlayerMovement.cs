@@ -1,55 +1,85 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    #region Member Variables
     [Header("Movement")]
-    public float moveSpeed;
-    public float groundDrag;
-    private bool is2D;
-    public bool IsMovingCheck = false;
+    [Tooltip("Speed at which the player moves.")]
+    public float moveSpeed = 4f;
+    [Tooltip("Amount of drag applied when on the ground.")]
+    public float groundDrag = 6f;
+    private bool is2D; // If you want 2D movement
+    private Vector3 moveDirection; // Direction of movement
 
     [Header("Sprint")]
+    [Tooltip("Multiplier applied to movement speed while sprinting.")]
     public float sprintSpeedMultiplier = 1.5f;
-    private bool isSprinting = false;
+    private bool isSprinting = false; // Checks if you are sprinting for sliding methods
 
     [Header("Jump")]
-    public float jumpForce;
-    public float jumpCooldown;
-    public float airMultiplier;
+    [Tooltip("Force applied when jumping.")]
+    public float jumpForce = 7f;
+    private float jumpMultiplier = 1f; // multiplier for the jump force
+    [Tooltip("Cooldown time between jumps.")]
+    public float jumpCooldown = 0f;
+    [Tooltip("Multiplier applied to movement speed while in the air.")]
+    public float airMultiplier = 5f;
+    [Tooltip("Maximum number of jumps the player can perform before touching the ground.")]
     public int maxJumps = 2;  
-    private int jumpsRemaining;  
-    bool readyToJump;
-    private float jumpBoost = 1.0f;
-    public bool IsJumpingCheck = false;
+    [Tooltip("Multiplier of force applied to the second jump.")]
     public float doubleJumpMultiplier = 0.8f;  
+    private int jumpsRemaining; // Counter for remaining jumps
+    private bool readyToJump; // Checks if the player is able to jump
+    
+    [Header("Jetpack")]
+    [Tooltip("Checks if the player has a jetpack active.")]
+    public bool jetpackActive = false;
+    [Tooltip("Total amount of jetfuel that the player is allowed to have.")]
+    public float jetfuel = 15f;
+    private float jetMaximum;
+    [Tooltip("The change in fuel burn rate and fuel recharge rate combined.")]
+    public float fuelRate = 5f;
+    [Tooltip("The boost in vertical velocity over time when using the jetpack.")]
+    public float jetBoost = 0.15f;
+    private float minRotation = -120f; // minimum rotation of gauge dial
+    private float maxRotation = 120f; // maximum rotation of gauge dial
+
 
     [Header("Climbing")]
+    [Tooltip("Speed at which the player climbs surfaces.")]
     public float climbSpeed = 5f;
+    [Tooltip("Distance to check for a climbable surface.")]
     public float climbCheckDistance = 0.5f;
-    private bool isClimbing = false;
+    private bool isClimbing = false; // Checks if you are climbing
 
     [Header("Crouch")]
+    [Tooltip("Speed of movement while crouching.")]
     public float crouchSpeed = 5f;
+    [Tooltip("Height of the player while crouching.")]
     public float crouchHeight = 0.5f;
+    [Tooltip("Height of the player while standing.")]
     public float standingHeight = 2f;
+    [Tooltip("Speed of transition between crouching and standing.")]
     public float crouchTransitionSpeed = 10f;
-    private bool isCrouching = false;
-    private Vector3 originalScale;
-    private bool readyToCrouch = true;
+    [Tooltip("Cooldown before the player can crouch again.")]
     public float crouchCooldown = 0.2f;
+    private Vector3 originalScale; // Transform scale of the original player
+    private bool readyToCrouch = true; // Checks if the player is able to crouch
+    private bool isCrouching = false; // Checks if you are crouch
 
     [Header("Slide")]
+    [Tooltip("Duration of a slide.")]
     public float slideDuration = 0.6f;
+    [Tooltip("Multiplier applied to movement speed while sliding.")]
     public float slideSpeedMultiplier = 1.5f;
+    [Tooltip("Force applied to initiate a slide.")]
     public float slideForce = 5f;
-    private bool isSliding = false;
+    private bool isSliding = false; // Checks if you are sliding
     private float slideTimer;
-
-    [Header("Ground Check")]
-    public float playerHeight;
-    bool grounded;
+    
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -58,23 +88,26 @@ public class PlayerMovement : MonoBehaviour
     public KeyCode sprintKey = KeyCode.LeftShift;
 
     [Header("Respawn")]
+    [Tooltip("Set a spawn point for the level, otherwise use current position if nothing is set.")]
     public GameObject SpawnPoint;
     private Vector3 respawnLocation;
 
+    [Header("External References")]
+    [Tooltip("Transform used for player orientation.")]
     public Transform orientation;
+    private GameObject circleGauge; // gauge for jetpack
+    private GameObject imageNeedle; // gauge needle for jetpack
 
-    float horizontalInput;
-    float verticalInput;
-
-    Vector3 moveDirection;
-
-    Rigidbody rb;
-    Transform tf;
+    // Script references
+    private float horizontalInput;
+    private float verticalInput;
+    private bool grounded; // Checks if you are grounded
+    private Rigidbody rb;
+    #endregion
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        tf = GetComponent<Transform>();
         rb.freezeRotation = true;
         originalScale = transform.localScale;
 
@@ -91,6 +124,13 @@ public class PlayerMovement : MonoBehaviour
         ResetCrouch();
         grounded = true;
         jumpsRemaining = maxJumps;
+
+        circleGauge = GameObject.Find("GaugeCircle");
+        imageNeedle = GameObject.Find("GaugeNeedle");
+        circleGauge.SetActive(false);
+        imageNeedle.SetActive(false);
+        jetMaximum = jetfuel;
+        UpdateFuelGauge();
     }
 
     private void Update()
@@ -101,12 +141,14 @@ public class PlayerMovement : MonoBehaviour
         if (grounded)
         {
             rb.drag = groundDrag;
+            if (jetpackActive) {
+                RefillJet();
+            }
         }
         else
         {
             rb.drag = 0;
         }
-
 
         HandleCrouchAnimation();
 
@@ -146,7 +188,6 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             verticalInput = Input.GetAxisRaw("Vertical");
-            if (IsJumpingCheck) Debug.Log(verticalInput);
         }
 
      
@@ -159,23 +200,38 @@ public class PlayerMovement : MonoBehaviour
             horizontalInput = Input.GetAxisRaw("Horizontal");
         }
 
-        if (IsMovingCheck) Debug.Log(horizontalInput);
-
        
         isSprinting = Input.GetKey(sprintKey) && grounded && !isCrouching;
 
-     
-        if (Input.GetKeyDown(jumpKey) && readyToJump && jumpsRemaining > 0)
-        {
-            readyToJump = false;
-
-         
-            if (!GameController.isMinigameActive)
+        if(jetpackActive){
+            circleGauge.SetActive(true);
+            imageNeedle.SetActive(true);
+            if (Input.GetKey(jumpKey) && jetfuel > 0)
             {
-                Jump();
-            }
+                readyToJump = false;
 
-            Invoke(nameof(ResetJump), jumpCooldown);
+            
+                if (!GameController.isMinigameActive)
+                {
+                    Jet();
+                }
+
+                Invoke(nameof(ResetJump), jumpCooldown);
+            }
+        }
+        else if(!jetpackActive){
+            if (Input.GetKeyDown(jumpKey) && readyToJump && jumpsRemaining > 0)
+            {
+                readyToJump = false;
+
+            
+                if (!GameController.isMinigameActive)
+                {
+                    Jump();
+                }
+
+                Invoke(nameof(ResetJump), jumpCooldown);
+            }            
         }
 
       
@@ -266,7 +322,6 @@ public class PlayerMovement : MonoBehaviour
         transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.deltaTime * crouchTransitionSpeed);
     }
     
-
     private void ResetCrouch()
     {
         readyToCrouch = true;
@@ -352,12 +407,40 @@ public class PlayerMovement : MonoBehaviour
       
         float currentJumpForce = grounded ? jumpForce : jumpForce * doubleJumpMultiplier;
         
-        rb.AddForce(transform.up * currentJumpForce * jumpBoost, ForceMode.Impulse);
+        rb.AddForce(transform.up * currentJumpForce * jumpMultiplier, ForceMode.Impulse);
     }
 
     private void ResetJump()
     {
         readyToJump = true;
+    }
+    #endregion
+
+    #region Jetpack Logic
+    private void Jet()
+    {
+        if (jetfuel > 0)
+        {
+            rb.AddForce(transform.up * jumpForce / 10f * jetBoost, ForceMode.Impulse);
+            jetfuel -= Time.deltaTime * fuelRate;
+            UpdateFuelGauge();
+        }
+    }
+
+    private void RefillJet() {
+        if (jetfuel < jetMaximum)
+        {
+            jetfuel += fuelRate * Time.deltaTime;
+            jetfuel = Mathf.Min(jetfuel, jetMaximum);
+            Debug.Log(jetfuel);
+            UpdateFuelGauge();
+        }
+    }
+
+    private void UpdateFuelGauge() {
+        float fuelPercentage = jetfuel / jetMaximum;
+        float rotationAngle = Mathf.Lerp(minRotation, maxRotation, fuelPercentage);
+        imageNeedle.transform.rotation = Quaternion.Euler(0, 0, -rotationAngle);
     }
     #endregion
 
@@ -384,7 +467,7 @@ public class PlayerMovement : MonoBehaviour
         if (!grounded && collision.contacts[0].normal.y > 0.7f) 
         {
             grounded = true;
-            jumpsRemaining = maxJumps;  
+            jumpsRemaining = maxJumps;
             StopClimbing();
         }
 
@@ -407,7 +490,7 @@ public class PlayerMovement : MonoBehaviour
     {
         grounded = false;
         transform.parent = null;
-        jumpBoost = 1.0f;
+        jumpMultiplier = 1.0f;
         if (isClimbing)
         {
             StopClimbing();
@@ -424,7 +507,7 @@ public class PlayerMovement : MonoBehaviour
         public void resetOrientation()
         {
             orientation.eulerAngles = new Vector3(0f, 0f, 0f);
-            tf.eulerAngles = new Vector3(0f, 0f, 0f);
+            gameObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
         }
     #endregion
 
@@ -432,12 +515,11 @@ public class PlayerMovement : MonoBehaviour
     public void respawn()
     {
         transform.position = respawnLocation;
-        resetOrientation();
+        transform.localScale = originalScale;
         rb.velocity = Vector3.zero;
         isCrouching = false;
         isSprinting = false;
         jumpsRemaining = maxJumps;
-        transform.localScale = originalScale;
     }
     #endregion
 }
