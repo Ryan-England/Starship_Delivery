@@ -10,10 +10,6 @@ public class Menu1 : MonoBehaviour
     public GameObject colorblind; // Reference to the Colorblind menu
     public GameObject credits;
 
-    public static bool detuer;
-    public static bool trit;
-    public static bool protan;
-
     public void Switch(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
@@ -58,25 +54,25 @@ public class Menu1 : MonoBehaviour
         credits.SetActive(true);
     }
     public void det(){
-        detuer = true; 
-        protan = false; 
-        trit = false;
+        PlayerPrefs.SetInt("detuer", 1);
+        PlayerPrefs.SetInt("protan", 0);
+        PlayerPrefs.SetInt("trit", 0);
     }
     public void tri(){
-        detuer = false; 
-        protan = false; 
-        trit = true;
+        PlayerPrefs.SetInt("detuer", 0);
+        PlayerPrefs.SetInt("protan", 0);
+        PlayerPrefs.SetInt("trit", 1);
     }
     public void pro(){
-        detuer= false;
-        protan= true; 
-        trit = false;
+        PlayerPrefs.SetInt("detuer", 0);
+        PlayerPrefs.SetInt("protan", 1);
+        PlayerPrefs.SetInt("trit", 0);
     }
 
     public void normal(){
-        detuer = false; 
-        protan = false; 
-        trit = false;
+        PlayerPrefs.SetInt("detuer", 0);
+        PlayerPrefs.SetInt("protan", 0);
+        PlayerPrefs.SetInt("trit", 0);
     }
 
     public void ExitGame()

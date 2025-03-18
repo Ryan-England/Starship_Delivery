@@ -6,62 +6,46 @@ public class ColorBlindFilter : MonoBehaviour
 {
     public Volume postProcessVolume;
 
+    private static bool detuer;
+    private static bool trit;
+    private static bool protan;
+
     void Start()
     {
         // Get the PostProcessVolume attached to the GameObject
         postProcessVolume = GetComponent<Volume>();
 
-        UpdateColor();
+        LoadColorSettings();
 
         // Check if the volume has the ColorGrading effect
     }
 
-    void Update()
+    public void LoadColorSettings()
     {
-        UpdateColor();
-    }
+        detuer = PlayerPrefs.GetInt("detuer", 0) == 1;
+        protan = PlayerPrefs.GetInt("protan", 0) == 1;
+        trit = PlayerPrefs.GetInt("trit", 0) == 1;
 
-    void UpdateColor() {
-        if(Menu1.protan || TabManager.protan){
-            if (postProcessVolume.profile.TryGet(out ColorAdjustments ca))
+        if (postProcessVolume.profile.TryGet(out ColorAdjustments ca))
+        {
+            if (protan)
             {
-                // Successfully got the ColorGrading settings
                 ca.hueShift.value = 15f;
             }
-            else
+            else if (detuer)
             {
-                Debug.LogError("ColorGrading effect not found in PostProcessProfile.");
-            }
-        }
-        else if(Menu1.detuer || TabManager.detuer){
-            if (postProcessVolume.profile.TryGet(out ColorAdjustments ca))
-            {
-                // Successfully got the ColorGrading settings
                 ca.hueShift.value = -19f;
                 ca.saturation.value = 31f;
             }
-            else
+            else if (trit)
             {
-                Debug.LogError("ColorGrading effect not found in PostProcessProfile.");
-            }
-        }
-        else if(Menu1.trit || TabManager.trit){
-            if (postProcessVolume.profile.TryGet(out ColorAdjustments ca))
-            {
-                // Successfully got the ColorGrading settings
                 ca.hueShift.value = -44f;
                 ca.saturation.value = 100f;
-                // ca.saturation.value = 31f;
             }
-        } else if (!TabManager.trit && !TabManager.detuer && !TabManager.protan) {
-            if (postProcessVolume.profile.TryGet(out ColorAdjustments ca))
-                {
-                    ca.hueShift.value = 0f;
-                    ca.saturation.value = 0f;
-                }
-        } else {
+            else
             {
-                Debug.LogError("ColorGrading effect not found in PostProcessProfile.");
+                ca.hueShift.value = 0f;
+                ca.saturation.value = 0f;
             }
         }
     }
