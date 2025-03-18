@@ -91,12 +91,12 @@ public class InteractionHandler : MonoBehaviour
         }
         else{
             chatBoxPrefab.SetActive(true);
-            if (LocalizationSettings.SelectedLocale.name == "fr-FR"){
+            if (LocalizationSettings.SelectedLocale.name == "French (fr)"){
                 sentences = dialogue_french.sentences;
                 CheckQuest();
                 StartDialogue(dialogue_french);
             }
-            else if (LocalizationSettings.SelectedLocale.name == "he-IL"){
+            else if (LocalizationSettings.SelectedLocale.name == "Hebrew (he)"){
                 sentences = dialogue_hebrew.sentences;
                 CheckQuest();
                 StartDialogue(dialogue_hebrew);
@@ -222,7 +222,7 @@ public class InteractionHandler : MonoBehaviour
         }
         //source.PlayOneShot(clip);
         StopAllCoroutines();
-        if (LocalizationSettings.SelectedLocale.name == "he-IL"){
+        if (LocalizationSettings.SelectedLocale.name == "Hebrew (he)"){
             StartCoroutine(TypeHebrew(sentence));
         }
         else{

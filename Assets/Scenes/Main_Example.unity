@@ -18305,6 +18305,12 @@ MonoBehaviour:
   - cam: {fileID: 0}
     lastCam: {fileID: 0}
     mirrorOnRenderImageOpaque: {fileID: 0}
+  - cam: {fileID: 0}
+    lastCam: {fileID: 0}
+    mirrorOnRenderImageOpaque: {fileID: 0}
+  - cam: {fileID: 0}
+    lastCam: {fileID: 0}
+    mirrorOnRenderImageOpaque: {fileID: 0}
   - cam: {fileID: 1438873316}
     lastCam: {fileID: 1438873316}
     mirrorOnRenderImageOpaque: {fileID: 0}
@@ -34543,8 +34549,16 @@ MonoBehaviour:
     - Me too! I love me some pineapple!
     - That is literally the worst opinion I have ever heard in my entire history
       of being please do not open your mouth in my presence again.
-    quest_check: []
-    quest_complete: []
+    quest_check:
+    - 
+    - 
+    - 
+    - 
+    quest_complete:
+    - 
+    - 
+    - 
+    - 
     choices:
     - 
     - yes,no
@@ -34559,8 +34573,16 @@ MonoBehaviour:
     - "C'est litt\xE9ralement la pire opinion que j'ai jamais entendue de toute mon
       histoire, qui dit : \xAB S'il vous pla\xEEt, n'ouvrez plus la bouche en ma
       pr\xE9sence. \xBB"
-    quest_check: []
-    quest_complete: []
+    quest_check:
+    - 
+    - 
+    - 
+    - 
+    quest_complete:
+    - 
+    - 
+    - 
+    - 
     choices:
     - 
     - oui, non
@@ -34581,8 +34603,16 @@ MonoBehaviour:
       \u05D1\u05D1\u05E7\u05E9\u05D4 \u05D0\u05DC \u05EA\u05E4\u05EA\u05D7 \u05D0\u05EA
       \u05D4\u05E4\u05D4 \u05E9\u05DC\u05DA \u05D1\u05E0\u05D5\u05DB\u05D7\u05D5\u05EA\u05D9
       \u05E9\u05D5\u05D1."
-    quest_check: []
-    quest_complete: []
+    quest_check:
+    - 
+    - 
+    - 
+    - 
+    quest_complete:
+    - 
+    - 
+    - 
+    - 
     choices:
     - 
     - "\u05DB\u05DF, \u05DC\u05D0"
@@ -55027,7 +55057,11 @@ MonoBehaviour:
     - "Votre r\xE9frig\xE9rateur a beaucoup d'espace alors que votre inventaire n'en
       a pas, alors assurez-vous d'y stocker tous vos ingr\xE9dients d\xE8s que possible\_!"
     - "Le processus peut \xEAtre d\xE9routant au d\xE9but, mais pers\xE9v\xE9rez\_!"
-    choices: []
+    choices:
+    - 
+    - 
+    - 
+    - 
   dialogue_hebrew:
     name: Atty
     sentences:
@@ -55085,7 +55119,11 @@ MonoBehaviour:
     - "\u05D4\u05EA\u05D4\u05DC\u05D9\u05DA \u05E2\u05E9\u05D5\u05D9 \u05DC\u05D4\u05D9\u05D5\u05EA
       \u05DE\u05D1\u05DC\u05D1\u05DC \u05D1\u05D4\u05EA\u05D7\u05DC\u05D4, \u05D0\u05D1\u05DC
       \u05D4\u05DE\u05E9\u05D9\u05DB\u05D5 \u05DB\u05DA!"
-    choices: []
+    choices:
+    - 
+    - 
+    - 
+    - 
   dialogueText: {fileID: 2134645054}
   dialogueName: {fileID: 37501561}
   opt1: {fileID: 835184099}
@@ -57616,7 +57654,11 @@ MonoBehaviour:
       la banane..."
     - "Cela a rendu ce p\xE8lerinage beaucoup plus supportable..."
     - "H\xE9las, si seulement je pouvais en trouver un autre..."
-    choices: []
+    choices:
+    - 
+    - 
+    - 
+    - 
   dialogue_hebrew:
     name: Monke
     sentences:
@@ -57652,7 +57694,11 @@ MonoBehaviour:
       \u05D9\u05D5\u05EA\u05E8 \u05E0\u05E1\u05D1\u05DC\u05EA..."
     - "\u05D0\u05D5\u05D9 \u05D5\u05D0\u05D1\u05D5\u05D9, \u05DC\u05D5 \u05E8\u05E7
       \u05D9\u05DB\u05D5\u05DC\u05EA\u05D9 \u05DC\u05DE\u05E6\u05D5\u05D0 \u05D0\u05D7\u05E8...."
-    choices: []
+    choices:
+    - 
+    - 
+    - 
+    - 
   dialogueText: {fileID: 2134645054}
   dialogueName: {fileID: 37501561}
   opt1: {fileID: 835184099}
@@ -71357,7 +71403,9 @@ MonoBehaviour:
     quest_complete:
     - Merci de me rappeler la vie de jeunesse de mon enfance, ah, le bon vieux temps.
     - "Je vous recommanderai certainement \xE0 mes sup\xE9rieurs."
-    choices: []
+    choices:
+    - 
+    - 
   dialogue_hebrew:
     name: Magma Slug
     sentences:
@@ -71380,7 +71428,9 @@ MonoBehaviour:
       \u05D4\u05D8\u05D5\u05D1\u05D9\u05DD."
     - "\u05D0\u05E0\u05D9 \u05D1\u05D4\u05D7\u05DC\u05D8 \u05D0\u05DE\u05DC\u05D9\u05E5
       \u05E2\u05DC\u05D9\u05DA \u05DC\u05DE\u05DE\u05D5\u05E0\u05D9\u05DD \u05E2\u05DC\u05D9."
-    choices: []
+    choices:
+    - 
+    - 
   dialogueText: {fileID: 2134645054}
   dialogueName: {fileID: 37501561}
   opt1: {fileID: 835184099}
@@ -95444,8 +95494,12 @@ MonoBehaviour:
     sentences:
     - Hey, did you know that you can double jump to jump higher?
     - How about you use these platforms to test it out?
-    quest_check: []
-    quest_complete: []
+    quest_check:
+    - 
+    - 
+    quest_complete:
+    - 
+    - 
     choices:
     - 
     - 
@@ -95454,9 +95508,15 @@ MonoBehaviour:
     sentences:
     - "H\xE9, saviez-vous que vous pouvez faire un double saut pour sauter plus haut?"
     - Et si vous utilisiez ces plateformes pour le tester?
-    quest_check: []
-    quest_complete: []
-    choices: []
+    quest_check:
+    - 
+    - 
+    quest_complete:
+    - 
+    - 
+    choices:
+    - 
+    - 
   dialogue_hebrew:
     name: Remmy
     sentences:
@@ -95467,9 +95527,15 @@ MonoBehaviour:
     - "\u05DE\u05D4 \u05D3\u05E2\u05EA\u05DA \u05DC\u05D4\u05E9\u05EA\u05DE\u05E9
       \u05D1\u05E4\u05DC\u05D8\u05E4\u05D5\u05E8\u05DE\u05D5\u05EA \u05D4\u05D0\u05DC\u05D4
       \u05DB\u05D3\u05D9 \u05DC\u05D1\u05D3\u05D5\u05E7 \u05D0\u05EA \u05D6\u05D4?"
-    quest_check: []
-    quest_complete: []
-    choices: []
+    quest_check:
+    - 
+    - 
+    quest_complete:
+    - 
+    - 
+    choices:
+    - 
+    - 
   dialogueText: {fileID: 2134645054}
   dialogueName: {fileID: 37501561}
   opt1: {fileID: 835184099}
@@ -148644,9 +148710,39 @@ MonoBehaviour:
       derni\xE8res nouvelles, il \xE9tait perdu quelque part dans le lac de lave,
       mais si vous le trouvez, apportez-lui une banane, s'il vous pla\xEEt. Il n'a
       pas mang\xE9 depuis des jours\u2026"
-    quest_check: []
-    quest_complete: []
-    choices: []
+    quest_check:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    quest_complete:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    choices:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
   dialogue_hebrew:
     name: Monke
     sentences:
@@ -148702,9 +148798,39 @@ MonoBehaviour:
       \u05D0\u05D1\u05DC \u05D0\u05DD \u05EA\u05DE\u05E6\u05D0 \u05D0\u05D5\u05EA\u05D5,
       \u05EA\u05D1\u05D9\u05D0 \u05DC\u05D5 \u05D1\u05E0\u05E0\u05D4 \u05D1\u05D1\u05E7\u05E9\u05D4.
       \u05D4\u05D5\u05D0 \u05DC\u05D0 \u05D0\u05DB\u05DC \u05DB\u05D1\u05E8 \u05D9\u05DE\u05D9\u05DD...."
-    quest_check: []
-    quest_complete: []
-    choices: []
+    quest_check:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    quest_complete:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    choices:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
   dialogueText: {fileID: 2134645054}
   dialogueName: {fileID: 37501561}
   opt1: {fileID: 835184099}
