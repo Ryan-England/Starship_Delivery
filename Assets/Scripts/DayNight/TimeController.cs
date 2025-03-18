@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,7 @@ public class TimeController : MonoBehaviour
     [SerializeField] private float timeMultiplier;
     [SerializeField] private float startHour;
     private DateTime currentTime; 
-    public Text displayTime;
+    public TMP_Text displayTime;
 
     public Light sunLight;
 

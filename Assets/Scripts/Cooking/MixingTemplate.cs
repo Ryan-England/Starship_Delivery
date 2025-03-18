@@ -5,6 +5,7 @@ using UnityEngine.UI;  // Required for UI elements
 using UnityEngine.EventSystems;
 using UnityEditor;
 using System;
+using TMPro;
 
 public class MixingTemplate : MonoBehaviour
 {
@@ -12,8 +13,8 @@ public class MixingTemplate : MonoBehaviour
     public GameObject kitchenUI;
     public GameObject startButton;
     public MixingMinigame minigame; // Reference to the minigame script
-    public Text timerText; // Assign in Unity
-    public float bakingTime = 5f; // Adjust as needed
+    public TMP_Text timerText;
+    public float bakingTime = 5f;
     private bool isBaking = false;
 
     List<GameObject> cook_it = new List<GameObject>();

@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;  // Required for UI elements
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class BakingTemplate : MonoBehaviour
 {
     public PlayerMovement pm;
     public GameObject kitchenUI;
     public GameObject startButton;
-    public Text timerText; // Assign in Unity
-    public float bakingTime = 5f; // Adjust as needed
+    public TMP_Text timerText;
+    public float bakingTime = 5f;
     private bool isBaking = false;
 
     List<GameObject> cook_it = new List<GameObject>();
