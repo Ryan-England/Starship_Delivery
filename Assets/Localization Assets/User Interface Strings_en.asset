@@ -202,6 +202,14 @@ MonoBehaviour:
     m_Localized: F - Climb
     m_Metadata:
       m_Items: []
+  - m_Id: 3013060108214272
+    m_Localized: Credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3015586664669184
+    m_Localized: Contributors
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
