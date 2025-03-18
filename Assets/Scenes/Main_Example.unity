@@ -18293,6 +18293,12 @@ MonoBehaviour:
   - cam: {fileID: 0}
     lastCam: {fileID: 0}
     mirrorOnRenderImageOpaque: {fileID: 0}
+  - cam: {fileID: 0}
+    lastCam: {fileID: 0}
+    mirrorOnRenderImageOpaque: {fileID: 0}
+  - cam: {fileID: 0}
+    lastCam: {fileID: 0}
+    mirrorOnRenderImageOpaque: {fileID: 0}
   - cam: {fileID: 1438873316}
     lastCam: {fileID: 1438873316}
     mirrorOnRenderImageOpaque: {fileID: 0}
@@ -114571,7 +114577,7 @@ MonoBehaviour:
   jetpackActive: 1
   jetfuel: 15
   fuelRate: 5
-  jetBoost: 0.3
+  jetBoost: 0.15
   climbSpeed: 5
   climbCheckDistance: 0.5
   crouchSpeed: 5
@@ -136270,7 +136276,7 @@ GameObject:
   - component: {fileID: 1519200529}
   - component: {fileID: 1519200528}
   m_Layer: 0
-  m_Name: Directional Light (1)
+  m_Name: Sunlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

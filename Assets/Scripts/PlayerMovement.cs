@@ -421,7 +421,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (jetfuel > 0)
         {
-            rb.AddForce(transform.up * jumpForce / 10f * jetBoost, ForceMode.Impulse);
+            rb.AddForce(transform.up * jetBoost, ForceMode.Impulse);
             jetfuel -= Time.deltaTime * fuelRate;
             UpdateFuelGauge();
         }
