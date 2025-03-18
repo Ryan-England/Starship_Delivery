@@ -18577,6 +18577,12 @@ MonoBehaviour:
   - cam: {fileID: 0}
     lastCam: {fileID: 0}
     mirrorOnRenderImageOpaque: {fileID: 0}
+  - cam: {fileID: 0}
+    lastCam: {fileID: 0}
+    mirrorOnRenderImageOpaque: {fileID: 0}
+  - cam: {fileID: 0}
+    lastCam: {fileID: 0}
+    mirrorOnRenderImageOpaque: {fileID: 0}
   - cam: {fileID: 1438873316}
     lastCam: {fileID: 1438873316}
     mirrorOnRenderImageOpaque: {fileID: 0}
@@ -132765,6 +132771,7 @@ RectTransform:
   - {fileID: 877558104}
   - {fileID: 1412422250}
   - {fileID: 1330518430}
+  - {fileID: 1723392415}
   - {fileID: 908846367}
   - {fileID: 2005943453}
   - {fileID: 2020387751}
@@ -132784,7 +132791,6 @@ RectTransform:
   - {fileID: 487908291}
   - {fileID: 386688847}
   - {fileID: 421510248}
-  - {fileID: 1723392415}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
