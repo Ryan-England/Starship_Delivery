@@ -15,11 +15,6 @@ public class TabManager : MonoBehaviour
     public GameObject player; 
     public Vector3 pos;
 
-    public static bool detuer;
-    public static bool trit;
-    public static bool protan;
-    public static bool none;
-
     void Start()
     {
         HideAllPages();
@@ -82,26 +77,29 @@ public class TabManager : MonoBehaviour
     }
 
     public void det(){
-        detuer = true; 
-        protan = false; 
-        trit = false;
+        PlayerPrefs.SetInt("detuer", 1);
+        PlayerPrefs.SetInt("protan", 0);
+        PlayerPrefs.SetInt("trit", 0);
+        FindObjectOfType<ColorBlindFilter>().LoadColorSettings();
     }
     public void tri(){
-        detuer = false; 
-        protan = false; 
-        trit = true;
+        PlayerPrefs.SetInt("detuer", 0);
+        PlayerPrefs.SetInt("protan", 0);
+        PlayerPrefs.SetInt("trit", 1);
+        FindObjectOfType<ColorBlindFilter>().LoadColorSettings();
     }
     public void pro(){
-        detuer= false;
-        protan= true; 
-        trit = false;
+        PlayerPrefs.SetInt("detuer", 0);
+        PlayerPrefs.SetInt("protan", 1);
+        PlayerPrefs.SetInt("trit", 0);
+        FindObjectOfType<ColorBlindFilter>().LoadColorSettings();
     }
 
     public void normal(){
-        detuer = false; 
-        protan = false; 
-        trit = false;
-        none = true;
+        PlayerPrefs.SetInt("detuer", 0);
+        PlayerPrefs.SetInt("protan", 0);
+        PlayerPrefs.SetInt("trit", 0);
+        FindObjectOfType<ColorBlindFilter>().LoadColorSettings();
     }
 
     public void ExitGame()
