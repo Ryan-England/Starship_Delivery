@@ -56,9 +56,15 @@ public class InteractionHandler : MonoBehaviour
     private bool skip = false;
     // Reference that tracks the current line of dialogue
     private int currentLineIndex = 0;
+    private DetectionManager detectionManager;
 
     public AudioSource source;
     public AudioClip clip;
+
+    private void Start()
+    {
+        detectionManager = FindObjectOfType<DetectionManager>();
+    }
 
     // Called by the detection manager to interact with the object on E press.
     public void Interact()
@@ -259,6 +265,7 @@ public class InteractionHandler : MonoBehaviour
         // GetComponent<Camera>().m_XAxis.m_MaxSpeed = currentX;
         // GetComponent<Camera>().m_YAxis.m_MaxSpeed = currentY;
         // box.SetActive(false);
+        detectionManager.EndDialogue();
         chatBoxPrefab.SetActive(false);
         optionBoxPrefab.SetActive(false);
         c.ans = 0; 

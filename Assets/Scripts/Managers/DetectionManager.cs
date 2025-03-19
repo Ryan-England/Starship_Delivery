@@ -20,16 +20,24 @@ public class DetectionManager : MonoBehaviour
     public BakingTemplate oven;
     public MixingTemplate mix;
 
+    private InteractionHandler activeDialogue;
+    private bool inDialogue = false;
+    private DetectionManager detectionManager;
+
     private void Update()
     {
         // Pressing E to interact with objects/npcs from a range
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            
-            Debug.Log("Pressed E");
-            DetectObjects();
+            if (inDialogue && activeDialogue != null)
+            {
+                activeDialogue.Interact();
+            }
+            else
+            {
+                DetectObjects();
+            }
         }
-
     }
 
     private void DetectObjects()
@@ -96,6 +104,8 @@ public class DetectionManager : MonoBehaviour
                 {
                     // Debug.Log("Call interactor");
                     interaction.Interact(); // Call the interactionhandler's interact function
+                    activeDialogue = interaction;
+                    inDialogue = true; 
                 }
                 else
                 {
@@ -126,5 +136,11 @@ public class DetectionManager : MonoBehaviour
             default:
                 return false; //appropriate tag not found
         }
+    }
+
+    public void EndDialogue()
+    {
+        inDialogue = false;
+        activeDialogue = null;
     }
 }
