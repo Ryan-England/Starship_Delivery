@@ -68,9 +68,10 @@ public class InteractionHandler : MonoBehaviour
         detectionManager = FindObjectOfType<DetectionManager>();
         tutorialHolder = GameObject.Find("Key_Background_Image");
         tutorial_text = GameObject.Find("Press_Text");
-        ResetQuestProgress();
+        //ResetQuestProgress();
 
-        if(force_complete){
+        if (force_complete)
+        {
             StartCoroutine(WaitForJKeyPress());
         }
     }
@@ -93,6 +94,9 @@ public class InteractionHandler : MonoBehaviour
         }
 
         Time.timeScale = 0f;
+
+        PlayerPrefs.SetInt("TutorialCompleted", 1);
+        PlayerPrefs.Save();
         
         Debug.Log("Waiting for 'J' key press...");
 
@@ -326,6 +330,8 @@ public class InteractionHandler : MonoBehaviour
             string questKey = "Quest_" + quest.quest_name;
             if (PlayerPrefs.HasKey(questKey)){
                 PlayerPrefs.DeleteKey(questKey);
+                PlayerPrefs.SetInt("TutorialCompleted", 0);
+                //PlayerPrefs.DeleteKey("TutorialCompleted");
             }
          }
 
