@@ -11,9 +11,11 @@ public class TabManager : MonoBehaviour
     [SerializeField] private KeyCode journalKey = KeyCode.J;
 
     [SerializeField] private Slider mouseSens;
+    [SerializeField] private GameObject tutorialHolder;
     public static float mouseValue;
     public GameObject player; 
     public Vector3 pos;
+    
 
     void Start()
     {
@@ -28,6 +30,7 @@ public class TabManager : MonoBehaviour
         if (Input.GetKeyDown(journalKey))
         {
             OpenTab(0);
+            tutorialHolder.SetActive(false);
         } else if (Input.GetKeyDown(pauseKey)) {
             OpenTab(2);
         }
