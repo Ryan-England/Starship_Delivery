@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 public class QuestManager : MonoBehaviour
 {
@@ -20,8 +21,19 @@ public class QuestManager : MonoBehaviour
     }
     public void AddQuest(NPCQuest n){
         Quests.Add(n.quest_name, false);
-        journalManager.AddPreWrittenEntry(n.quest_name, n.quest_description);
-
+        if (LocalizationSettings.SelectedLocale.name == "French (fr)")
+        {
+            journalManager.AddPreWrittenEntry(n.quest_nameFR, n.quest_descriptionFR);
+        }
+        else if (LocalizationSettings.SelectedLocale.name == "Hebrew (he)")
+        {
+            journalManager.AddPreWrittenEntry(n.quest_nameHE, n.quest_descriptionHE);
+        }
+        else
+        {
+            journalManager.AddPreWrittenEntry(n.quest_name, n.quest_descriptionEN);
+        }
+        
         if (n.questMarker != null && compassUI != null)
         {
             if (n.itemMarker != null) {

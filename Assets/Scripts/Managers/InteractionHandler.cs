@@ -59,6 +59,7 @@ public class InteractionHandler : MonoBehaviour
     private DetectionManager detectionManager;
     private GameObject tutorialHolder;
     private GameObject tutorial_text;
+    private TabManager tabManager;
 
     public AudioSource source;
     public AudioClip clip;
@@ -66,20 +67,27 @@ public class InteractionHandler : MonoBehaviour
     private void Start()
     {
         detectionManager = FindObjectOfType<DetectionManager>();
+        tabManager = FindObjectOfType<TabManager>();
         tutorialHolder = GameObject.Find("Key_Background_Image");
         tutorial_text = GameObject.Find("Press_Text");
         //ResetQuestProgress();
 
+        bool tutorialOver = PlayerPrefs.GetInt("TutorialCompleted") == 1;
+
         if (force_complete)
         {
-            StartCoroutine(WaitForJKeyPress());
+            if (!tutorialOver) {
+                StartCoroutine(WaitForJKeyPress());
+            } else {
+                Debug.Log("No tutorial");
+                tabManager.RemoveTutorial();
+            }
         }
     }
 
     private IEnumerator WaitForJKeyPress()
-    {
+    {   
         tutorialHolder.SetActive(true);
-    
         if (LocalizationSettings.SelectedLocale.name == "French (fr)")
         {
             tutorial_text.GetComponent<TMP_Text>().text = "Presse";
@@ -178,8 +186,8 @@ public class InteractionHandler : MonoBehaviour
     public void CheckQuest(){
         if(quest.have_quest){
             if (PlayerPrefs.HasKey("Quest_" + quest.quest_name)){
-            bool isCompleted = PlayerPrefs.GetInt("Quest_" + quest.quest_name) == 1;
-            qm.Quests[quest.quest_name] = isCompleted;
+                bool isCompleted = PlayerPrefs.GetInt("Quest_" + quest.quest_name) == 1;
+                qm.Quests[quest.quest_name] = isCompleted;
             }
 
             if(qm.Quests.ContainsKey(quest.quest_name)){
@@ -311,12 +319,34 @@ public class InteractionHandler : MonoBehaviour
 
         if(quest.have_quest){
             if(!qm.Quests.ContainsKey(quest.quest_name)){
-                quest_name.text = quest.quest_name;
+                if (LocalizationSettings.SelectedLocale.name == "French (fr)")
+                {
+                    quest_name.text = quest.quest_nameFR;
+                }
+                else if (LocalizationSettings.SelectedLocale.name == "Hebrew (he)")
+                {
+                    quest_name.text = quest.quest_nameHE;
+                }
+                else
+                {
+                    quest_name.text = quest.quest_name;
+                }
                 quest_anim.SetActive(true);
                 qm.AddQuest(quest);
             }
             else if(qm.Quests[quest.quest_name] && quest_complete_first){
-                quest_name.text = "Quest Complete: " + quest.quest_name;
+                if (LocalizationSettings.SelectedLocale.name == "French (fr)")
+                {
+                    quest_name.text = "Quête terminée: " + quest.quest_nameFR;
+                }
+                else if (LocalizationSettings.SelectedLocale.name == "Hebrew (he)")
+                {
+                    quest_name.text = "קווסט הושלם: " + quest.quest_nameHE;
+                }
+                else
+                {
+                    quest_name.text = "Quest Complete: " + quest.quest_name;
+                }
                 quest_anim.SetActive(true);
                 quest_complete_first = false;
             }
@@ -326,11 +356,11 @@ public class InteractionHandler : MonoBehaviour
 
     public void ResetQuestProgress()
     {
+        PlayerPrefs.SetInt("TutorialCompleted", 0);
          if(quest.have_quest){
             string questKey = "Quest_" + quest.quest_name;
             if (PlayerPrefs.HasKey(questKey)){
                 PlayerPrefs.DeleteKey(questKey);
-                PlayerPrefs.SetInt("TutorialCompleted", 0);
                 //PlayerPrefs.DeleteKey("TutorialCompleted");
             }
          }

@@ -1,58 +1,88 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Menu1 : MonoBehaviour
 {
-    public GameObject start;
-    public GameObject options;
-    public GameObject colorblind; // Reference to the Colorblind menu
-    public GameObject credits;
+    #region Member Variables
+    [Header("Tabs")]
+    [Tooltip("Insert a menu that you'd like to use.")]
+    [SerializeField] private List<GameObject> screens = new List<GameObject>();
 
-    public void Switch(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
-    }
+    [Header("External References")]
+    [SerializeField] private Slider mouseSensSlider;
+    //[SerializeField] private Slider playerFOVSlider;
+    [SerializeField] private TMP_Text mouseSensText;
+    //[SerializeField] private TMP_Text FOVText;
+    [Tooltip("Temporary tutorial reference for journals and gameplay.")]
 
-    public void Trigger_Options()
+    // Variables handled by PlayerCam
+    public static float mouseValue;
+    public static float FOV;
+    #endregion
+    private void Start()
     {
-        options.SetActive(true);
-        start.SetActive(false);
-        colorblind.SetActive(false);
-        credits.SetActive(false);
-    }
+        // Open the start menu upon start!
+        OpenTab(0);
 
-    public void Back()
-    {
-        options.SetActive(false);
-        start.SetActive(true);
-        colorblind.SetActive(false);
-        credits.SetActive(false);
-    }
-
-    public void OpenColorblindMenu()
-    {
-        colorblind.SetActive(true);
-        options.SetActive(false);
-        start.SetActive(false);
-        credits.SetActive(false);
+        // Set-up mouse sensitivity and FOV settings
+        mouseValue = PlayerPrefs.GetFloat("MouseSensitivity", 5.0f);
+        FOV = PlayerPrefs.GetFloat("FOV", 60f);
+        //playerFOVSlider.value = FOV;
+        mouseSensSlider.value = mouseValue;
+        //UpdateFOVText();
+        UpdateMouseSensText();
     }
 
-    public void BackToOptions()
+    #region Slider Functionality
+    public void SaveMouseSensitivity()
     {
-        colorblind.SetActive(false);
-        options.SetActive(true);
-        start.SetActive(false);
-        credits.SetActive(false);
+        mouseValue = mouseSensSlider.value;
+        PlayerPrefs.SetFloat("MouseSensitivity", mouseValue);
+        PlayerPrefs.Save();
     }
-    public void openCredits()
+
+    // public void SavePlayerFOV()
+    // {
+    //     FOV = playerFOVSlider.value;
+    //     PlayerPrefs.SetFloat("FOV", FOV);
+    //     PlayerPrefs.Save();
+    // }
+
+    public void UpdateMouseSensText() {
+        mouseValue = mouseSensSlider.value;
+        mouseSensText.text = ((int)mouseValue).ToString();
+    }
+
+    // public void UpdateFOVText() {
+    //     FOV = playerFOVSlider.value;
+    //     FOVText.text = ((int)FOV).ToString();
+    // }
+    #endregion
+    #region Menu Functionality
+    public void OpenTab(int index)
     {
-        colorblind.SetActive(false);
-        options.SetActive(false);
-        start.SetActive(false);
-        credits.SetActive(true);
+        HideAllScreens();
+        if (index >= 0 && index < screens.Count)
+        {
+            screens[index].SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
+
+    private void HideAllScreens()
+    {
+        foreach (GameObject screen in screens)
+        {
+            screen.SetActive(false);
+        }
+    }
+    #endregion
+    #region Color-blind Mode
     public void det(){
         PlayerPrefs.SetInt("detuer", 1);
         PlayerPrefs.SetInt("protan", 0);
@@ -73,6 +103,22 @@ public class Menu1 : MonoBehaviour
         PlayerPrefs.SetInt("detuer", 0);
         PlayerPrefs.SetInt("protan", 0);
         PlayerPrefs.SetInt("trit", 0);
+    }
+    #endregion
+    public void Switch(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void ResetQuestProgress()
+    {
+        PlayerPrefs.SetInt("TutorialCompleted", 0);
+        PlayerPrefs.DeleteKey("Quest_" + "Find Banana.");
+        PlayerPrefs.DeleteKey("Quest_" + "Find a Banana.");
+        PlayerPrefs.DeleteKey("Quest_" + "Make Cinderloaf.");
+
+        PlayerPrefs.Save();
+        Debug.Log("All quest progress has been reset.");
     }
 
     public void ExitGame()
