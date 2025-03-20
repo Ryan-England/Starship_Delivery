@@ -72,7 +72,6 @@ public class InteractionHandler : MonoBehaviour
 
         if(force_complete){
             StartCoroutine(WaitForJKeyPress());
-            tutorialHolder.SetActive(false);
         }
     }
 
@@ -93,11 +92,9 @@ public class InteractionHandler : MonoBehaviour
             tutorial_text.GetComponent<TMP_Text>().text = "Press";
         }
 
-        yield return new WaitForSeconds(1f);
+        Time.timeScale = 0f;
         
         Debug.Log("Waiting for 'J' key press...");
-        
-        Time.timeScale = 0f;
 
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.J));
 
