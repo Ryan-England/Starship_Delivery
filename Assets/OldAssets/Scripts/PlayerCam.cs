@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerCam : MonoBehaviour
@@ -19,7 +20,7 @@ public class PlayerCam : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         cam = GetComponent<Camera>();
-        cam.fieldOfView = normalFOV;
+        StartCoroutine(InitializeFOV());
     }
 
     private void Update()
@@ -62,5 +63,15 @@ public class PlayerCam : MonoBehaviour
         float targetFOV = Input.GetKey(KeyCode.V) ? zoomFOV : normalFOV;
         
         cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetFOV, Time.deltaTime * zoomSpeed);
+    }
+
+    private IEnumerator InitializeFOV() {
+        yield return new WaitForSeconds(0.0001f);
+        UpdateFOV();
+    }
+
+    public void UpdateFOV() {
+        normalFOV = TabManager.FOV;
+        cam.fieldOfView = normalFOV;
     }
 }
