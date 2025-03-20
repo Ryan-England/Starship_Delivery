@@ -22,7 +22,6 @@ public class DetectionManager : MonoBehaviour
 
     private InteractionHandler activeDialogue;
     private bool inDialogue = false;
-    private DetectionManager detectionManager;
 
     private void Update()
     {

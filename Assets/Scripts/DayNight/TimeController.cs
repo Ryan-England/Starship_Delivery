@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TimeController : MonoBehaviour
@@ -42,8 +43,10 @@ public class TimeController : MonoBehaviour
     public Camera c;
     private float timeOfDay = 0f;
     public float transitionSpeed = 0.1f;      // Speed of the transition
-    // Start is called before the first frame update
-    void Start()
+
+    [SerializeField] private GameObject fadeImage;
+
+    private void Start()
     {
         currentTime = DateTime.Now.Date + TimeSpan.FromHours(startHour);
     
@@ -52,8 +55,7 @@ public class TimeController : MonoBehaviour
         // c.backgroundColor = cameraDayColor;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         UpdateTimeOfDay();
         RotateSun();
@@ -66,6 +68,11 @@ public class TimeController : MonoBehaviour
         if (timeOfDay > 1f) timeOfDay = 0f; // Loop back to night
         if(displayTime != null){
             displayTime.text = currentTime.ToString("HH:mm");
+        }
+
+        if (currentTime.Hour > 19 && currentTime.Minute > 30)
+        {
+            StartCoroutine(FadeOutAndLoadScene());
         }
     }
 
@@ -109,5 +116,17 @@ public class TimeController : MonoBehaviour
         }
 
         return difference;
+    }
+
+    private IEnumerator FadeOutAndLoadScene()
+    {
+        GameObject Canvas = GameObject.Find("Canvas");
+        if (Canvas != null)
+        {
+            GameObject fadeOut = Instantiate(fadeImage);
+            fadeOut.transform.SetParent(Canvas.transform, false);
+        }
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("Main_Example");
     }
 }

@@ -50,13 +50,15 @@ public class InteractionHandler : MonoBehaviour
 
     public bool quest_complete_first = false;
     public bool quest_complete = false;
-
+    public bool force_complete = false;
 
     private string[] sentences;
     private bool skip = false;
     // Reference that tracks the current line of dialogue
     private int currentLineIndex = 0;
     private DetectionManager detectionManager;
+    private GameObject tutorialHolder;
+    private GameObject tutorial_text;
 
     public AudioSource source;
     public AudioClip clip;
@@ -64,6 +66,42 @@ public class InteractionHandler : MonoBehaviour
     private void Start()
     {
         detectionManager = FindObjectOfType<DetectionManager>();
+        tutorialHolder = GameObject.Find("Key_Background_Image");
+        tutorial_text = GameObject.Find("Press_Text");
+        ResetQuestProgress();
+
+        if(force_complete){
+            StartCoroutine(WaitForJKeyPress());
+            tutorialHolder.SetActive(false);
+        }
+    }
+
+    private IEnumerator WaitForJKeyPress()
+    {
+        tutorialHolder.SetActive(true);
+    
+        if (LocalizationSettings.SelectedLocale.name == "French (fr)")
+        {
+            tutorial_text.GetComponent<TMP_Text>().text = "Presse";
+        }
+        else if (LocalizationSettings.SelectedLocale.name == "Hebrew (he)")
+        {
+            tutorial_text.GetComponent<TMP_Text>().text = "לִלְחוֹץ";
+        }
+        else
+        {
+            tutorial_text.GetComponent<TMP_Text>().text = "Press";
+        }
+
+        yield return new WaitForSeconds(1f);
+        
+        Debug.Log("Waiting for 'J' key press...");
+        
+        Time.timeScale = 0f;
+
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.J));
+
+        Debug.Log("J key was pressed!");
     }
 
     // Called by the detection manager to interact with the object on E press.

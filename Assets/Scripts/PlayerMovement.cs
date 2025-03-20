@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("The change in fuel burn rate and fuel recharge rate combined.")]
     public float fuelRate = 5f;
     [Tooltip("The boost in vertical velocity over time when using the jetpack.")]
-    public float jetBoost = 0.15f;
+    public float jetBoost = 15f;
     private float minRotation = -120f; // minimum rotation of gauge dial
     private float maxRotation = 120f; // maximum rotation of gauge dial
 
@@ -421,7 +421,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (jetfuel > 0)
         {
-            rb.AddForce(transform.up * jetBoost, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * jetBoost * Time.deltaTime, ForceMode.Impulse);
             jetfuel -= Time.deltaTime * fuelRate;
             UpdateFuelGauge();
         }
