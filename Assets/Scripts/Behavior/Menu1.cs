@@ -113,7 +113,7 @@ public class Menu1 : MonoBehaviour
     public void ResetQuestProgress()
     {
         PlayerPrefs.SetInt("TutorialCompleted", 0);
-        PlayerPrefs.DeleteKey("Quest_" + "Find Banana.");
+        PlayerPrefs.DeleteKey("Quest_" + "Find Apple.");
         PlayerPrefs.DeleteKey("Quest_" + "Find a Banana.");
         PlayerPrefs.DeleteKey("Quest_" + "Make Cinderloaf.");
 
