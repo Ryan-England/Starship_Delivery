@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class MixingMinigame : MonoBehaviour
 {
+    public Animator animator;
     public Slider gaugeBar;               // The gauge bar UI element
     public float fillAmountPerPress = 0.1f;
     public float decayRate = 0.02f;
@@ -48,6 +49,7 @@ public class MixingMinigame : MonoBehaviour
         // Minigame logic
         if (GameController.isMinigameActive)
         {
+            animator.SetBool("isActive", true);
             HandleKeyPresses();
             DecayGauge();
             CheckForSuccess();
@@ -56,6 +58,7 @@ public class MixingMinigame : MonoBehaviour
         // Dismiss the success message with Spacebar
         if (hasWon)
         {
+            animator.SetBool("isActive", false);
             HideSuccessMessage();
         }
     }

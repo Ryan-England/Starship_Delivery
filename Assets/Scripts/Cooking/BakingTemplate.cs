@@ -21,6 +21,7 @@ public class BakingTemplate : MonoBehaviour
 
     Dictionary<string, int> csub = new Dictionary<string, int>();
     public GameObject product;
+    public Animator doorAnimator;
     public GameObject spawner;
 
     public GameObject Dictionary;
@@ -191,7 +192,6 @@ public class BakingTemplate : MonoBehaviour
 
     private IEnumerator MixingProcess(recipe r)
     {
-
         isBaking = true;
         float timer = bakingTime;
 
@@ -202,6 +202,11 @@ public class BakingTemplate : MonoBehaviour
         }*/
         int b = batchcount();
 
+        BackButtonKitchen();
+        doorAnimator.SetBool("IsOpen", true);
+        yield return new WaitForSeconds(1.5f);
+        doorAnimator.SetBool("IsOpen", false);
+
         // Start the baking timer
         while (timer > 0)
         {
@@ -209,6 +214,10 @@ public class BakingTemplate : MonoBehaviour
             yield return new WaitForSeconds(1f);
             timer--;
         }
+
+        doorAnimator.SetBool("IsOpen", true);
+        yield return new WaitForSeconds(1.5f);
+        doorAnimator.SetBool("IsOpen", false);
 
         // Baking complete
         timerText.text = "";

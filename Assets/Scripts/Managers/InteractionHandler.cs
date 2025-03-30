@@ -357,13 +357,17 @@ public class InteractionHandler : MonoBehaviour
     public void ResetQuestProgress()
     {
         PlayerPrefs.SetInt("TutorialCompleted", 0);
-         if(quest.have_quest){
-            string questKey = "Quest_" + quest.quest_name;
-            if (PlayerPrefs.HasKey(questKey)){
-                PlayerPrefs.DeleteKey(questKey);
-                //PlayerPrefs.DeleteKey("TutorialCompleted");
-            }
-         }
+        //  if(quest.have_quest){
+        //     string questKey = "Quest_" + quest.quest_name;
+        //     if (PlayerPrefs.HasKey(questKey)){
+        //         PlayerPrefs.DeleteKey(questKey);
+        //         //PlayerPrefs.DeleteKey("TutorialCompleted");
+        //     }
+        //  }
+
+        PlayerPrefs.DeleteKey("Quest_" + "Find Apple.");
+        PlayerPrefs.DeleteKey("Quest_" + "Find a Banana.");
+        PlayerPrefs.DeleteKey("Quest_" + "Make Cinderloaf.");
 
         PlayerPrefs.Save();
         Debug.Log("All quest progress has been reset.");

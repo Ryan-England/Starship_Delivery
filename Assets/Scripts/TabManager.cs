@@ -32,6 +32,7 @@ public class TabManager : MonoBehaviour
     // Variables handled by PlayerCam
     public static float mouseValue;
     public static float FOV;
+    public static bool journalActive;
     private PlayerCam playerCam;
     #endregion
     private void Start()
@@ -98,6 +99,7 @@ public class TabManager : MonoBehaviour
     public void OpenTab(int index)
     {
         HideAllPages();
+        journalActive = true;
         if (index >= 0 && index < pages.Count)
         {
             pages[index].SetActive(true);
@@ -110,6 +112,7 @@ public class TabManager : MonoBehaviour
     public void CloseMenu()
     {
         HideAllPages();
+        journalActive = false;
         Time.timeScale = 1f;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
